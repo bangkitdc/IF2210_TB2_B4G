@@ -8,14 +8,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.Insets;
 
-import bnmobusinessmanagementsystem.views.components.DateTime.DateTime;
-import bnmobusinessmanagementsystem.views.components.NimNama.NimNama;
-
 public class MenuAndTab {
     private Scene scene;
     private TabPane tabPane;
 
     public MenuAndTab(Scene mainScene) {
+        // Tab pane
         tabPane = new TabPane();
 
         // Create the two panes
@@ -28,29 +26,17 @@ public class MenuAndTab {
         // Set the StackPane as the center node of the BorderPane
         BorderPane borderPane = new BorderPane(stackPane);
 
-        // Show or hide the panes as needed
-        pane1.setVisible(false);
-        pane2.setVisible(true);
-
-        DateTime dateTime = new DateTime();
-        dateTime.setMaxSize(200, 100);
-        dateTime.setPadding(new Insets(0, 0, 30, 0));
-        VBox vBox = new VBox();
-        vBox.getChildren().add(dateTime);
-
-        NimNama nimNama = new NimNama();
-        nimNama.setMaxSize(400, 200);
-        vBox.getChildren().add(nimNama);
-
-        vBox.setAlignment(Pos.CENTER);
+        // Add main page
+        MainPage mainPage = new MainPage();
 
         // Set the layout bounds of the VBox to match the size of pane1
-        vBox.layoutBoundsProperty().addListener((obs, oldVal, newVal) -> {
-            vBox.setPrefWidth(pane1.getWidth());
-            vBox.setPrefHeight(pane1.getHeight());
+        mainPage.layoutBoundsProperty().addListener((obs, oldVal, newVal) -> {
+            mainPage.setPrefWidth(pane1.getWidth());
+            mainPage.setPrefHeight(pane1.getHeight());
         });
 
-        pane1.getChildren().addAll(vBox);
+        // Add pane elements
+        pane1.getChildren().add(mainPage);
         pane2.getChildren().add(tabPane);
 
         pane1.setVisible(true);
@@ -94,6 +80,7 @@ public class MenuAndTab {
             }
         });
 
+        // Set menuBar and new scene
         borderPane.setTop(menuBar);
 
         scene = new Scene(borderPane, 1080, 660);

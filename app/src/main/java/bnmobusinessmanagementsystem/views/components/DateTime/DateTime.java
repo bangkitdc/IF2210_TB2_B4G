@@ -2,13 +2,11 @@ package bnmobusinessmanagementsystem.views.components.DateTime;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javafx.application.Platform;
-import javafx.scene.layout.BorderPane;
 
 public class DateTime extends BorderPane {
     private Label dateLabel;
