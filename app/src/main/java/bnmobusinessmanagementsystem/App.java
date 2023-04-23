@@ -1,20 +1,25 @@
 package bnmobusinessmanagementsystem;
 
 /* Import library */
+import bnmobusinessmanagementsystem.views.MenuAndTab;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.scene.layout.*;
 
 public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Label label = new Label("Hello, JavaFX!");
-        Scene scene = new Scene(new StackPane(label), 640, 480);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        try {
+            MenuAndTab menuBar = new MenuAndTab(new Scene(new VBox(), 1080, 660));
+            primaryStage.setScene(menuBar.getScene());
+            primaryStage.show();
+
+        } catch (Exception e) {
+            System.out.println("Error: ");
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
