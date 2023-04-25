@@ -34,7 +34,7 @@ public class VIP extends Customer {
         return poin;
     }
 
-    public void getPoin(double price){
+    public void addPoin(double price){
         this.poin += getDiscPrice(price)*0.01;
     }
     
@@ -56,5 +56,21 @@ public class VIP extends Customer {
 
     public double getDiscPrice(double price) {
         return price * discPrice;
+    }
+
+    public double usePoin(double price){
+        double tempPrice=0;
+        if(this.poin>price){
+            this.poin-=price;
+            return tempPrice;
+        }else if(this.poin==price){
+            this.poin = 0;
+            return tempPrice;
+        }else{
+            tempPrice=price;
+            tempPrice-=this.poin;
+            this.poin-=price;
+            return tempPrice;
+        }
     }
 }

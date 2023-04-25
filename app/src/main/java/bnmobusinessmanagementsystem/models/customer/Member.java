@@ -33,14 +33,13 @@ public class Member extends Customer{
         return poin;
     }
 
-    public void getPoin(double price){
+    public void addPoin(double price){
         this.poin += price*0.01;
     }
 
     public void setPoin(double poin) {
         this.poin = poin;
     }
-
 
     public boolean isActive() {
         return isActive;
@@ -54,5 +53,20 @@ public class Member extends Customer{
         this.isActive = true;
     }
 
+    public double usePoin(double price){
+        double tempPrice=0;
+        if(this.poin>price){
+            this.poin-=price;
+            return tempPrice;
+        }else if(this.poin==price){
+            this.poin = 0;
+            return tempPrice;
+        }else{
+            tempPrice=price;
+            tempPrice-=this.poin;
+            this.poin-=price;
+            return tempPrice;
+        }
+    }
 
 }
