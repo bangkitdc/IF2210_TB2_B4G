@@ -5,14 +5,25 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.*;
-import javafx.geometry.Insets;
+import javafx.scene.image.Image;
+
+
+import javax.print.attribute.standard.Media;
+import java.io.File;
+import java.nio.file.Paths;
 
 public class MenuAndTab {
     private Scene scene;
     private TabPane tabPane;
 
     public MenuAndTab(Scene mainScene) {
+        FontManager.loadFonts();
+
         // Tab pane
         tabPane = new TabPane();
 
@@ -38,6 +49,14 @@ public class MenuAndTab {
         // Add pane elements
         pane1.getChildren().add(mainPage);
         pane2.getChildren().add(tabPane);
+
+        String currentDir = System.getProperty("user.dir");
+        String path = "src/main/resources/background/bg.png";
+        String fullPath = Paths.get(currentDir, path).toString();
+
+        Image img = new Image(fullPath);
+        BackgroundImage bg_img = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0, true, true, false, false));
+        mainPage.setBackground(new Background(bg_img));
 
         pane1.setVisible(true);
         pane2.setVisible(false);
@@ -84,6 +103,7 @@ public class MenuAndTab {
         borderPane.setTop(menuBar);
 
         scene = new Scene(borderPane, 1080, 660);
+        scene.getRoot().setStyle("-fx-font-family: Helvetica");
     }
 
     public Scene getScene() {

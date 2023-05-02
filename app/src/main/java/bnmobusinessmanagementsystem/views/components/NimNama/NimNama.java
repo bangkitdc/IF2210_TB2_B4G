@@ -1,5 +1,6 @@
 package bnmobusinessmanagementsystem.views.components.NimNama;
 
+import bnmobusinessmanagementsystem.views.FontManager;
 import javafx.geometry.*;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -9,12 +10,14 @@ public class NimNama extends VBox {
         // Create labels for each piece of information
         Label kelLabel = new Label("Mahasiswa Pencari Takjil");
         kelLabel.setStyle("""
-            -fx-font-size: 18px;
-            -fx-font-weight: semi-bold;
-            -fx-text-fill: #000000;
+            -fx-font-size: 24px;
+            -fx-text-fill: #FEFEA8;
+            -fx-opacity: 0.8;
             -fx-background-color: transparent;
-            -fx-font-family: Consolas;
+            -fx-font-family: "Poppins Semibold";
+            -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
         """);
+
         kelLabel.setPadding(new Insets(0, 0, 10, 0));
 
         Label[] labelsNIM = new Label[5];
@@ -28,21 +31,23 @@ public class NimNama extends VBox {
 
         for (Label label : labelsNIM) {
             label.setStyle("""
-                -fx-font-size: 14px;
-                -fx-font-weight: normal;
-                -fx-text-fill: #000000;
+                -fx-font-size: 16px;
+                -fx-text-fill: #FEFEA8;
+                -fx-opacity: 0.8;
                 -fx-background-color: transparent;
-                -fx-font-family: Consolas;
+                -fx-font-family: "Poppins Semibold";
+                -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
             """);
         }
 
         for (Label label : labelsName) {
             label.setStyle("""
-                -fx-font-size: 14px;
-                -fx-font-weight: normal;
-                -fx-text-fill: #000000;
+                -fx-font-size: 16px;
+                -fx-text-fill: #F1F6F9;
+                -fx-opacity: 0.8;
                 -fx-background-color: transparent;
-                -fx-font-family: Consolas;
+                -fx-font-family: "Poppins Semibold";
+                -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
             """);
         }
 
@@ -73,9 +78,6 @@ public class NimNama extends VBox {
         this.setAlignment(Pos.CENTER);
 
         this.setStyle("""
-            -fx-border-color: #000000;
-            -fx-border-width: 1px;
-            -fx-border-radius: 20px;
             -fx-alignment: CENTER;
         """);
     }

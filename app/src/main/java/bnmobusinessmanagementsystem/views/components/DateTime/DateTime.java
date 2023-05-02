@@ -1,12 +1,15 @@
 package bnmobusinessmanagementsystem.views.components.DateTime;
 
+import bnmobusinessmanagementsystem.views.FontManager;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javafx.application.Platform;
+import javafx.scene.paint.Color;
 
 public class DateTime extends BorderPane {
     private Label dateLabel;
@@ -17,33 +20,25 @@ public class DateTime extends BorderPane {
         timeLabel = new Label();
 
         dateLabel.setStyle("""
-            -fx-font-size: 14px;
-            -fx-font-weight: normal;
-            -fx-text-fill: #000000;
+            -fx-font-size: 30px;
+            -fx-text-fill: #FEFEA8;
             -fx-background-color: transparent;
-            -fx-font-family: Consolas;
+            -fx-font-family: "SF Pro Rounded Regular";
+            -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
         """);
 
         timeLabel.setStyle("""
-            -fx-font-size: 36px;
-            -fx-font-weight: bold;
-            -fx-text-fill: #000000;
+            -fx-font-size: 80px;
+            -fx-text-fill: #FEFEA8;
             -fx-background-color: transparent;
-            -fx-font-family: Consolas;
+            -fx-font-family: "SF Pro Rounded Semibold";
+            -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
         """);
 
         dateLabel.setId("dateLabel");
         timeLabel.setId("timeLabel");
 
         VBox vbox = new VBox(dateLabel, timeLabel);
-
-        vbox.setStyle("""
-            -fx-border-color: #000000;
-            -fx-border-width: 1px;
-            -fx-border-radius: 20px;
-            -fx-padding: 5px;
-            -fx-alignment: CENTER;
-        """);
 
         vbox.setAlignment(Pos.CENTER);
         setCenter(vbox);
@@ -58,7 +53,7 @@ public class DateTime extends BorderPane {
 
                 Platform.runLater(() -> {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMMM yyyy");
-                    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
                     String currentDate = dateFormat.format(new Date());
                     String currentTime = timeFormat.format(new Date());
 
