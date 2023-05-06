@@ -27,6 +27,7 @@ public class Purchase {
     }
     
 
+
     public String getCustomerId() {
         return customerId;
     }

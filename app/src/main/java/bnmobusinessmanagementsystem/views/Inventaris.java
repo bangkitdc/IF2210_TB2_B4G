@@ -1,6 +1,9 @@
 package bnmobusinessmanagementsystem.views;
 
 import bnmobusinessmanagementsystem.models.Item;
+import bnmobusinessmanagementsystem.models.customer.Customer;
+import bnmobusinessmanagementsystem.models.customer.Member;
+import bnmobusinessmanagementsystem.models.customer.VIP;
 import bnmobusinessmanagementsystem.utils.DataStore;
 import bnmobusinessmanagementsystem.views.components.Catalog.*;
 import bnmobusinessmanagementsystem.views.components.Catalog.CashierView;
@@ -22,7 +25,6 @@ public class Inventaris extends HBox{
         double maxHeight = primaryScreen.getVisualBounds().getHeight();
         double maxWidth = primaryScreen.getVisualBounds().getWidth();
         DataStore dataStore = new DataStore("itemTEMP.json");
-
         Item[] itemDB = new Item[10];
         itemDB[0] = new Item("alpukat", 2050, 1500, 5, "buah", "picture");
         itemDB[1] = new Item("pisang", 205, 1500, 4, "buah", "picture");

@@ -2,14 +2,14 @@ package bnmobusinessmanagementsystem.utils;
 
 import java.io.*;
 
-import bnmobusinessmanagementsystem.models.customer.Member;
-import bnmobusinessmanagementsystem.models.customer.VIP;
+import bnmobusinessmanagementsystem.models.customer.*;
+//import bnmobusinessmanagementsystem.models.customer.VIP;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.*;
 import org.json.simple.JSONObject;
 import java.util.ArrayList;
 
-import bnmobusinessmanagementsystem.models.customer.Customer;
+//import bnmobusinessmanagementsystem.models.customer.Customer;
 import bnmobusinessmanagementsystem.models.Item;
 
 
@@ -29,23 +29,49 @@ public class DataStore {
         for (Customer customer : customers) {
             JSONObject customerObject = new JSONObject();
 
+            customerObject.put("idCustomer", customer.getCustomerId());
+            JSONArray transactionArray = new JSONArray();
+            for (Purchase purchase : customer.getTransaction()) {
+                JSONObject purchaseObject = new JSONObject();
+
+                purchaseObject.put("customerId", purchase.getCustomerId());
+                purchaseObject.put("date", purchase.getDate());
+                purchaseObject.put("bill", purchase.getBill());
+
+                JSONArray itemArray = new JSONArray();
+                for (Item item : purchase.getItemList()) {
+                    JSONObject itemObject = new JSONObject();
+
+                    itemObject.put("name", item.getName());
+                    itemObject.put("sellPrice", item.getSellPrice());
+                    itemObject.put("buyPrice", item.getBuyPrice());
+                    itemObject.put("quantity", item.getQuantity());
+                    itemObject.put("category", item.getCategory());
+                    itemObject.put("image", item.getImage());
+
+                    itemArray.add(itemObject);
+                }
+
+                purchaseObject.put("itemList", itemArray);
+
+                transactionArray.add(purchaseObject);
+            }
+            customerObject.put("transaction", transactionArray);
+
             if (customer instanceof Member member) {
                 customerObject.put("tipe", "member");
-                customerObject.put("idCustomer", member.getCustomerId());
                 customerObject.put("nama", member.getNama());
                 customerObject.put("noTelp", member.getNoTelp());
                 customerObject.put("poin", member.getPoin());
                 customerObject.put("isActive", member.isActive());
             } else if (customer instanceof VIP vip) {
                 customerObject.put("tipe", "vip");
-                customerObject.put("idCustomer", vip.getCustomerId());
                 customerObject.put("nama", vip.getNama());
                 customerObject.put("noTelp", vip.getNoTelp());
                 customerObject.put("poin", vip.getPoin());
                 customerObject.put("isActive", vip.isActive());
             } else {
                 customerObject.put("tipe", "customer");
-                customerObject.put("id", customer.getCustomerId());
             }
 
             customerArray.add(customerObject);

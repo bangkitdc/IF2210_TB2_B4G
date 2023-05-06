@@ -1,14 +1,22 @@
 package bnmobusinessmanagementsystem.views.components.Catalog;
 
+import bnmobusinessmanagementsystem.models.customer.Customer;
+import bnmobusinessmanagementsystem.models.customer.Member;
+import bnmobusinessmanagementsystem.models.customer.VIP;
+import bnmobusinessmanagementsystem.utils.DataStore;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -17,18 +25,33 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CashierView extends VBox {
 
     private Label addCustomer;
+    private ComboBox<String> dropdown;
+    private HBox customerType;
     private ListView items;
     private Label saveBill;
     private Label printBill;
+    private HBox bill;
     private Label charge;
     private double sum;
     private ArrayList itemInfoList;
     public CashierView(){
+        DataStore custStore = new DataStore("customer.json");
+        Customer[] customers = new Customer[2];
+        customers[0] = new VIP("Jane Doe", "987654321");
+        customers[1] = new Member("Joli Diva", "123456789");
+        ArrayList<Customer> customerList = new ArrayList<>(Arrays.asList(customers));
+        custStore.saveCustomer(customerList);
+
+
+
+        dropdown = new ComboBox<>();
         itemInfoList = new ArrayList<>();
         Screen primaryScreen = Screen.getPrimary();
         double maxHeight = primaryScreen.getVisualBounds().getHeight();
@@ -44,6 +67,33 @@ public class CashierView extends VBox {
                 System.out.println("Add Customer!");
             }
         });
+
+//        customerType = new HBox(20);
+        try{
+            ArrayList<Customer> custs = custStore.readCustomer();
+            for (Customer cust : custs){
+                if(cust instanceof Member){
+                    dropdown.getItems().add(((Member) cust).getNama());
+                }
+                if(cust instanceof VIP){
+                    dropdown.getItems().add(((VIP) cust).getNama());
+                }
+//                System.out.println(cust.);
+            }
+        } catch (IOException e){
+            e.printStackTrace();;
+        }
+
+
+//        dropdown.getItems().addAll("Customer", "Member", "VIP");
+        dropdown.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+
+        });
+//        customerType.getChildren().addAll(dropdown, new Label("ID"));
+        customerType = new HBox(20);
+        customerType.getChildren().addAll(dropdown);
+
+
 
         items = new ListView();
 
@@ -73,7 +123,7 @@ public class CashierView extends VBox {
         saveBill.setPrefWidth(maxWidth/2);
         printBill.setPrefWidth(maxWidth/2);
 
-        HBox bill = new HBox(saveBill, printBill);
+        bill = new HBox(saveBill, printBill);
         bill.setPrefHeight(30);
 
         charge = new Label("Charge");
@@ -138,14 +188,13 @@ public class CashierView extends VBox {
             }
         });
 
-
-        this.getChildren().addAll(addCustomer, items, bill, charge);
+        this.getChildren().addAll(addCustomer, customerType, items, bill, charge);
         this.setPrefWidth(maxWidth/4);
         this.setPrefHeight(maxHeight);
 
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-
+        dropdown.getSelectionModel().select("Customer");
     }
 
     public Label getAddCustomer() {
