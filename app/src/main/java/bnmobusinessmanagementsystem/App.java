@@ -15,6 +15,7 @@ public class App extends Application {
             MenuAndTab menuBar = new MenuAndTab(new Scene(new VBox(), 1080, 660));
             primaryStage.setScene(menuBar.getScene());
             primaryStage.show();
+            primaryStage.setResizable(false);
 
         } catch (Exception e) {
             System.out.println("Error: ");

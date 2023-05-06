@@ -33,7 +33,7 @@ public class FontManager {
         for (File fontFile : fontFiles) {
             if (fontFile.getName().endsWith(".ttf")) {
                 Font font = Font.loadFont(fontFile.toURI().toString(), 12);
-                System.out.println(font.toString());
+//                System.out.println(font.toString());
             }
         }
     }
