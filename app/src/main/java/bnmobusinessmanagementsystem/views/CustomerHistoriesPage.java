@@ -30,7 +30,7 @@ public class CustomerHistoriesPage extends BorderPane{
 //        );
 
 
-        Image img = new Image("C:\\Users\\ASUS\\IdeaProjects\\IF2210_TB2_B4G\\app\\src\\main\\resources\\background\\bg.png");
+//        Image img = new Image("C:\\Users\\ASUS\\IdeaProjects\\IF2210_TB2_B4G\\app\\src\\main\\resources\\background\\bg.png");
         BackgroundImage bg_img = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0, true, true, false, false));
         setBackground(new Background(bg_img));
         purchaseTable.setFixedCellSize(-1);
