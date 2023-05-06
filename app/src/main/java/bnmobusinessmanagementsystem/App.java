@@ -23,6 +23,7 @@ public class App extends Application {
             primaryStage.setScene(inventaris.getScene());
 //            primaryStage.setmaximized(true
             primaryStage.show();
+            primaryStage.setResizable(false);
 
         } catch (Exception e) {
             System.out.println("Error: ");
