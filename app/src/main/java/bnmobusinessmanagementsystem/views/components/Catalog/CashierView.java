@@ -100,7 +100,7 @@ public class CashierView extends VBox {
             }
         });
 
-        items.setPrefHeight(maxHeight-addCustomer.getPrefHeight()-bill.getPrefHeight()-charge.getPrefHeight());
+        items.setPrefHeight(584-addCustomer.getPrefHeight()-bill.getPrefHeight()-charge.getPrefHeight());
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), event -> {
             // Code to execute every second
