@@ -1,18 +1,12 @@
 package bnmobusinessmanagementsystem.views.components.Catalog;
 
 import bnmobusinessmanagementsystem.models.Item;
-import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
-
-import javax.swing.*;
 
 public class Bubble extends BorderPane {
     private Label bubblePict;
@@ -22,7 +16,9 @@ public class Bubble extends BorderPane {
     private VBox rightSide;
     private Label quantityLabel;
     private int quantity;
+    private Item item;
     public Bubble(Item item){
+        this.item = item;
         quantity = 1;
         bubblePict = new Label(item.getImage());
         bubbleName = new Label(item.getName());
@@ -124,5 +120,13 @@ public class Bubble extends BorderPane {
 
     public void setRemoveItem(Button removeItem) {
         this.removeItem = removeItem;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 }

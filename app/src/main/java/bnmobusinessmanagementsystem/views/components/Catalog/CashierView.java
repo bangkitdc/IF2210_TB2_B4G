@@ -6,8 +6,8 @@ import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -17,6 +17,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+
 public class CashierView extends VBox {
 
     private Label addCustomer;
@@ -25,8 +27,9 @@ public class CashierView extends VBox {
     private Label printBill;
     private Label charge;
     private double sum;
-
+    private ArrayList itemInfoList;
     public CashierView(){
+        itemInfoList = new ArrayList<>();
         Screen primaryScreen = Screen.getPrimary();
         double maxHeight = primaryScreen.getVisualBounds().getHeight();
         double maxWidth = primaryScreen.getVisualBounds().getWidth();
@@ -81,6 +84,18 @@ public class CashierView extends VBox {
         charge.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 System.out.println(charge.getText());
+                for(Object item : items.getItems()){
+                    if(item instanceof Bubble){
+                        ArrayList<String> itemInfo = new ArrayList<>();
+                        itemInfo.add(((Bubble) item).getBubbleName().getText());
+                        itemInfo.add(((Bubble) item).getBubblePrice().getText());
+                        itemInfo.add(((Bubble) item).getQuantityLabel().getText());
+                        System.out.print(itemInfo);
+//                        System.out.println(((Bubble) item).getBubbleName().getText());
+//                        System.out.println(((Bubble) item).getBubblePrice().getText());
+//                        System.out.println(((Bubble) item).getQuantityLabel().getText());
+                    }
+                }
                 //TODO : ngecharge ke customer
             }
         });

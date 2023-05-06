@@ -18,9 +18,13 @@ public class ItemView extends Pane {
     private double priceNum;
     private Label category;
 
-    public ItemView(CashierView cashier, Item _item) {
-
+    public ItemView(CashierView cashier, Item _item, int _height, int _width) {
         // Item image
+//        System.out.println(this.heightProperty());
+//        System.out.println(this.heightProperty());
+        // ItemView item = new ItemView()
+//        this.setHeight(_height);
+        this.setWidth(_width);
         pict = new Label("PICTURE");
         pict.setPrefHeight(150);
         pict.setPrefWidth(150);
