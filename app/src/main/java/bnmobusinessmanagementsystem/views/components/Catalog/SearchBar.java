@@ -20,20 +20,16 @@ public class SearchBar extends HBox {
     public SearchBar(CatalogView catalog){
         this.catalog = catalog;
         this.originalCatalog = new ArrayList<>(catalog.getChildren());
-        System.out.println(originalCatalog);
         searchBar = new TextField();
         searchBar.setPromptText("Search");
         searchBar.setPrefWidth(360);
 
         searchBar.setOnKeyReleased(e -> { // handle submit on "Enter" key pressed
             String searchText = searchBar.getText();
-            System.out.println(searchText);
 
             if(searchText.equals("")){
                 catalog.clearCatalog();
                 catalog.getChildren().addAll(originalCatalog);
-                System.out.println(originalCatalog);
-                System.out.println(catalog.getChildren());
             }
             else {
                 List<Node> temp = new ArrayList<>(originalCatalog);
@@ -41,15 +37,12 @@ public class SearchBar extends HBox {
                 catalog.clearCatalog();
 
                 for (Node node : temp) {
-                    if (node instanceof Items) {
-                        if (((Items) node).getName().getText().contains(searchText)) { // Search by name
-                            System.out.println("name");
+                    if (node instanceof ItemView) {
+                        if (((ItemView) node).getName().getText().contains(searchText)) { // Search by name
                             catalog.getChildren().add(node);
-                        } else if (((Items) node).getCategory().getText().contains(searchText)) { // Search by category
-                            System.out.println("category");
+                        } else if (((ItemView) node).getCategory().getText().contains(searchText)) { // Search by category
                             catalog.getChildren().add(node);
-                        } else if (((Items) node).getPrice().getText().contains(searchText)) { // Search by price
-                            System.out.println("price");
+                        } else if (((ItemView) node).getPrice().getText().contains(searchText)) { // Search by price
                             catalog.getChildren().add(node);
                         }
                     }

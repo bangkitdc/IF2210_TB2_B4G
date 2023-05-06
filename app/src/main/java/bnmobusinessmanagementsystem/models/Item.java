@@ -25,6 +25,15 @@ public class Item {
         this.image = image;
     }
 
+    public Item(Item other) {
+        this.name = other.name;
+        this.sellPrice = other.sellPrice;
+        this.buyPrice = other.buyPrice;
+        this.quantity = other.quantity;
+        this.category = other.category;
+        this.image = other.image;
+    }
+
     public String getName() {
         return name;
     }

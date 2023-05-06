@@ -1,6 +1,7 @@
 package bnmobusinessmanagementsystem;
 
 /* Import library */
+import bnmobusinessmanagementsystem.views.Inventaris;
 import bnmobusinessmanagementsystem.views.MenuAndTab;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,8 +13,12 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            MenuAndTab menuBar = new MenuAndTab(new Scene(new VBox(), 1080, 660));
-            primaryStage.setScene(menuBar.getScene());
+//            MenuAndTab menuBar = new MenuAndTab(new Scene(new VBox(), 1080, 660));
+//            primaryStage.setScene(menuBar.getScene());
+//            primaryStage.show();
+            Inventaris inventaris = new Inventaris ();
+            primaryStage.setScene(inventaris.getScene());
+//            primaryStage.setmaximized(true
             primaryStage.show();
 
         } catch (Exception e) {

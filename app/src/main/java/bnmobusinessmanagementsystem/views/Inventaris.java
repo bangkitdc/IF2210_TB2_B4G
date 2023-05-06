@@ -29,15 +29,25 @@ public class Inventaris{
         Item pisang = new Item("pisang", 18500, 15500, 5, "buah", "picture");
         Item apel = new Item("apel", 7500, 6500, 5, "buah", "picture");
         Item obeng = new Item("obeng", 12500, 11500, 5, "peralatan", "picture");
+        Item palu = new Item("palu", 12500, 11500, 5, "peralatan", "picture");
+        Item paku = new Item("paku", 12500, 11500, 5, "peralatan", "picture");
+        Item laptop = new Item("laptop", 50000, 11500, 5, "elektronik", "picture");
+        Item handphone = new Item("handphone", 50000, 11500, 5, "elektronik", "picture");
+        Item radio = new Item("radio", 50000, 11500, 5, "elektronik", "picture");
 
-        itemList.addItem(new Items(cashier, alpukat.getName(),  alpukat.getCategory(), String.valueOf(alpukat.getSellPrice())));
-        itemList.addItem(new Items(cashier, pisang.getName(), pisang.getCategory(), String.valueOf(pisang.getSellPrice())));
-        itemList.addItem(new Items(cashier, apel.getName(), apel.getCategory(), String.valueOf(apel.getSellPrice())));
-        itemList.addItem(new Items(cashier, obeng.getName(), obeng.getCategory(), String.valueOf(obeng.getSellPrice())));
+        itemList.addItem(new ItemView(cashier,alpukat));
+        itemList.addItem(new ItemView(cashier, pisang));
+        itemList.addItem(new ItemView(cashier, apel));
+        itemList.addItem(new ItemView(cashier, obeng));
+        itemList.addItem(new ItemView(cashier, palu));
+        itemList.addItem(new ItemView(cashier, paku));
+        itemList.addItem(new ItemView(cashier, laptop));
+        itemList.addItem(new ItemView(cashier, handphone));
+        itemList.addItem(new ItemView(cashier, radio));
 
-//        for(int i = 0; i < 30; i++){
-//            itemList.addItem(new Items(cashier, "Test"+i, "200"+i, "2000"));
-//        }
+//       for(int i = 0; i < 30; i++){
+//            itemList.addItem(new ItemView(cashier, "Test"+i, "200"+i, "2000"));
+//       }
         SearchBar searchBar = new SearchBar(itemList);
 
         catalog.getChildren().addAll(searchBar, catalogs);

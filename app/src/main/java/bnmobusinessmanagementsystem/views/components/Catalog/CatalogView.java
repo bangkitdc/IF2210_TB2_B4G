@@ -10,7 +10,7 @@ public class CatalogView extends TilePane {
         this.setVgap(20);
     }
 
-    public void addItem(Items items){
+    public void addItem(ItemView items){
         this.getChildren().add(items);
     }
 
