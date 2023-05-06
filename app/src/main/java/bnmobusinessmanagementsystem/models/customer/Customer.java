@@ -1,20 +1,39 @@
 package bnmobusinessmanagementsystem.models.customer;
 
+import java.util.ArrayList;
+
 public class Customer {
     private static int numOfCustomer=0;
-    private final int idCustomer=numOfCustomer+1;
+    private String idCustomer;
+    private ArrayList<Purchase> transaction;
 
+
+    public Customer(String id) {
+        numOfCustomer++;
+        this.idCustomer=id;
+        this.transaction=new ArrayList<>();
+    }
     public Customer() {
         numOfCustomer++;
+        this.idCustomer=Integer.toString(numOfCustomer);
+        this.transaction=new ArrayList<>();
     }
 
-    public int getCustomerId() {
+    public String getCustomerId() {
         return this.idCustomer;
     }
 
     public int getNumOfCustomer() {
         return numOfCustomer;
     }
+    public int getNumOfTransaction(){return this.transaction.size();}
 
+    public ArrayList<Purchase> getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(ArrayList<Purchase> transaction) {
+        this.transaction = transaction;
+    }
 }
 
