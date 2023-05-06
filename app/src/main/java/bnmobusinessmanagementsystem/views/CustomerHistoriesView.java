@@ -1,4 +1,5 @@
 package bnmobusinessmanagementsystem.views;
+import bnmobusinessmanagementsystem.models.Item;
 import bnmobusinessmanagementsystem.models.customer.*;
 
 import javafx.geometry.Insets;

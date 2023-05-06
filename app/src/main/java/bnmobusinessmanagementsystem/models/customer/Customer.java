@@ -13,6 +13,11 @@ public class Customer {
         this.idCustomer=id;
         this.transaction=new ArrayList<>();
     }
+    public Customer() {
+        numOfCustomer++;
+        this.idCustomer=Integer.toString(numOfCustomer);
+        this.transaction=new ArrayList<>();
+    }
 
     public String getCustomerId() {
         return this.idCustomer;
@@ -30,6 +35,10 @@ public class Customer {
 
     public void setTransaction(ArrayList<Purchase> transaction) {
         this.transaction = transaction;
+    }
+
+    public void addTransaction(Purchase a){
+        this.transaction.add(a);
     }
 }
 
