@@ -33,6 +33,7 @@ public class DateTime extends BorderPane {
             -fx-background-color: transparent;
             -fx-font-family: "SF Pro Rounded Semibold";
             -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
+            -fx-min-width: 350px;
         """);
 
         dateLabel.setId("dateLabel");
