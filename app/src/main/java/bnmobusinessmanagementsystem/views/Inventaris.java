@@ -1,8 +1,7 @@
 package bnmobusinessmanagementsystem.views;
 
 import bnmobusinessmanagementsystem.models.Item;
-import bnmobusinessmanagementsystem.models.customer.Customer;
-import bnmobusinessmanagementsystem.util.DataStore;
+import bnmobusinessmanagementsystem.utils.DataStore;
 import bnmobusinessmanagementsystem.views.components.Catalog.*;
 import bnmobusinessmanagementsystem.views.components.Catalog.CashierView;
 import bnmobusinessmanagementsystem.views.components.Catalog.CatalogView;
