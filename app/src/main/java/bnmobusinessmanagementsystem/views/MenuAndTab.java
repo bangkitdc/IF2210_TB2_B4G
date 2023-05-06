@@ -1,7 +1,7 @@
 package bnmobusinessmanagementsystem.views;
 
 import javafx.collections.ListChangeListener;
-import javafx.geometry.Pos;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
@@ -13,8 +13,6 @@ import javafx.scene.layout.*;
 import javafx.scene.image.Image;
 
 
-import javax.print.attribute.standard.Media;
-import java.io.File;
 import java.nio.file.Paths;
 
 public class MenuAndTab {
@@ -49,14 +47,6 @@ public class MenuAndTab {
         pane1.getChildren().add(mainPage);
         pane2.getChildren().add(tabPane);
 
-        String currentDir = System.getProperty("user.dir");
-        String path = "/IF2210_TB2_B4G/app/src/main/resources/background/bg.png";
-        String fullPath = Paths.get(currentDir, path).toString();
-
-        // Image img = new Image("src/main/resources/background/bg.png");
-        // BackgroundImage bg_img = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0, true, true, false, false));
-        // mainPage.setBackground(new Background(bg_img));
-
         pane1.setVisible(true);
         pane2.setVisible(false);
 
@@ -65,12 +55,14 @@ public class MenuAndTab {
         // Create menu items
         MenuItem page1MenuItem = new MenuItem("Page 1");
         MenuItem page2MenuItem = new MenuItem("Page 2");
+        MenuItem pageSetting = new MenuItem("Setting");
         MenuItem addCustomer = new MenuItem("Add Customer");
         MenuItem update = new MenuItem("Update");
         MenuItem historyTransaction = new MenuItem("History");
 
         // Create menus
         Menu pageMenu = new Menu("Menu");
+        pageMenu.getItems().addAll(page1MenuItem, page2MenuItem, pageSetting);
         pageMenu.getItems().addAll(page1MenuItem, page2MenuItem, addCustomer, update, historyTransaction);
 
         // Create menu bar
@@ -81,17 +73,61 @@ public class MenuAndTab {
         page1MenuItem.setOnAction(e -> {
             pane1.setVisible(false);
             pane2.setVisible(true);
-            Tab tab1 = new Tab("Page 1");
-            tab1.setContent(new Label("This is Page 1"));
+            String pageTitle = "Page 1";
+            for (Tab tab : tabPane.getTabs()) {
+                if (tab.getText().equals(pageTitle)) {
+                    tabPane.getSelectionModel().select(tab);
+                    return;
+                }
+            }
+            Page1 page1 = new Page1();
+            page1.layoutBoundsProperty().addListener((obs, oldVal, newVal) -> {
+                page1.setPrefWidth(pane2.getWidth());
+                page1.setPrefHeight(pane2.getHeight());
+            });
+            Tab tab1 = new Tab(pageTitle);
+            tab1.setContent(page1);
             tabPane.getTabs().add(tab1);
         });
 
         page2MenuItem.setOnAction(e -> {
             pane1.setVisible(false);
             pane2.setVisible(true);
-            Tab tab2 = new Tab("Page 2");
-            tab2.setContent(new Label("This is Page 2"));
+            String pageTitle = "Page 2";
+            for (Tab tab : tabPane.getTabs()) {
+                if (tab.getText().equals(pageTitle)) {
+                    tabPane.getSelectionModel().select(tab);
+                    return;
+                }
+            }
+            Page2 page2 = new Page2();
+            page2.layoutBoundsProperty().addListener((obs, oldVal, newVal) -> {
+                page2.setPrefWidth(pane2.getWidth());
+                page2.setPrefHeight(pane2.getHeight());
+            });
+            Tab tab2 = new Tab(pageTitle);
+            tab2.setContent(page2);
             tabPane.getTabs().add(tab2);
+        });
+
+        pageSetting.setOnAction(e -> {
+            pane1.setVisible(false);
+            pane2.setVisible(true);
+            String pageTitle = "Settings";
+            for (Tab tab : tabPane.getTabs()) {
+                if (tab.getText().equals(pageTitle)) {
+                    tabPane.getSelectionModel().select(tab);
+                    return;
+                }
+            }
+            SettingPage settingPage = new SettingPage();
+            settingPage.layoutBoundsProperty().addListener((obs, oldVal, newVal) -> {
+                settingPage.setPrefWidth(pane2.getWidth());
+                settingPage.setPrefHeight(pane2.getHeight());
+            });
+            Tab tab3 = new Tab(pageTitle);
+            tab3.setContent(settingPage);
+            tabPane.getTabs().add(tab3);
         });
 
         addCustomer.setOnAction(e -> {

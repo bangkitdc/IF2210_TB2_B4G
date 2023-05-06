@@ -13,6 +13,14 @@ public class VIP extends Customer {
         this.poin=0;
         this.isActive=true;
     }
+
+    public VIP(String nama, String noTelp, String id){
+        super(id);
+        this.nama=nama;
+        this.noTelp=noTelp;
+        this.poin=0;
+        this.isActive=true;
+    }
     
     public String getNama() {
         return nama;
