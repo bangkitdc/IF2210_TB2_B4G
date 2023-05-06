@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Inventaris{
+public class Inventaris extends HBox{
     private Scene scene;
 
     public Inventaris(){
@@ -23,12 +23,17 @@ public class Inventaris{
         double maxWidth = primaryScreen.getVisualBounds().getWidth();
         DataStore dataStore = new DataStore("itemTEMP.json");
 
-        Item[] itemDB = new Item[5];
+        Item[] itemDB = new Item[10];
         itemDB[0] = new Item("alpukat", 2050, 1500, 5, "buah", "picture");
         itemDB[1] = new Item("pisang", 205, 1500, 4, "buah", "picture");
         itemDB[2] = new Item("apel", 20, 1500, 3, "buah", "picture");
         itemDB[3] = new Item("obeng", 2000, 1500, 2, "peralatan", "picture");
         itemDB[4] = new Item("palu", 200, 1500, 1, "peralatan", "picture");
+        itemDB[5] = new Item("alpukat", 2050, 1500, 5, "buah", "picture");
+        itemDB[6] = new Item("pisang", 205, 1500, 4, "buah", "picture");
+        itemDB[7] = new Item("apel", 20, 1500, 3, "buah", "picture");
+        itemDB[8] = new Item("obeng", 2000, 1500, 2, "peralatan", "picture");
+        itemDB[9] = new Item("palu", 200, 1500, 1, "peralatan", "picture");
 
         VBox catalog = new VBox(10);
         CashierView cashier = new CashierView();
@@ -74,13 +79,16 @@ public class Inventaris{
         SearchBar searchBar = new SearchBar(itemList);
 
         catalog.getChildren().addAll(searchBar, catalogs);
-        catalog.setPrefWidth(maxWidth*3/5);
-        cashier.setPrefWidth(maxWidth*2/5);
+//        catalog.setPrefWidth(maxWidth*3/5);
+//        cashier.setPrefWidth(maxWidth*2/5);
+        catalog.setPrefWidth(1080*3/5);
+        cashier.setPrefWidth(1080*2/5);
         catalog.setPrefHeight(maxHeight);
-        HBox inventaris = new HBox(catalog, cashier);
-        scene = new Scene(inventaris, 1080, 660);
+//        HBox inventaris = new HBox(catalog, cashier);
+        this.getChildren().addAll(catalog, cashier);
+//        scene = new Scene(inventaris, 1080, 660);
     }
-    public Scene getScene() {
-        return scene;
-    }
+//    public Scene getScene() {
+//        return scene;
+//    }
 }

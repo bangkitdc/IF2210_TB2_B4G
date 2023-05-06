@@ -20,7 +20,7 @@ public class MenuAndTab {
     private TabPane tabPane;
 
     public MenuAndTab(Scene mainScene) {
-        FontManager.loadFonts();
+//        FontManager.loadFonts();
 
         // Tab pane
         tabPane = new TabPane();
@@ -57,10 +57,11 @@ public class MenuAndTab {
         MenuItem page1MenuItem = new MenuItem("Page 1");
         MenuItem page2MenuItem = new MenuItem("Page 2");
         MenuItem pageSetting = new MenuItem("Setting");
+        MenuItem pageInventaris = new MenuItem("Inventaris");
 
         // Create menus
         Menu pageMenu = new Menu("Menu");
-        pageMenu.getItems().addAll(page1MenuItem, page2MenuItem, pageSetting);
+        pageMenu.getItems().addAll(page1MenuItem, page2MenuItem, pageSetting, pageInventaris);
 
         // Create menu bar
         MenuBar menuBar = new MenuBar();
@@ -125,6 +126,33 @@ public class MenuAndTab {
             Tab tab3 = new Tab(pageTitle);
             tab3.setContent(settingPage);
             tabPane.getTabs().add(tab3);
+        });
+
+        tabPane.getTabs().addListener((ListChangeListener<Tab>) change -> {
+            if (tabPane.getTabs().isEmpty()) {
+                pane1.setVisible(true);
+                pane2.setVisible(false);
+            }
+        });
+
+        pageInventaris.setOnAction(e -> {
+            pane1.setVisible(false);
+            pane2.setVisible(true);
+            String pageTitle = "Inventaris";
+            for (Tab tab : tabPane.getTabs()) {
+                if (tab.getText().equals(pageTitle)) {
+                    tabPane.getSelectionModel().select(tab);
+                    return;
+                }
+            }
+            Inventaris inventaris = new Inventaris();
+//            inventaris.layoutBoundsProperty().addListener((obs, oldVal, newVal) -> {
+//                inventaris.setPrefWidth(pane2.getWidth());
+//                inventaris.setPrefHeight(pane2.getHeight());
+//            });
+            Tab tab4 = new Tab(pageTitle);
+            tab4.setContent(inventaris);
+            tabPane.getTabs().add(tab4);
         });
 
         tabPane.getTabs().addListener((ListChangeListener<Tab>) change -> {
