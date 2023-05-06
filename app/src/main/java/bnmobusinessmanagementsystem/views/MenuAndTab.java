@@ -22,7 +22,6 @@ public class MenuAndTab {
     private TabPane tabPane;
 
     public MenuAndTab(Scene mainScene) {
-        FontManager.loadFonts();
 
         // Tab pane
         tabPane = new TabPane();
@@ -51,12 +50,12 @@ public class MenuAndTab {
         pane2.getChildren().add(tabPane);
 
         String currentDir = System.getProperty("user.dir");
-        String path = "src/main/resources/background/bg.png";
+        String path = "/IF2210_TB2_B4G/app/src/main/resources/background/bg.png";
         String fullPath = Paths.get(currentDir, path).toString();
 
-        Image img = new Image(fullPath);
-        BackgroundImage bg_img = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0, true, true, false, false));
-        mainPage.setBackground(new Background(bg_img));
+        // Image img = new Image("src/main/resources/background/bg.png");
+        // BackgroundImage bg_img = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0, true, true, false, false));
+        // mainPage.setBackground(new Background(bg_img));
 
         pane1.setVisible(true);
         pane2.setVisible(false);
@@ -66,10 +65,13 @@ public class MenuAndTab {
         // Create menu items
         MenuItem page1MenuItem = new MenuItem("Page 1");
         MenuItem page2MenuItem = new MenuItem("Page 2");
+        MenuItem addCustomer = new MenuItem("Add Customer");
+        MenuItem update = new MenuItem("Update");
+        MenuItem historyTransaction = new MenuItem("History");
 
         // Create menus
         Menu pageMenu = new Menu("Menu");
-        pageMenu.getItems().addAll(page1MenuItem, page2MenuItem);
+        pageMenu.getItems().addAll(page1MenuItem, page2MenuItem, addCustomer, update, historyTransaction);
 
         // Create menu bar
         MenuBar menuBar = new MenuBar();
@@ -91,6 +93,40 @@ public class MenuAndTab {
             tab2.setContent(new Label("This is Page 2"));
             tabPane.getTabs().add(tab2);
         });
+
+        addCustomer.setOnAction(e -> {
+            pane1.setVisible(false);
+            pane2.setVisible(true);
+            Tab tab1 = new Tab("Add Customer");
+            AddMember customerTab = new AddMember();
+            customerTab.setPrefWidth(pane1.getWidth());
+            customerTab.setPrefHeight(pane1.getHeight());
+            tab1.setContent(customerTab);
+            tabPane.getTabs().add(tab1);
+        });
+
+        update.setOnAction(e -> {
+            pane1.setVisible(false);
+            pane2.setVisible(true);
+            Tab tab1 = new Tab("Update");
+            UpdateCustomer updateCust = new UpdateCustomer();
+            updateCust.setPrefWidth(pane1.getWidth());
+            updateCust.setPrefHeight(pane1.getHeight());
+            tab1.setContent(updateCust);
+            tabPane.getTabs().add(tab1);
+        });
+        
+        historyTransaction.setOnAction(e -> {
+            pane1.setVisible(false);
+            pane2.setVisible(true);
+            Tab tab1 = new Tab("Histori");
+            CustomerHistoriesPage historyPgae = new CustomerHistoriesPage();
+            historyPgae.setPrefWidth(pane1.getWidth());
+            historyPgae.setPrefHeight(pane1.getHeight());
+            tab1.setContent(historyPgae);
+            tabPane.getTabs().add(tab1);
+        });
+
 
         tabPane.getTabs().addListener((ListChangeListener<Tab>) change -> {
             if (tabPane.getTabs().isEmpty()) {
