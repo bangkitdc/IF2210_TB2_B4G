@@ -5,7 +5,7 @@
     "tipe": "vip",
     "isActive": true,
     "noTelp": "987654321",
-    "idCustomer": "C1"
+    "idCustomer": "id1"
   },
   {
     "poin": 0.0,
@@ -13,6 +13,6 @@
     "tipe": "member",
     "isActive": true,
     "noTelp": "123456789",
-    "idCustomer": "C2"
+    "idCustomer": "id2"
   }
 ]

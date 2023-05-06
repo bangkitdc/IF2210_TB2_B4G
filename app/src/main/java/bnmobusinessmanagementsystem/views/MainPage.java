@@ -23,9 +23,9 @@ public class MainPage extends HBox {
         String path = "src/main/resources/background/bg.png";
         String fullPath = Paths.get(currentDir, path).toString();
 
-        Image img = new Image(fullPath);
-        BackgroundImage bg_img = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0, true, true, false, false));
-        this.setBackground(new Background(bg_img));
+//        Image img = new Image(fullPath);
+//        BackgroundImage bg_img = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0, true, true, false, false));
+//        this.setBackground(new Background(bg_img));
         // Create a DateTime component
         DateTime dateTime = new DateTime();
 
