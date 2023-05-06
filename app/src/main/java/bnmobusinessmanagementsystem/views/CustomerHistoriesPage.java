@@ -31,10 +31,10 @@ public class CustomerHistoriesPage extends BorderPane{
 
 
 //        Image img = new Image("C:\\Users\\ASUS\\IdeaProjects\\IF2210_TB2_B4G\\app\\src\\main\\resources\\background\\bg.png");
-        BackgroundImage bg_img = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0, true, true, false, false));
-        setBackground(new Background(bg_img));
+//        BackgroundImage bg_img = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0, true, true, false, false));
+//        setBackground(new Background(bg_img));
         purchaseTable.setFixedCellSize(-1);
-//        purchaseTable.setPadding(new Insets(10, 20, 10, 20));
+        purchaseTable.setPadding(new Insets(10, 20, 10, 20));
         purchaseTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         setPadding(new Insets(10, 10, 10, 10));
         setPrefSize(1080, 660);
@@ -100,6 +100,53 @@ public class CustomerHistoriesPage extends BorderPane{
                 }
             }
         });
+    }
+
+    public class Purchase {
+        private final String customerId;
+        private final String date;
+        private final String item;
+        private final int quantity;
+
+        public Purchase(String customerId, String date, String item, int quantity) {
+            this.customerId = customerId;
+            this.date = date;
+            this.item = item;
+            this.quantity = quantity;
+        }
+
+        public String getCustomerId() {
+            return customerId;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public String getItem() {
+            return item;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public StringProperty customerIdProperty() {
+            return new SimpleStringProperty(customerId);
+        }
+
+        public StringProperty dateProperty() {
+            return new SimpleStringProperty(date);
+        }
+
+        public StringProperty itemProperty() {
+            return new SimpleStringProperty(item);
+        }
+
+        public IntegerProperty quantityProperty() {
+            return new SimpleIntegerProperty(quantity);
+        }
+
     }
 }
 
