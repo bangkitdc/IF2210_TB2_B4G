@@ -26,6 +26,7 @@ dependencies {
 
     // json
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation 'org.apache.pdfbox:pdfbox:2.0.27'
 }
 
 javafx {

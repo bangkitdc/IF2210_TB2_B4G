@@ -1,9 +1,6 @@
 package bnmobusinessmanagementsystem.views.components.Catalog;
 
-import bnmobusinessmanagementsystem.models.Item;
-import bnmobusinessmanagementsystem.models.customer.Customer;
 import bnmobusinessmanagementsystem.models.customer.Member;
-import bnmobusinessmanagementsystem.models.customer.Purchase;
 import bnmobusinessmanagementsystem.models.customer.VIP;
 import bnmobusinessmanagementsystem.utils.DataStore;
 import javafx.animation.Animation;
