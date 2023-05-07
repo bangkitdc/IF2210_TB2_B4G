@@ -119,8 +119,10 @@ public class CustomerControllers {
                             int quantity = ((Long) itemJson.get("quantity")).intValue();
                             String category = (String) itemJson.get("category");
                             String image = (String) itemJson.get("image");
+
                             int sold = ((Long) itemJson.get("sold")).intValue();
                             Item item = new Item(name, sellPrice, buyPrice, quantity, sold, category, image);
+
                             itemList.add(item);
                         }
 

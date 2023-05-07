@@ -12,11 +12,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.Optional;
@@ -26,7 +29,7 @@ public class ItemView extends Pane {
     private Label deleteButton;
 
     private Label name;
-    private Label pict;
+    private Pane pict;
     private Label price;
     private double priceNum;
     private Label category;
@@ -34,6 +37,7 @@ public class ItemView extends Pane {
     private Item itemTemp;
 
     public ItemView(CashierView cashier, Item _item, int _height, int _width, DataStore itemDataStore) {
+        //#A7A9D0
         this.itemDataStore = itemDataStore;
         try{
             this.itemTemp = this.itemDataStore.getItemByName(_item.getName());
@@ -41,11 +45,19 @@ public class ItemView extends Pane {
             e.printStackTrace();
         }
 
+        String currentDir = System.getProperty("user.dir");
+        String path = "src/main/resources/itempict/"+_item.getImage();
+        String fullPath = Paths.get(currentDir, path).toString();
+        Image img = new Image("file:"+fullPath);
+        ImageView imgview = new ImageView(img);
+        imgview.setFitHeight(150);
+        imgview.setFitWidth(150);
         this.setWidth(_width);
-        pict = new Label("PICTURE");
+        pict = new Pane(imgview);
+//        pict.getChildren().add(imgview);
         pict.setPrefHeight(150);
         pict.setPrefWidth(150);
-        pict.setBackground(Background.fill(Color.BLACK));
+//        pict.setBackground(Background.fill(Color.BLACK));
 
         // Item name
         this.name = new Label(_item.getName());
@@ -75,88 +87,88 @@ public class ItemView extends Pane {
         this.editButton = new Label("Edit");
         editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                    // Create the custom dialog.
-                    Dialog<Item> dialog = new Dialog<>();
-                    dialog.setTitle("Update Item");
-                    dialog.setHeaderText("Update the item information:");
+                // Create the custom dialog.
+                Dialog<Item> dialog = new Dialog<>();
+                dialog.setTitle("Update Item");
+                dialog.setHeaderText("Update the item information:");
 
-                    // Set the button types.
-                    ButtonType updateButtonType = new ButtonType("Update", ButtonBar.ButtonData.OK_DONE);
-                    dialog.getDialogPane().getButtonTypes().addAll(updateButtonType, ButtonType.CANCEL);
+                // Set the button types.
+                ButtonType updateButtonType = new ButtonType("Update", ButtonBar.ButtonData.OK_DONE);
+                dialog.getDialogPane().getButtonTypes().addAll(updateButtonType, ButtonType.CANCEL);
 
-                    // Create the GridPane for the form elements.
-                    GridPane grid = new GridPane();
-                    grid.setHgap(10);
-                    grid.setVgap(10);
-                    grid.setPadding(new Insets(20, 150, 10, 10));
+                // Create the GridPane for the form elements.
+                GridPane grid = new GridPane();
+                grid.setHgap(10);
+                grid.setVgap(10);
+                grid.setPadding(new Insets(20, 150, 10, 10));
 
-                    // Add the form elements to the GridPane.
-                    TextField nameTextField = new TextField(_item.getName());
-                    grid.add(new Label("Name:"), 0, 0);
-                    grid.add(nameTextField, 1, 0);
+                // Add the form elements to the GridPane.
+                TextField nameTextField = new TextField(_item.getName());
+                grid.add(new Label("Name:"), 0, 0);
+                grid.add(nameTextField, 1, 0);
 
-                    TextField sellPriceTextField = new TextField(Double.toString(_item.getSellPrice()));
-                    grid.add(new Label("Sell Price:"), 0, 1);
-                    grid.add(sellPriceTextField, 1, 1);
+                TextField sellPriceTextField = new TextField(Double.toString(_item.getSellPrice()));
+                grid.add(new Label("Sell Price:"), 0, 1);
+                grid.add(sellPriceTextField, 1, 1);
 
-                    TextField buyPriceTextField = new TextField(Double.toString(_item.getBuyPrice()));
-                    grid.add(new Label("Buy Price:"), 0, 2);
-                    grid.add(buyPriceTextField, 1, 2);
+                TextField buyPriceTextField = new TextField(Double.toString(_item.getBuyPrice()));
+                grid.add(new Label("Buy Price:"), 0, 2);
+                grid.add(buyPriceTextField, 1, 2);
 
-                    TextField quantityTextField = new TextField(Integer.toString(_item.getQuantity()));
-                    grid.add(new Label("Quantity:"), 0, 3);
-                    grid.add(quantityTextField, 1, 3);
+                TextField quantityTextField = new TextField(Integer.toString(_item.getQuantity()));
+                grid.add(new Label("Quantity:"), 0, 3);
+                grid.add(quantityTextField, 1, 3);
 
-                    TextField categoryTextField = new TextField(_item.getCategory());
-                    grid.add(new Label("Category:"), 0, 4);
-                    grid.add(categoryTextField, 1, 4);
+                TextField categoryTextField = new TextField(_item.getCategory());
+                grid.add(new Label("Category:"), 0, 4);
+                grid.add(categoryTextField, 1, 4);
 
-                    TextField imageTextField = new TextField(_item.getImage());
-                    grid.add(new Label("Image path:"), 0, 5);
-                    grid.add(imageTextField, 1, 5);
+                TextField imageTextField = new TextField(_item.getImage());
+                grid.add(new Label("Image path:"), 0, 5);
+                grid.add(imageTextField, 1, 5);
 
-                    // Set the default button disable state.
-                    Node updateButton = dialog.getDialogPane().lookupButton(updateButtonType);
-                    updateButton.setDisable(true);
+                // Set the default button disable state.
+                Node updateButton = dialog.getDialogPane().lookupButton(updateButtonType);
+                updateButton.setDisable(true);
 
-                    // Add a listener to enable/disable the default button based on form validation.
-                    BooleanBinding isFormValid = Bindings.createBooleanBinding(
-                            () -> !nameTextField.getText().isEmpty() && !quantityTextField.getText().isEmpty()
-                                    && !sellPriceTextField.getText().isEmpty(),
-                            nameTextField.textProperty(), quantityTextField.textProperty(), sellPriceTextField.textProperty());
-                    updateButton.disableProperty().bind(isFormValid.not());
+                // Add a listener to enable/disable the default button based on form validation.
+                BooleanBinding isFormValid = Bindings.createBooleanBinding(
+                        () -> !nameTextField.getText().isEmpty() && !quantityTextField.getText().isEmpty()
+                                && !sellPriceTextField.getText().isEmpty(),
+                        nameTextField.textProperty(), quantityTextField.textProperty(), sellPriceTextField.textProperty());
+                updateButton.disableProperty().bind(isFormValid.not());
 
-                    // Add the GridPane to the DialogPane.
-                    dialog.getDialogPane().setContent(grid);
+                // Add the GridPane to the DialogPane.
+                dialog.getDialogPane().setContent(grid);
 
-                    // Request focus on the first field.
-                    Platform.runLater(() -> nameTextField.requestFocus());
+                // Request focus on the first field.
+                Platform.runLater(() -> nameTextField.requestFocus());
 
-                    // Convert the result to an item object.
-                    dialog.setResultConverter(dialogButton -> {
-                        if (dialogButton == updateButtonType) {
-                            String name = nameTextField.getText();
-                            int quantity = Integer.parseInt(quantityTextField.getText());
-                            double sellPrice = Double.parseDouble(sellPriceTextField.getText());
-                            double buyPrice = Double.parseDouble(buyPriceTextField.getText());
-                            String category = categoryTextField.getText();
-                            String image = imageTextField.getText();
-                            return new Item(name, sellPrice, buyPrice, quantity, _item.getSold(), category, image);
-                        }
-                        return null;
-                    });
+                // Convert the result to an item object.
+                dialog.setResultConverter(dialogButton -> {
+                    if (dialogButton == updateButtonType) {
+                        String name = nameTextField.getText();
+                        int quantity = Integer.parseInt(quantityTextField.getText());
+                        double sellPrice = Double.parseDouble(sellPriceTextField.getText());
+                        double buyPrice = Double.parseDouble(buyPriceTextField.getText());
+                        String category = categoryTextField.getText();
+                        String image = imageTextField.getText();
+                        return new Item(name, sellPrice, buyPrice, quantity, _item.getSold(), category, image);
+                    }
+                    return null;
+                });
 
-                    // Show the dialog and wait for the user to update the item or cancel.
-                    Optional<Item> result = dialog.showAndWait();
-                    result.ifPresent(updatedItem -> {
-                        // Update the item in the database.
-                        try{
-                            itemDataStore.deleteItemByName(itemTemp.getName());
-                            itemDataStore.addItem(dialog.getResult());
-                        } catch (IOException | ParseException e){
-                            e.printStackTrace();
-                        }
-                    });
+                // Show the dialog and wait for the user to update the item or cancel.
+                Optional<Item> result = dialog.showAndWait();
+                result.ifPresent(updatedItem -> {
+                    // Update the item in the database.
+                    try{
+                        itemDataStore.deleteItemByName(itemTemp.getName());
+                        itemDataStore.addItem(dialog.getResult());
+                    } catch (IOException | ParseException e){
+                        e.printStackTrace();
+                    }
+                });
                 System.out.println("Edit Item!");
             }
         });
@@ -182,8 +194,10 @@ public class ItemView extends Pane {
         itemInfo.getChildren().addAll(editDelete, pict, name, category, price);
 
         itemInfo.setStyle(
-                "-fx-background-color: #eeebe3; " +
+                "-fx-background-color: #7A833c; " +
                         "-fx-background-radius: 2em; " +
+                        "-fx-border-color : black;"+
+                        "-fx-border-radius: 2em;" +
                         "-fx-text-fill: white; " +
                         "-fx-font-size: 16px; " +
                         "-fx-padding: 10px 20px;"
@@ -200,7 +214,7 @@ public class ItemView extends Pane {
                 }
             }
         });
-
+        itemInfo.setBackground(Background.fill(Color.valueOf("#A7A9D0")));
     }
 
     public void setName(String name) {

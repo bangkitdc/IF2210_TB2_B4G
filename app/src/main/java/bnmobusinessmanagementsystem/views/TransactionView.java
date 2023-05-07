@@ -22,14 +22,36 @@ public class TransactionView extends VBox {
         Label ID=new Label("ID : " + a.getCustomerId());
         Label Date=new Label("Date : " + a.getDate());
         Label TotalBill=new Label("Total : " + a.getBill());
-        ID.setStyle("-fx-font-size: 15");
-        Date.setStyle("-fx-font-size: 15");
-        TotalBill.setStyle("-fx-font-size: 15");
+        ID.setStyle("""
+            -fx-text-fill: white;
+            -fx-font-size: 20px;
+            -fx-font-family: "SF Pro Rounded Semibold";
+            -fx-padding: 10px 20px;
+            -fx-background-radius: 20px;
+            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
+""");
+        Date.setStyle("""
+            -fx-text-fill: white;
+            -fx-font-size: 20px;
+            -fx-font-family: "SF Pro Rounded Semibold";
+            -fx-padding: 10px 20px;
+            -fx-background-radius: 20px;
+            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
+""");
+        TotalBill.setStyle("""
+            -fx-text-fill: white;
+            -fx-font-size: 20px;
+            -fx-font-family: "SF Pro Rounded Semibold";
+            -fx-padding: 10px 20px;
+            -fx-background-radius: 20px;
+            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
+""");
         ID.setAlignment(Pos.CENTER);
         Date.setAlignment(Pos.CENTER);
         HBox labelView=new HBox(ID,Date,TotalBill);
         labelView.setAlignment(Pos.CENTER);
         labelView.setSpacing(60);
+
 
         TilePane purchaseItemView = new TilePane();
         purchaseItemView.setAlignment(Pos.CENTER);
