@@ -18,29 +18,32 @@ public class ItemHistoryView extends Pane {
     private double priceNum;
     private Label category;
 
+    private Label totalPrice;
+
     public ItemHistoryView(Item _item) {
 
         // Item image
         pict = new Label("PICTURE");
-        pict.setPrefHeight(50);
-        pict.setPrefWidth(50);
+        pict.setPrefHeight(75);
+        pict.setPrefWidth(75);
         pict.setBackground(Background.fill(Color.BLACK));
 
         // Item name
-        this.name = new Label(_item.getName());
+        this.name = new Label(_item.getName()+ " " + _item.getQuantity() + "x");
 
         // Item category
-        this.category = new Label(_item.getCategory());
+        this.category = new Label("Category : "+_item.getCategory());
 
         // Item price
-        this.price = new Label("Rp" + _item.getSellPrice());
+        this.price = new Label("Price : Rp" + _item.getSellPrice());
+        this.totalPrice= new Label("Total : Rp" + _item.getTotalPrice());
 
         this.priceNum = _item.getSellPrice();
 
 
         VBox itemInfo = new VBox(10);
 
-        itemInfo.getChildren().addAll(pict, name, category, price);
+        itemInfo.getChildren().addAll(pict, name, category, price ,totalPrice);
 
         itemInfo.setStyle(
                 "-fx-background-color: #eeebe3; " +
