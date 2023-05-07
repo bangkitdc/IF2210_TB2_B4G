@@ -1,1 +1,1 @@
-[{"poin":0.0,"nama":"Jane Doe","tipe":"vip","isActive":true,"noTelp":"987654321","idCustomer":"C1"},{"poin":0.0,"nama":"Joli Diva","tipe":"member","isActive":true,"noTelp":"123456789","idCustomer":"C2"}]
+[{"poin":0.0,"nama":"Jane Doe","tipe":"vip","isActive":true,"transaction":[],"noTelp":"987654321","idCustomer":"5"},{"poin":0.0,"nama":"Joli Diva","tipe":"member","isActive":true,"transaction":[],"noTelp":"123456789","idCustomer":"6"}]

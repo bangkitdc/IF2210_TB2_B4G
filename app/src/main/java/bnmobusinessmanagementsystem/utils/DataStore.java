@@ -18,7 +18,7 @@ public class DataStore {
     private final String filename;
 
     public DataStore(String filename) {
-        this.filename = "app/src/main/resources/data/" +  filename;
+        this.filename = "src/main/resources/data/" +  filename;
     }
 
 
