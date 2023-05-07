@@ -1,5 +1,4 @@
 package bnmobusinessmanagementsystem.views.components.Catalog;
-
 import bnmobusinessmanagementsystem.models.Item;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

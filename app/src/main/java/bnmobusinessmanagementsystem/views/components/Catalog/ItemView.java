@@ -1,7 +1,7 @@
 package bnmobusinessmanagementsystem.views.components.Catalog;
 
-import bnmobusinessmanagementsystem.models.Item;
 import bnmobusinessmanagementsystem.utils.DataStore;
+import bnmobusinessmanagementsystem.models.Item;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
