@@ -1,6 +1,8 @@
 package bnmobusinessmanagementsystem.pluginsStorage.pluginsInput;
 
-public interface Plugin {
+public interface Plugin<T> {
     public String getName();
-//    public void run();
+    public void run(T parameter);
+
+    public boolean isNeedPage();
 }
