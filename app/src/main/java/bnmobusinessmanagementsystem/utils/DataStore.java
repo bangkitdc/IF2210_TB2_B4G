@@ -8,7 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.*;
 import org.json.simple.JSONObject;
 import java.util.ArrayList;
-
+import java.text.ParseException;
 //import bnmobusinessmanagementsystem.models.customer.Customer;
 import bnmobusinessmanagementsystem.models.Item;
 
@@ -18,7 +18,7 @@ public class DataStore {
     private final String filename;
 
     public DataStore(String filename) {
-        this.filename = "app/src/main/resources/data/" +  filename;
+        this.filename = "src/main/resources/data/" +  filename;
     }
 
 
@@ -98,24 +98,49 @@ public class DataStore {
             // Membuat objek JSON dari data customer
             JSONObject customerObject = new JSONObject();
 
+            customerObject.put("idCustomer", customer.getCustomerId());
+            JSONArray transactionArray = new JSONArray();
+            for (Purchase purchase : customer.getTransaction()) {
+                JSONObject purchaseObject = new JSONObject();
+
+                purchaseObject.put("customerId", purchase.getCustomerId());
+                purchaseObject.put("date", purchase.getDate());
+                purchaseObject.put("bill", purchase.getBill());
+
+                JSONArray itemArray = new JSONArray();
+                for (Item item : purchase.getItemList()) {
+                    JSONObject itemObject = new JSONObject();
+
+                    itemObject.put("name", item.getName());
+                    itemObject.put("sellPrice", item.getSellPrice());
+                    itemObject.put("buyPrice", item.getBuyPrice());
+                    itemObject.put("quantity", item.getQuantity());
+                    itemObject.put("category", item.getCategory());
+                    itemObject.put("image", item.getImage());
+
+                    itemArray.add(itemObject);
+                }
+
+                purchaseObject.put("itemList", itemArray);
+
+                transactionArray.add(purchaseObject);
+            }
+            customerObject.put("transaction", transactionArray);
 
             if (customer instanceof Member member) {
                 customerObject.put("tipe", "member");
-                customerObject.put("idCustomer", member.getCustomerId() + len);
                 customerObject.put("nama", member.getNama());
                 customerObject.put("noTelp", member.getNoTelp());
                 customerObject.put("poin", member.getPoin());
                 customerObject.put("isActive", member.isActive());
             } else if (customer instanceof VIP vip) {
                 customerObject.put("tipe", "vip");
-                customerObject.put("idCustomer", vip.getCustomerId() + len);
                 customerObject.put("nama", vip.getNama());
                 customerObject.put("noTelp", vip.getNoTelp());
                 customerObject.put("poin", vip.getPoin());
                 customerObject.put("isActive", vip.isActive());
             } else {
                 customerObject.put("tipe", "customer");
-                customerObject.put("id", customer.getCustomerId());
             }
 
             // Menambahkan objek JSON baru ke dalam array JSON
@@ -287,6 +312,59 @@ public class DataStore {
             e.printStackTrace();
         }
     }
+
+    public Item getItemByName(String name) throws IOException {
+        Item item = null;
+
+        try (FileReader reader = new FileReader(filename)) {
+            JSONParser parser = new JSONParser();
+            JSONArray itemsArray = (JSONArray) parser.parse(reader);
+
+            for (Object obj : itemsArray) {
+                JSONObject itemJson = (JSONObject) obj;
+
+                if ((itemJson.get("name")).equals(name)) {
+                    String nama = (String) itemJson.get("name");
+                    double sellPrice = (Double) itemJson.get("sellPrice");
+                    double buyPrice = (Double) itemJson.get("buyPrice");
+                    int quantity = ((Long) itemJson.get("quantity")).intValue();
+                    String category = (String) itemJson.get("category");
+                    String image = (String) itemJson.get("image");
+
+                    item = new Item(nama, sellPrice, buyPrice, quantity, category, image);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return item;
+    }
+
+    public void deleteItemByName(String name) throws IOException, ParseException {
+        try (FileReader reader = new FileReader(filename)) {
+            JSONParser parser = new JSONParser();
+            JSONArray itemsArray = (JSONArray) parser.parse(reader);
+
+            for (int i = 0; i < itemsArray.size(); i++) {
+                JSONObject itemJson = (JSONObject) itemsArray.get(i);
+
+                if (itemJson.get("name").equals(name)) {
+                    itemsArray.remove(i);
+                    break;
+                }
+            }
+
+            try (FileWriter writer = new FileWriter(filename)) {
+                writer.write(itemsArray.toJSONString());
+                System.out.println("Item " + name + " has been deleted.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public ArrayList<Item> readItems() throws IOException {
         ArrayList<Item> items = new ArrayList<Item>();

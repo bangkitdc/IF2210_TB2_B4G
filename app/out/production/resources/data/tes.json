@@ -4,6 +4,31 @@
     "nama": "Jane Doe",
     "tipe": "vip",
     "isActive": true,
+    "transaction": [
+      {
+        "date": "asdfghjkl",
+        "customerId": "id1",
+        "bill": 69.69,
+        "itemList": [
+          {
+            "buyPrice": 2.0,
+            "image": "kontoool",
+            "quantity": 100,
+            "name": "KONTOL",
+            "sellPrice": 1.0,
+            "category": "kontol"
+          },
+          {
+            "buyPrice": 2.0,
+            "image": "kontoool",
+            "quantity": 100,
+            "name": "MEMEK",
+            "sellPrice": 1.0,
+            "category": "memek"
+          }
+        ]
+      }
+    ],
     "noTelp": "987654321",
     "idCustomer": "id1"
   },
@@ -12,6 +37,7 @@
     "nama": "Joli Diva",
     "tipe": "member",
     "isActive": true,
+    "transaction": [],
     "noTelp": "123456789",
     "idCustomer": "id2"
   }
