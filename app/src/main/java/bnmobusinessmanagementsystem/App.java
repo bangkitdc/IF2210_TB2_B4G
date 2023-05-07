@@ -8,11 +8,11 @@ import javafx.stage.Stage;
 import javafx.scene.layout.*;
 
 public class App extends Application {
-
+    public static MenuAndTab menuBar;
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            MenuAndTab menuBar = new MenuAndTab(new Scene(new VBox(), 1080, 660));
+            menuBar = new MenuAndTab(new Scene(new VBox(), 1080, 660));
             primaryStage.setScene(menuBar.getScene());
             primaryStage.show();
             primaryStage.setResizable(false);

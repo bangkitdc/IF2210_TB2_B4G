@@ -2,6 +2,7 @@ package bnmobusinessmanagementsystem.views;
 
 import javafx.collections.ListChangeListener;
 import javafx.geometry.NodeOrientation;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
@@ -18,16 +19,19 @@ import java.nio.file.Paths;
 public class MenuAndTab {
     private Scene scene;
     private TabPane tabPane;
+    private Menu pageMenu;
+    private Pane pane1;
+    private Pane pane2;
 
     public MenuAndTab(Scene mainScene) {
-//        FontManager.loadFonts();
+        FontManager.loadFonts();
 
         // Tab pane
         tabPane = new TabPane();
 
         // Create the two panes
-        Pane pane1 = new Pane();
-        Pane pane2 = new Pane();
+        this.pane1 = new Pane();
+        this.pane2 = new Pane();
 
         // Stack them on top of each other in a new StackPane
         StackPane stackPane = new StackPane(pane1, pane2);
@@ -60,7 +64,7 @@ public class MenuAndTab {
         MenuItem pageInventaris = new MenuItem("Inventaris");
 
         // Create menus
-        Menu pageMenu = new Menu("Menu");
+        this.pageMenu = new Menu("Menu");
         pageMenu.getItems().addAll(page1MenuItem, page2MenuItem, pageSetting, pageInventaris);
 
         // Create menu bar
@@ -108,6 +112,7 @@ public class MenuAndTab {
             tabPane.getTabs().add(tab2);
         });
 
+        SettingPage settingPage = new SettingPage();
         pageSetting.setOnAction(e -> {
             pane1.setVisible(false);
             pane2.setVisible(true);
@@ -118,7 +123,6 @@ public class MenuAndTab {
                     return;
                 }
             }
-            SettingPage settingPage = new SettingPage();
             settingPage.layoutBoundsProperty().addListener((obs, oldVal, newVal) -> {
                 settingPage.setPrefWidth(pane2.getWidth());
                 settingPage.setPrefHeight(pane2.getHeight());
@@ -126,13 +130,6 @@ public class MenuAndTab {
             Tab tab3 = new Tab(pageTitle);
             tab3.setContent(settingPage);
             tabPane.getTabs().add(tab3);
-        });
-
-        tabPane.getTabs().addListener((ListChangeListener<Tab>) change -> {
-            if (tabPane.getTabs().isEmpty()) {
-                pane1.setVisible(true);
-                pane2.setVisible(false);
-            }
         });
 
         pageInventaris.setOnAction(e -> {
@@ -171,5 +168,24 @@ public class MenuAndTab {
 
     public Scene getScene() {
         return scene;
+    }
+
+    public void addPageToMenuAndTab(String pageTitle, Node pageContent) {
+        MenuItem newPageMenuItem = new MenuItem(pageTitle);
+        pageMenu.getItems().add(newPageMenuItem);
+
+        newPageMenuItem.setOnAction(e -> {
+            pane1.setVisible(false);
+            pane2.setVisible(true);
+            for (Tab tab : tabPane.getTabs()) {
+                if (tab.getText().equals(pageTitle)) {
+                    tabPane.getSelectionModel().select(tab);
+                    return;
+                }
+            }
+            Tab newTab = new Tab(pageTitle);
+            newTab.setContent(pageContent);
+            tabPane.getTabs().add(newTab);
+        });
     }
 }

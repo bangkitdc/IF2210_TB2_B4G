@@ -1,10 +1,17 @@
 package bnmobusinessmanagementsystem.views.components.Settings;
 
+import bnmobusinessmanagementsystem.App;
+import bnmobusinessmanagementsystem.controllers.PaymentStatesControllers;
+
+import bnmobusinessmanagementsystem.models.plugin.ExchangeRate;
+import bnmobusinessmanagementsystem.models.plugin.PaymentStates;
 import bnmobusinessmanagementsystem.models.plugin.PluginManager;
+
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 
@@ -13,18 +20,26 @@ import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
 import java.util.List;
+import java.util.function.Consumer;
+
+import bnmobusinessmanagementsystem.controllers.ExchangeRateControllers;
+
 
 public class Settings extends VBox {
     private String databasePath;
 
     private List<Object> plugins;
+
+    ExchangeRateControllers exchangeRateControllers = new ExchangeRateControllers();
+    PaymentStatesControllers paymentStatesControllers = new PaymentStatesControllers();
     public Settings() {
         plugins = new ArrayList<Object>();
 
         Label filePathLabel = new Label("No folder selected");
         filePathLabel.setStyle("""
-            -fx-font-size: 24px;
+            -fx-font-size: 22px;
             -fx-text-fill: #FEFEA8;
             -fx-background-color: transparent;
             -fx-font-family: "SF Pro Rounded Semibold";
@@ -71,12 +86,12 @@ public class Settings extends VBox {
             filePluginLabel.setText("Plugins successfully added");
         }
         filePluginLabel.setStyle("""
-            -fx-font-size: 24px;
+            -fx-font-size: 22px;
             -fx-text-fill: #FEFEA8;
             -fx-background-color: transparent;
             -fx-font-family: "SF Pro Rounded Semibold";
             -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
-            -fx-padding: 40 0 20 0;
+            -fx-padding: 20 0 20 0;
         """);
 
         Button choosePluginButton = new Button("Choose Plugin");
@@ -109,7 +124,6 @@ public class Settings extends VBox {
                 // Get the loaded plugins
                 this.plugins = pluginManager.getPlugins();
 
-
                 // Call getName() and run() on each loaded plugin
                 for (Object plugin : this.plugins) {
                     try {
@@ -124,53 +138,151 @@ public class Settings extends VBox {
             }
         });
 
-        VBox pluginSection = new VBox();
-
-        GridPane pane = new GridPane();
-        pane.setAlignment(Pos.CENTER);
-        // Add label and button to GridPane
-        Label label = new Label("This is a label added by Plugin1.");
-        label.setStyle("""
-            -fx-font-size: 16px;
-            -fx-text-fill: #FEFEA8;
-            -fx-background-color: transparent;
-            -fx-font-family: "SF Pro Rounded Regular";
-            -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
-            -fx-padding: 10 10 10 10;
+        Button pluginClearButton = new Button("Clear Plugin");
+        pluginClearButton.setStyle("""
+            -fx-background-color: #8A5760;
+            -fx-text-fill: white;
+            -fx-font-size: 14px;
+            -fx-font-family: "SF Pro Rounded Semibold";
+            -fx-padding: 10px 20px;
+            -fx-background-radius: 20px;
+            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
         """);
-        pane.add(label, 0, 0);
 
-        Button button = new Button("Click me!");
-        pane.add(button, 0, 1);
-
-        // Set action for button
-        button.setOnAction(e -> {
-            System.out.println("Button clicked!");
+        pluginClearButton.setOnAction(e -> {
+            pluginManager.unloadPlugin();
+            filePluginLabel.setText("Plugins successfully deleted");
         });
 
-        pluginSection.getChildren().addAll(pane);
+        HBox btn = new HBox();
+        btn.getChildren().addAll(choosePluginButton, pluginClearButton);
+        btn.setAlignment(Pos.CENTER);
+        btn.setSpacing(10);
 
-//        if (this.plugins.size() > 0) {
-//            try {
-//                Object plugin1 = this.plugins.get(0);
-//                Method runMethod = plugin1.getClass().getMethod("run", GridPane.class);
-//                runMethod.invoke(plugin1, mainPane);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
+        VBox pluginSection = new VBox();
 
-        this.getChildren().addAll(filePathLabel, chooseFolderButton, filePluginLabel, choosePluginButton, pluginSection);
+        // Akses ke database
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        Consumer<Object> optionsChose = (selectedOption) -> {
+            if (selectedOption instanceof String) {
+                try {
+                    Double rate = exchangeRateControllers.getRate((String) selectedOption);
+                    exchangeRateControllers.updateCurrentRate(new ExchangeRate((String) selectedOption, rate));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (selectedOption instanceof ArrayList) {
+                try {
+                    ArrayList<Integer> list = (ArrayList<Integer>) selectedOption;
+
+                    Integer discount = list.get(0);
+                    Integer tax = list.get(1);
+                    Integer service = list.get(2);
+
+                    paymentStatesControllers.updateCurrentStates(new PaymentStates(discount, tax, service));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        if (this.plugins.size() > 0) {
+            for (Object plugin : this.plugins) {
+                GridPane pane = new GridPane();
+                try {
+                    Method isNeedPage = plugin.getClass().getMethod("isNeedPage");
+                    boolean needPage = (boolean) isNeedPage.invoke(plugin);
+
+                    Method getNameMethod = plugin.getClass().getMethod("getName");
+                    String name = (String) getNameMethod.invoke(plugin);
+                    if (needPage) {
+                        if (name.equals("Plugin_Pie_Chart")) {
+                            Thread thread = new Thread(() -> {
+                                while (App.menuBar == null) {
+                                    try {
+                                        Thread.sleep(1000); // check every second
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                // Add the page to the menu and tab
+                                try {
+                                    Method runMethod = plugin.getClass().getMethod("run", String.class);
+                                    runMethod.invoke(plugin, "hehe");
+
+                                    Method getSceneMethod = plugin.getClass().getMethod("getScene");
+                                    Scene scene = (Scene) getSceneMethod.invoke(plugin);
+
+                                    App.menuBar.addPageToMenuAndTab("Pie Chart", scene.getRoot());
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            });
+
+                            thread.start();
+                        }
+                        if (name.equals("Plugin_Line_Bar_Chart")) {
+                            ;
+                        }
+                    } else {
+                        Method needDB = plugin.getClass().getMethod("getDBNeeded");
+                        String db = (String) needDB.invoke(plugin);
+
+                        Method setupMethod = plugin.getClass().getMethod("setUp", ArrayList.class, Consumer.class, String.class);
+                        setupMethod.invoke(plugin, getDatabasePlugins(db), optionsChose, exchangeRateControllers.getCurrentRate().getName());
+
+                        Method runMethod = plugin.getClass().getMethod("run", GridPane.class);
+                        runMethod.invoke(plugin, pane);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                pluginSection.getChildren().add(pane);
+            }
+        }
+
+
+        this.getChildren().addAll(filePathLabel, chooseFolderButton, filePluginLabel, btn, pluginSection);
         this.setAlignment(Pos.CENTER);
         this.setStyle("""
             -fx-background-color: rgba(0, 0, 0, 0.5);
             -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
-            -fx-padding: 120px;
+            -fx-padding: 40px 100px;
             -fx-background-radius: 20px;
         """);
     }
 
     public String getDBPath() {
         return this.databasePath;
+    }
+
+    public ArrayList<String> getDatabasePlugins(String data) {
+        ArrayList<String> arrayList = new ArrayList<String>();
+        if (data.equals("exchangerate")) {
+            try {
+                ArrayList<ExchangeRate> exchangeList = this.exchangeRateControllers.readExchangeRates();
+
+                for (ExchangeRate e : exchangeList) {
+                    arrayList.add(e.getName());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (data.equals("paymentstates")) {
+            try {
+                PaymentStates paymentStates = this.paymentStatesControllers.getCurrentStates();
+
+                arrayList.add(paymentStates.getDiscount().toString());
+                arrayList.add(paymentStates.getTax().toString());
+                arrayList.add(paymentStates.getService().toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return arrayList;
     }
 }
