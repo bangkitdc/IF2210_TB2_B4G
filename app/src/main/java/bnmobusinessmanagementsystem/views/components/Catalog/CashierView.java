@@ -1,11 +1,8 @@
 package bnmobusinessmanagementsystem.views.components.Catalog;
 
 import bnmobusinessmanagementsystem.controllers.ExchangeRateControllers;
+import bnmobusinessmanagementsystem.models.customer.*;
 import bnmobusinessmanagementsystem.models.Item;
-import bnmobusinessmanagementsystem.models.customer.Customer;
-import bnmobusinessmanagementsystem.models.customer.Member;
-import bnmobusinessmanagementsystem.models.customer.Purchase;
-import bnmobusinessmanagementsystem.models.customer.VIP;
 import bnmobusinessmanagementsystem.models.plugin.ExchangeRate;
 import bnmobusinessmanagementsystem.utils.DataStore;
 import javafx.animation.Animation;
@@ -26,6 +23,7 @@ import javafx.stage.Screen;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -163,7 +161,7 @@ public class CashierView extends VBox {
                 if(currentCustomer.equals("CUSTOMER")){
                     Customer customer = new Customer();
                     ArrayList<Purchase> purchaseArray = new ArrayList<>();
-                    purchaseArray.add(new Purchase(customer.getCustomerId(), formattedDate,itemPurchased, sum));
+                    purchaseArray.add(new Purchase(customer.getCustomerId(), formattedDate,itemPurchased));
                     customer.setTransaction(purchaseArray);
                     custStore.addCustomer(customer);
                 }
@@ -180,9 +178,9 @@ public class CashierView extends VBox {
             // Update sum of prices
             items.getItems().forEach(item -> {
                 if(item instanceof Bubble){
-                    var numString = ((Bubble) item).getBubblePrice().getText();
-                    var num = Double.parseDouble(numString);
-                    sum += num;
+//                    var numString = ((Bubble) item).getBubblePrice().getText();
+//                    var num = Double.parseDouble(numString);
+                    sum += ((Bubble) item).getUpdatedPrice();
 
                     ExchangeRateControllers exchangeRateControllers = new ExchangeRateControllers();
 
@@ -197,8 +195,9 @@ public class CashierView extends VBox {
                     }
 
                     Double res = sum * rate;
-                    String formatted = String.format("%.5f", res);
-                    charge.setText("Charge (" + currency + " " + formatted + ")");
+                    DecimalFormat df = new DecimalFormat("#.#####");
+                    String formattedValue = df.format(res);
+                    charge.setText("Charge (" + currency + " " + formattedValue + ")");
                 }
             });
 
@@ -254,7 +253,15 @@ public class CashierView extends VBox {
     }
 
     public void addItems(Pane itemPane) {
-        if(!items.getItems().contains(itemPane)){
+        boolean flag = false;
+        for(Object item : items.getItems()){
+            if(item instanceof Bubble && itemPane instanceof Bubble){
+                if(((Bubble) item).getBubbleName().getText() == ((Bubble) itemPane).getBubbleName().getText()){
+                    flag = true;
+                }
+            }
+        }
+        if(!flag){
             items.getItems().add(itemPane);
         }
     }

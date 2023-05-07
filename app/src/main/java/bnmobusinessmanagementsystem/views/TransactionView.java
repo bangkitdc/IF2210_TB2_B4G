@@ -1,6 +1,6 @@
 package bnmobusinessmanagementsystem.views;
-import bnmobusinessmanagementsystem.models.Item;
 import bnmobusinessmanagementsystem.models.customer.*;
+import bnmobusinessmanagementsystem.models.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;

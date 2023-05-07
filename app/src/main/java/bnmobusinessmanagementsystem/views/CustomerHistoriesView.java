@@ -102,11 +102,11 @@ public class CustomerHistoriesView extends VBox{
 //            }
         }
 //         Customer not found, clear the purchase list
-                Customer tempp= new Customer();
+                Customer tempp= new Customer("-1");
                 ArrayList<Purchase> temp= new ArrayList<>();
                 ArrayList<Item> tempItem= new ArrayList<>();
                 tempItem.add(new Item("TIDAK ADA TRANSAKSI", 0, 0, 0, "", ""));
-                temp.add(new Purchase(customer.getCustomerId(), "dwadawdaw",tempItem,500000));
+                temp.add(new Purchase(tempp.getCustomerId(), "dwadawdaw",tempItem));
                 tempp.setTransaction(temp);
                 this.customer=tempp;
                 this.purchaseList=tempp.getTransaction();

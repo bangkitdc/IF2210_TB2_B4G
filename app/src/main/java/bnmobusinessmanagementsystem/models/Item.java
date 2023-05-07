@@ -91,4 +91,8 @@ public class Item {
         return "Name: " + this.getName() + "\nCategory: " + this.getCategory() + "\nPrice: " +
                 this.getSellPrice() + "\nQuantity: " + this.getQuantity();
     }
+
+    public double getTotalPrice(){
+        return sellPrice*quantity;
+    }
 }

@@ -1,9 +1,9 @@
 package bnmobusinessmanagementsystem.views.components.Catalog;
 
 import bnmobusinessmanagementsystem.controllers.ExchangeRateControllers;
-import bnmobusinessmanagementsystem.models.Item;
 import bnmobusinessmanagementsystem.models.plugin.ExchangeRate;
 import bnmobusinessmanagementsystem.utils.DataStore;
+import bnmobusinessmanagementsystem.models.Item;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -17,6 +17,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.Optional;
 
@@ -64,9 +65,10 @@ public class ItemView extends Pane {
         }
 
         Double res = _item.getSellPrice() * rate;
-        String formatted = String.format("%.5f", res);
+        DecimalFormat df = new DecimalFormat("#.#####");
+        String formattedValue = df.format(res);
         // Item price
-        this.price = new Label(currency + " " + formatted);
+        this.price = new Label(currency + " " + formattedValue);
 
         this.priceNum = _item.getSellPrice();
 

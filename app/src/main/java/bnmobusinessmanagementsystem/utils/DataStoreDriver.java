@@ -4,6 +4,7 @@ package bnmobusinessmanagementsystem.utils;
 import bnmobusinessmanagementsystem.models.customer.*;
 import bnmobusinessmanagementsystem.models.*;
 import bnmobusinessmanagementsystem.utils.DataStore;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class DataStoreDriver {
         ArrayList<Item> itemL = new ArrayList<>(Arrays.asList(items));
 
         Purchase[] purchases = new Purchase[1];
-        purchases[0] = new Purchase("id1", "asdfghjkl", itemL, 69.69);
+        purchases[0] = new Purchase("id1", "asdfghjkl", itemL);
         ArrayList<Purchase> purchaseL = new ArrayList<>(Arrays.asList(purchases));
 
         customers[0].setTransaction(purchaseL);
@@ -36,24 +37,27 @@ public class DataStoreDriver {
 
 //        System.out.println("Customers saved successfully");
 
-//        try {
-//            // read customer data from the file
-////            ArrayList<Customer> custs = dataStore.readCustomer();
-////
-////            // do something with the customer data (e.g., print it out)
-////            for (Customer cust : custs) {
-////                if(cust instanceof Member){
-////                    System.out.println(((Member) cust).getNama());
-////                }
-////                if(cust instanceof VIP){
-////                    System.out.println(((VIP) cust).getNama());
-////                }
-//////                System.out.println(cust.);
-////            }
+        try {
+            // read customer data from the file
+//            ArrayList<Customer> custs = dataStore.readCustomer();
+//
+//            // do something with the customer data (e.g., print it out)
+//            for (Customer cust : custs) {
+//                if(cust instanceof Member){
+//                    System.out.println(((Member) cust).getNama());
+//                }
+//                if(cust instanceof VIP){
+//                    System.out.println(((VIP) cust).getNama());
+//                }
+////                System.out.println(cust.);
+//            }
 //            Customer AAA = dataStore.getCustomerById("C2");
 //            System.out.println(((Member) AAA).getNama());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+            dataStore.deleteCustomerById("tes");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (java.text.ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

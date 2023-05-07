@@ -42,12 +42,12 @@ public class Plugin3 implements Plugin<String>{
         series2.getData().add(new XYChart.Data<>("C", 4));
 
         barChart.getData().addAll(series1, series2);
-
     }
 
     public Scene getScene() {
         StackPane root = new StackPane(barChart);
-        Scene scene = new Scene(root, 400, 300);
+        root.setPrefSize(1080, 634);
+        Scene scene = new Scene(root);
         return scene;
     }
 
