@@ -1,21 +1,11 @@
 package bnmobusinessmanagementsystem.views;
 
-import bnmobusinessmanagementsystem.views.components.DateTime.DateTime;
-import bnmobusinessmanagementsystem.views.components.NimNama.NimNama;
+import bnmobusinessmanagementsystem.App;
 import bnmobusinessmanagementsystem.views.components.Settings.Settings;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.stage.FileChooser;
-import javafx.util.Duration;
 
-import java.io.File;
 import java.nio.file.Paths;
 
 public class SettingPage extends HBox {
