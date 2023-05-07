@@ -278,6 +278,7 @@ public class SistemLaporan extends HBox {
             Thread thread = new Thread(task);
             thread.start();
             try {
+                thread.wait(100000);
                 thread.join(); // Wait for the thread to finish
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -319,6 +320,7 @@ public class SistemLaporan extends HBox {
             Thread thread = new Thread(task);
             thread.start();
             try {
+                thread.wait(100000);
                 thread.join(); // Wait for the thread to finish
             } catch (InterruptedException e) {
                 e.printStackTrace();

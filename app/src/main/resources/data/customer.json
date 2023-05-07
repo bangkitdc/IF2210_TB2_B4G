@@ -12,7 +12,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 0,
             "quantity": 5,
             "name": "rambutan",
@@ -38,7 +38,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 1,
             "quantity": 5,
             "name": "rambutan",
@@ -61,7 +61,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 2,
             "quantity": 5,
             "name": "rambutan",
@@ -83,7 +83,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 0,
             "quantity": 5,
             "name": "rambutan",
@@ -105,7 +105,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 0,
             "quantity": 5,
             "name": "rambutan",
@@ -127,7 +127,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 0,
             "quantity": 5,
             "name": "rambutan",
@@ -149,7 +149,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 0,
             "quantity": 5,
             "name": "rambutan",
@@ -171,7 +171,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 2,
             "quantity": 5,
             "name": "rambutan",
@@ -193,7 +193,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 3,
             "quantity": 5,
             "name": "rambutan",
@@ -215,7 +215,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 4,
             "quantity": 5,
             "name": "rambutan",
@@ -237,7 +237,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 9,
             "quantity": 5,
             "name": "rambutan",
@@ -259,7 +259,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 5,
             "quantity": 5,
             "name": "rambutan",
@@ -281,7 +281,7 @@
         "itemList": [
           {
             "buyPrice": 1500.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 5,
             "quantity": 10,
             "name": "pisang",
