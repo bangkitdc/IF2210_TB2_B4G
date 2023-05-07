@@ -4,13 +4,14 @@ import java.io.*;
 
 import bnmobusinessmanagementsystem.models.customer.*;
 import bnmobusinessmanagementsystem.models.Item;
-//import bnmobusinessmanagementsystem.models.customer.VIP;
+import bnmobusinessmanagementsystem.models.customer.VIP;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.*;
 import org.json.simple.JSONObject;
 import java.util.ArrayList;
 import java.text.ParseException;
-//import bnmobusinessmanagementsystem.models.customer.Customer;
+import bnmobusinessmanagementsystem.models.customer.Customer;
+
 
 
 public class DataStore {
@@ -20,6 +21,22 @@ public class DataStore {
         this.filename = "src/main/resources/data/" +  filename;
     }
 
+    public String getLatestID() {
+        String id = "";
+
+        try (FileReader reader = new FileReader(filename)) {
+            JSONParser parser = new JSONParser();
+            JSONArray customersArray = (JSONArray) parser.parse(reader);
+
+            JSONObject lastObject = (JSONObject) customersArray.get(customersArray.size() - 1);
+            id = (String) lastObject.get("idCustomer");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return id;
+    }
 
     public void saveCustomer(ArrayList<Customer> customers) {
 
@@ -215,8 +232,10 @@ public class DataStore {
                             int quantity = ((Long) itemJson.get("quantity")).intValue();
                             String category = (String) itemJson.get("category");
                             String image = (String) itemJson.get("image");
+
                             int sold = ((Long) itemJson.get("sold")).intValue();
                             Item item = new Item(name, sellPrice, buyPrice, quantity, sold, category, image);
+
                             itemList.add(item);
                         }
 
@@ -263,6 +282,7 @@ public class DataStore {
         }
         return customers;
     }
+
 
     public Customer getCustomerById(String id) throws IOException {
         Customer customer = null;
