@@ -16,13 +16,18 @@ public class Purchase {
     private final double bill;
 
 
-    public Purchase(String customerId, String date,ArrayList<Item> Item ,double bill) {
+    public Purchase(String customerId, String date,ArrayList<Item> Items) {
         this.customerId = customerId;
         this.date = date;
-        this.bill = bill;
         this.itemList = new ArrayList<>();
 
-        this.itemList.addAll(Item);
+        this.itemList.addAll(Items);
+        double temp=0;
+        for (Item item: Items
+             ) {
+            temp+=item.getTotalPrice();
+        }
+        this.bill=temp;
 
     }
     
@@ -42,6 +47,7 @@ public class Purchase {
     public double getBill() {
         return bill;
     }
+
 
 }
 
