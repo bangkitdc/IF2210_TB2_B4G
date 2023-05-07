@@ -178,9 +178,9 @@ public class CashierView extends VBox {
             // Update sum of prices
             items.getItems().forEach(item -> {
                 if(item instanceof Bubble){
-                    var numString = ((Bubble) item).getBubblePrice().getText();
-                    var num = Double.parseDouble(numString);
-                    sum += num;
+//                    var numString = ((Bubble) item).getBubblePrice().getText();
+//                    var num = Double.parseDouble(numString);
+                    sum += ((Bubble) item).getUpdatedPrice();
                     charge.setText("Charge (Rp" + sum + ")");
                 }
             });
@@ -237,7 +237,15 @@ public class CashierView extends VBox {
     }
 
     public void addItems(Pane itemPane) {
-        if(!items.getItems().contains(itemPane)){
+        boolean flag = false;
+        for(Object item : items.getItems()){
+            if(item instanceof Bubble && itemPane instanceof Bubble){
+                if(((Bubble) item).getBubbleName().getText() == ((Bubble) itemPane).getBubbleName().getText()){
+                    flag = true;
+                }
+            }
+        }
+        if(!flag){
             items.getItems().add(itemPane);
         }
     }

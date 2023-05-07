@@ -12,6 +12,8 @@ public class Bubble extends BorderPane {
     private Label bubblePict;
     private Label bubbleName;
     private Label bubblePrice;
+    private double price;
+    private double updatedPrice;
     private Button removeItem;
     private VBox rightSide;
     private Label quantityLabel;
@@ -22,7 +24,9 @@ public class Bubble extends BorderPane {
         quantity = 1;
         bubblePict = new Label(item.getImage());
         bubbleName = new Label(item.getName());
-        bubblePrice = new Label(Double.toString(item.getSellPrice()));
+        this.price = item.getSellPrice();
+        this.updatedPrice = this.price;
+        bubblePrice = new Label("Rp"+Double.toString(item.getSellPrice()));
         removeItem = new Button("X");
         removeItem.setAlignment(Pos.CENTER);
         removeItem.setTextAlignment(TextAlignment.CENTER);
@@ -35,9 +39,9 @@ public class Bubble extends BorderPane {
 
         Button incrementButton = new Button("+");
         incrementButton.setOnAction(event -> {
-            removeItem = new Button("X");
             quantity++;
             double res = item.getSellPrice()*quantity;
+            this.updatedPrice = this.price * quantity;
             rightSide.getChildren().setAll(new Label("Rp"+res), removeItem);
             this.setRight(rightSide);
             quantityLabel.setText(Integer.toString(quantity));
@@ -49,6 +53,7 @@ public class Bubble extends BorderPane {
             if (quantity > 1) {
                 quantity--;
                 double res = item.getSellPrice()*quantity;
+                this.updatedPrice = this.price * quantity;
                 rightSide.getChildren().setAll(new Label("Rp"+res), removeItem);
                 this.setRight(rightSide);
                 quantityLabel.setText(Integer.toString(quantity));
@@ -128,5 +133,13 @@ public class Bubble extends BorderPane {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public double getUpdatedPrice() {
+        return updatedPrice;
     }
 }
