@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Screen;
 import javafx.util.Duration;
 
@@ -121,7 +122,7 @@ public class CashierView extends VBox {
 //        discountBox.setPrefHeight(10);
         discountBox.getChildren().add(new Label("Discount : "));
         discountBox.setBackground(Background.fill(Color.valueOf("#BFCB7E")));
-        discountBox.setStyle("-fx-font-size: 20px;");
+        discountBox.setStyle("-fx-font-size: 10px; -fx-text-alignment: center;");
         // TODO: add discount plugin
         PaymentStatesControllers paymentStatesControllers = new PaymentStatesControllers();
 
@@ -134,11 +135,11 @@ public class CashierView extends VBox {
             e.printStackTrace();
         }
 
-        taxBox = new HBox(20);
+        taxBox = new HBox(45);
 //        taxBox.setPrefHeight();
         taxBox.getChildren().add(new Label("Tax : "));
         taxBox.setBackground(Background.fill(Color.valueOf("#BFCB7E")));
-        taxBox.setStyle("-fx-font-size: 20px;");
+        taxBox.setStyle("-fx-font-size: 10px; -fx-text-alignment: center;");
         // TODO: add tax plugin
 
         Integer tax = 0;
@@ -153,7 +154,7 @@ public class CashierView extends VBox {
         serviceBox = new HBox(20);
         serviceBox.getChildren().add(new Label("Service : "));
         serviceBox.setBackground(Background.fill(Color.valueOf("#BFCB7E")));
-        serviceBox.setStyle("-fx-font-size: 20px;");
+        serviceBox.setStyle("-fx-font-size: 15px;-fx-text-alignment: center;");
         // TODO: add service plugin
 
         Integer service = 0;
@@ -246,7 +247,7 @@ public class CashierView extends VBox {
                         }
                     }
 //                    DataStore purchase = new DataStore("purchase.json");
-                    if (currentCustomer.equals("CUSTOMER")) {
+//                    if (currentCustomer.equals("CUSTOMER")) {
                         customer.addTransaction(new Purchase(customer.getCustomerId(), formattedDate, itemPurchased));
                         try {
                             String latestId = custStore.getLatestID();
@@ -258,7 +259,7 @@ public class CashierView extends VBox {
                             e.printStackTrace();
                         }
                         custStore.addCustomer(customer);
-                    }
+//                    }
                     System.out.print(currentCustomer);
                     System.out.println(customer.getCustomerId());
                     items.getItems().clear();
@@ -270,8 +271,11 @@ public class CashierView extends VBox {
             }
         });
 
-        items.setPrefHeight(530-addCustomer.getPrefHeight()-discountBox.getPrefHeight() - taxBox.getPrefHeight()- bill.getPrefHeight() - charge.getPrefHeight());
+        items.setPrefHeight(500-addCustomer.getPrefHeight()-discountBox.getPrefHeight() - taxBox.getPrefHeight()- bill.getPrefHeight() - charge.getPrefHeight());
 
+        Integer finalDiscount = discount;
+        Integer finalTax = tax;
+        Integer finalService = service;
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), event -> {
             // Code to execute every second
             sum = 0;
@@ -294,6 +298,10 @@ public class CashierView extends VBox {
                     }
 
                     Double res = sum * rate;
+                    Double resDiscount = res * finalDiscount/100;
+                    Double resTax = (res * finalTax/100);
+                    Double resService = (res * finalService/100);
+                    res += resTax + resService - resDiscount;
                     DecimalFormat df = new DecimalFormat("#.#####");
                     String formattedValue = df.format(res);
                     charge.setText("Charge (" + currency + " " + formattedValue + ")");
@@ -324,11 +332,17 @@ public class CashierView extends VBox {
         addCustomer.setStyle("-fx-border-color: black;");
         customerType.setStyle("-fx-border-color: black;");
         items.setStyle("-fx-border-color: black;");
-        discountBox.setStyle("-fx-border-color: black;");
-        taxBox.setStyle("-fx-border-color: black;");
         saveBill.setStyle("-fx-border-color: black;");
         printBill.setStyle("-fx-border-color: black;");
         charge.setStyle("-fx-border-color: black;");
+
+        HBox.setHgrow(discountBox, Priority.ALWAYS);
+        HBox.setHgrow(taxBox, Priority.ALWAYS);
+        HBox.setHgrow(serviceBox, Priority.ALWAYS);
+
+        discountBox.setStyle("-fx-font-size: 15px; -fx-alignment: center; -fx-border-color: black;");
+        taxBox.setStyle("-fx-font-size: 15px; -fx-alignment: center; -fx-border-color: black;");
+        serviceBox.setStyle("-fx-font-size: 15px; -fx-alignment: center; -fx-border-color: black;");
 
         this.getChildren().addAll(addCustomer, customerType, items, discountBox, taxBox, serviceBox, bill, chargePane);
         this.setPrefWidth(1080*2/5);
