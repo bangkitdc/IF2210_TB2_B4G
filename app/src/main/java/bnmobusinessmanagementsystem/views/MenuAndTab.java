@@ -139,12 +139,12 @@ public class MenuAndTab {
             pane1.setVisible(false);
             pane2.setVisible(true);
             String pageTitle = "Inventaris";
-            for (Tab tab : tabPane.getTabs()) {
-                if (tab.getText().equals(pageTitle)) {
-                    tabPane.getSelectionModel().select(tab);
-                    return;
-                }
-            }
+//            for (Tab tab : tabPane.getTabs()) {
+//                if (tab.getText().equals(pageTitle)) {
+//                    tabPane.getSelectionModel().select(tab);
+//                    return;
+//                }
+//            }
             Inventaris inventaris = new Inventaris();
 //            inventaris.layoutBoundsProperty().addListener((obs, oldVal, newVal) -> {
 //                inventaris.setPrefWidth(pane2.getWidth());
