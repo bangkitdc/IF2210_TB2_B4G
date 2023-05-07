@@ -1,9 +1,7 @@
 package bnmobusinessmanagementsystem.views;
 
-import bnmobusinessmanagementsystem.App;
 import javafx.collections.ListChangeListener;
 import javafx.geometry.NodeOrientation;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
@@ -21,10 +19,6 @@ public class MenuAndTab {
     private Scene scene;
     private TabPane tabPane;
 
-    private Menu pageMenu;
-    private Pane pane1;
-    private Pane pane2;
-
     public MenuAndTab(Scene mainScene) {
         FontManager.loadFonts();
 
@@ -32,8 +26,8 @@ public class MenuAndTab {
         tabPane = new TabPane();
 
         // Create the two panes
-        this.pane1 = new Pane();
-        this.pane2 = new Pane();
+        Pane pane1 = new Pane();
+        Pane pane2 = new Pane();
 
         // Stack them on top of each other in a new StackPane
         StackPane stackPane = new StackPane(pane1, pane2);
@@ -113,13 +107,6 @@ public class MenuAndTab {
             tabPane.getTabs().add(tab2);
         });
 
-        // Set menuBar and new scene
-        borderPane.setTop(menuBar);
-
-        scene = new Scene(borderPane, 1080, 660);
-        scene.getRoot().setStyle("-fx-font-family: Helvetica");
-
-        SettingPage settingPage = new SettingPage();
         pageSetting.setOnAction(e -> {
             pane1.setVisible(false);
             pane2.setVisible(true);
@@ -130,6 +117,7 @@ public class MenuAndTab {
                     return;
                 }
             }
+            SettingPage settingPage = new SettingPage();
             settingPage.layoutBoundsProperty().addListener((obs, oldVal, newVal) -> {
                 settingPage.setPrefWidth(pane2.getWidth());
                 settingPage.setPrefHeight(pane2.getHeight());
@@ -145,28 +133,15 @@ public class MenuAndTab {
                 pane2.setVisible(false);
             }
         });
+
+        // Set menuBar and new scene
+        borderPane.setTop(menuBar);
+
+        scene = new Scene(borderPane, 1080, 660);
+        scene.getRoot().setStyle("-fx-font-family: Helvetica");
     }
 
     public Scene getScene() {
         return scene;
-    }
-
-    public void addPageToMenuAndTab(String pageTitle, Node pageContent) {
-        MenuItem newPageMenuItem = new MenuItem(pageTitle);
-        pageMenu.getItems().add(newPageMenuItem);
-
-        newPageMenuItem.setOnAction(e -> {
-            pane1.setVisible(false);
-            pane2.setVisible(true);
-            for (Tab tab : tabPane.getTabs()) {
-                if (tab.getText().equals(pageTitle)) {
-                    tabPane.getSelectionModel().select(tab);
-                    return;
-                }
-            }
-            Tab newTab = new Tab(pageTitle);
-            newTab.setContent(pageContent);
-            tabPane.getTabs().add(newTab);
-        });
     }
 }

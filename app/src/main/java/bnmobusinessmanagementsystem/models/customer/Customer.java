@@ -8,15 +8,14 @@ public class Customer {
     private ArrayList<Purchase> transaction;
 
 
-    public Customer() {
-        numOfCustomer++;
-        this.idCustomer="C"+Integer.toString(numOfCustomer);
-        this.transaction=new ArrayList<>();
-    }
-
     public Customer(String id) {
         numOfCustomer++;
         this.idCustomer=id;
+        this.transaction=new ArrayList<>();
+    }
+    public Customer() {
+        numOfCustomer++;
+        this.idCustomer=Integer.toString(numOfCustomer);
         this.transaction=new ArrayList<>();
     }
 
@@ -32,4 +31,14 @@ public class Customer {
     public ArrayList<Purchase> getTransaction() {
         return transaction;
     }
+
+
+    public void setTransaction(ArrayList<Purchase> transaction) {
+        this.transaction = transaction;
+    }
+
+    public void addTransaction(Purchase a){
+        this.transaction.add(a);
+    }
 }
+

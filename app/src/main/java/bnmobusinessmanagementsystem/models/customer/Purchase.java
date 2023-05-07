@@ -1,6 +1,7 @@
 package bnmobusinessmanagementsystem.models.customer;
 
 import bnmobusinessmanagementsystem.models.Item;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -20,7 +21,12 @@ public class Purchase {
         this.date = date;
         this.bill = bill;
         this.itemList = new ArrayList<>();
+
+        this.itemList.addAll(Item);
+
     }
+    
+
 
     public String getCustomerId() {
         return customerId;
@@ -34,4 +40,9 @@ public class Purchase {
         return itemList;
     }
 
+    public double getBill() {
+        return bill;
+    }
+
 }
+
