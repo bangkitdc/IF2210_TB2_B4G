@@ -44,6 +44,7 @@ public class SistemLaporan extends HBox {
         Button selectFolderButton2 = new Button("Select Folder");
         this.fixedBill=new ArrayList<>();
         this.laporanPenjualan=new ArrayList<>();
+
         DataStore customersData=new DataStore("customer.json");
         this.customers=FXCollections.observableArrayList();
         this.customers.addAll(customersData.readCustomer());
@@ -58,6 +59,7 @@ public class SistemLaporan extends HBox {
         Image img = new Image(fullPath);
         BackgroundImage bg_img = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0, true, true, false, false));
         this.setBackground(new Background(bg_img));
+
 
 
         customerComboBox = new ComboBox<>(customers);

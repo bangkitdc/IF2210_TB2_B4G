@@ -218,6 +218,8 @@ public class MenuAndTab {
                     return;
                 }
             }
+            pageContent.maxHeight(Double.MAX_VALUE);
+            pageContent.maxWidth(Double.MAX_VALUE);
             Tab newTab = new Tab(pageTitle);
             newTab.setContent(pageContent);
             tabPane.getTabs().add(newTab);

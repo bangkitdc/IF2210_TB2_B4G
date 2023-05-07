@@ -25,7 +25,7 @@ public class Inventaris extends HBox{
         DataStore custStore = new DataStore("customer.json");
 
         VBox catalog = new VBox(10);
-        CashierView cashier = new CashierView(custStore);
+        CashierView cashier = new CashierView(custStore, dataStore);
         itemList = new CatalogView();
         ScrollPane catalogs = new ScrollPane();
         catalogs.setContent(itemList);
@@ -46,5 +46,6 @@ public class Inventaris extends HBox{
         cashier.setPrefWidth(1080*2/5);
         catalog.setPrefHeight(maxHeight);
         this.getChildren().addAll(catalog, cashier);
+        this.setPrefSize(1080, 634);
     }
 }
