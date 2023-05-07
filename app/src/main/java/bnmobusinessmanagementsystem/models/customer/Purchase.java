@@ -1,13 +1,7 @@
 package bnmobusinessmanagementsystem.models.customer;
 
-import bnmobusinessmanagementsystem.models.Item;
-
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 import java.util.ArrayList;
+import bnmobusinessmanagementsystem.models.Item;
 
 public class Purchase {
     private final String customerId;
@@ -16,17 +10,21 @@ public class Purchase {
     private final double bill;
 
 
-    public Purchase(String customerId, String date,ArrayList<Item> Item ,double bill) {
+    public Purchase(String customerId, String date,ArrayList<Item> Items) {
         this.customerId = customerId;
         this.date = date;
-        this.bill = bill;
         this.itemList = new ArrayList<>();
 
-        this.itemList.addAll(Item);
+        this.itemList.addAll(Items);
+        double temp=0;
+        for (Item item: Items
+             ) {
+            temp+=item.getTotalPrice();
+        }
+        this.bill=temp;
 
     }
     
-
 
     public String getCustomerId() {
         return customerId;
@@ -42,6 +40,11 @@ public class Purchase {
 
     public double getBill() {
         return bill;
+    }
+
+    @Override
+    public String toString() {
+        return "( Customer ID : " + customerId + ", Date : " + date + ", Bill : " + bill + " )";
     }
 
 }

@@ -1,6 +1,5 @@
 package bnmobusinessmanagementsystem;
 
-import bnmobusinessmanagementsystem.models.customer.Customer;
 import org.junit.Test;
 
 public class AppTest {

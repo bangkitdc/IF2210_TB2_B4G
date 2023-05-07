@@ -3,6 +3,7 @@ package bnmobusinessmanagementsystem.utils;
 import java.io.*;
 
 import bnmobusinessmanagementsystem.models.customer.*;
+import bnmobusinessmanagementsystem.models.Item;
 //import bnmobusinessmanagementsystem.models.customer.VIP;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.*;
@@ -10,8 +11,6 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 import java.text.ParseException;
 //import bnmobusinessmanagementsystem.models.customer.Customer;
-import bnmobusinessmanagementsystem.models.Item;
-
 
 
 public class DataStore {
@@ -191,7 +190,7 @@ public class DataStore {
                         itemList.add(item);
                     }
 
-                    Purchase purchase = new Purchase(customerId, date, itemList, bill);
+                    Purchase purchase = new Purchase(customerId, date, itemList);
                     purchasesArray.add(purchase);
 
                 if (type.equals("customer")) {
@@ -447,7 +446,7 @@ public class DataStore {
                     itemList.add(item);
                 }
 
-                Purchase purchase = new Purchase(customerId, date, itemList, bill);
+                Purchase purchase = new Purchase(customerId, date, itemList);
                 purchases.add(purchase);
             }
         } catch (Exception e) {

@@ -40,5 +40,10 @@ public class Customer {
     public void addTransaction(Purchase a){
         this.transaction.add(a);
     }
+
+    @Override
+    public String toString() {
+        return "Customer ID: " + this.idCustomer;
+    }
 }
 

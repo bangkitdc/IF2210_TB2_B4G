@@ -1,17 +1,13 @@
 package bnmobusinessmanagementsystem.views;
 
-import bnmobusinessmanagementsystem.models.Item;
 import bnmobusinessmanagementsystem.utils.DataStore;
 import bnmobusinessmanagementsystem.views.components.Catalog.*;
 import bnmobusinessmanagementsystem.views.components.Catalog.CashierView;
 import bnmobusinessmanagementsystem.views.components.Catalog.CatalogView;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.stage.Screen;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
