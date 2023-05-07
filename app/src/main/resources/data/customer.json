@@ -1,5 +1,57 @@
 [
   {
+    "poin": 0.0,
+    "nama": "Jane Doe",
+    "tipe": "vip",
+    "isActive": true,
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "1",
+        "bill": 15000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 0,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "noTelp": "1234567890",
+    "idCustomer": "1"
+  },
+  {
+    "poin": 0.0,
+    "nama": "Joli Diva",
+    "tipe": "member",
+    "isActive": true,
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "2",
+        "bill": 15000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 1,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "noTelp": "123456789",
+    "idCustomer": "id2"
+  },
+  {
     "tipe": "customer",
     "transaction": [
       {
@@ -83,147 +135,162 @@
             "category": "buah"
           }
         ]
-      },      {
-        "date": "7\/5\/2023",
-        "customerId": "3",
-        "bill": 4275.0,
-        "itemList": [
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 3,
-            "name": "apel",
-            "sellPrice": 20.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 4,
-            "name": "pisang",
-            "sellPrice": 205.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 5,
-            "name": "alpukat",
-            "sellPrice": 2050.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 2,
-            "name": "obeng",
-            "sellPrice": 2000.0,
-            "category": "peralatan"
-          }
-        ]
-      },      {
-        "date": "7\/5\/2023",
-        "customerId": "3",
-        "bill": 4275.0,
-        "itemList": [
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 3,
-            "name": "apel",
-            "sellPrice": 20.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 4,
-            "name": "pisang",
-            "sellPrice": 205.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 5,
-            "name": "alpukat",
-            "sellPrice": 2050.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 2,
-            "name": "obeng",
-            "sellPrice": 2000.0,
-            "category": "peralatan"
-          }
-        ]
-      },      {
-        "date": "7\/5\/2023",
-        "customerId": "3",
-        "bill": 4275.0,
-        "itemList": [
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 3,
-            "name": "apel",
-            "sellPrice": 20.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 4,
-            "name": "pisang",
-            "sellPrice": 205.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 5,
-            "name": "alpukat",
-            "sellPrice": 2050.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 2,
-            "name": "obeng",
-            "sellPrice": 2000.0,
-            "category": "peralatan"
-          }
-        ]
-      },
+      }
+    ],
+    "idCustomer": "6"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
       {
-        "date": "08\/05\/2023",
-        "customerId": "1",
-        "bill": 800000.0,
+        "date": "07\/05\/2023",
+        "customerId": "7",
+        "bill": 15000.0,
         "itemList": [
           {
-            "buyPrice": 1500.0,
+            "buyPrice": 2000.0,
             "image": "picture",
-            "sold": 11,
-            "quantity": 100,
-            "name": "pisang",
-            "sellPrice": 2000.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 5500.0,
-            "image": "apel src",
-            "sold": 11,
-            "quantity": 100,
-            "name": "apel",
-            "sellPrice": 6000.0,
+            "sold": 0,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
             "category": "buah"
           }
         ]
       }
     ],
-    "idCustomer": "1"
+    "idCustomer": "7"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "8",
+        "bill": 15000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 2,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "8"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "9",
+        "bill": 15000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 3,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "9"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "10",
+        "bill": 15000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 4,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "10"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "11",
+        "bill": 15000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 9,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "11"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "08\/05\/2023",
+        "customerId": "12",
+        "bill": 15000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 5,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "12"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "08\/05\/2023",
+        "customerId": "13",
+        "bill": 20000.0,
+        "itemList": [
+          {
+            "buyPrice": 1500.0,
+            "image": "picture",
+            "sold": 5,
+            "quantity": 10,
+            "name": "pisang",
+            "sellPrice": 2000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "13"
   }
 ]

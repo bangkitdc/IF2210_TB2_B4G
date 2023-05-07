@@ -156,7 +156,7 @@ public class CustomerHistoriesView extends VBox{
                 ArrayList<Purchase> temp= new ArrayList<>();
                 ArrayList<Item> tempItem= new ArrayList<>();
 
-                tempItem.add(new Item("TIDAK ADA TRANSAKSI", 0, 0, 0, "", ""));
+                tempItem.add(new Item("TIDAK ADA TRANSAKSI", 0, 0, 0, 0, "", ""));
                 temp.add(new Purchase(tempp.getCustomerId(), "-",tempItem));
 
                 tempp.setTransaction(temp);

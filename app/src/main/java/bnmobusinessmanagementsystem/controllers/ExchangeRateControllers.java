@@ -17,7 +17,7 @@ public class ExchangeRateControllers {
     private final String path = "exchangeRates.json";
 
     public ExchangeRateControllers() {
-        this.filename = "app/src/main/resources/data/" + path;
+        this.filename = "src/main/resources/data/" + path;
     }
 
     public ArrayList<ExchangeRate> readExchangeRates() throws IOException {
