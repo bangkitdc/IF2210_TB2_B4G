@@ -13,8 +13,6 @@ import java.util.List;
 import bnmobusinessmanagementsystem.models.customer.Customer;
 import bnmobusinessmanagementsystem.models.Item;
 
-
-
 public class DataStore {
     private final String filename;
 
