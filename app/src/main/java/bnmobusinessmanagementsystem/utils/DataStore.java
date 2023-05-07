@@ -18,7 +18,7 @@ public class DataStore {
     private final String filename;
 
     public DataStore(String filename) {
-        this.filename = "src/main/resources/data/" +  filename;
+        this.filename = "app/src/main/resources/data/" +  filename;
     }
 
 
@@ -98,49 +98,24 @@ public class DataStore {
             // Membuat objek JSON dari data customer
             JSONObject customerObject = new JSONObject();
 
-            customerObject.put("idCustomer", customer.getCustomerId());
-            JSONArray transactionArray = new JSONArray();
-            for (Purchase purchase : customer.getTransaction()) {
-                JSONObject purchaseObject = new JSONObject();
-
-                purchaseObject.put("customerId", purchase.getCustomerId());
-                purchaseObject.put("date", purchase.getDate());
-                purchaseObject.put("bill", purchase.getBill());
-
-                JSONArray itemArray = new JSONArray();
-                for (Item item : purchase.getItemList()) {
-                    JSONObject itemObject = new JSONObject();
-
-                    itemObject.put("name", item.getName());
-                    itemObject.put("sellPrice", item.getSellPrice());
-                    itemObject.put("buyPrice", item.getBuyPrice());
-                    itemObject.put("quantity", item.getQuantity());
-                    itemObject.put("category", item.getCategory());
-                    itemObject.put("image", item.getImage());
-
-                    itemArray.add(itemObject);
-                }
-
-                purchaseObject.put("itemList", itemArray);
-
-                transactionArray.add(purchaseObject);
-            }
-            customerObject.put("transaction", transactionArray);
 
             if (customer instanceof Member member) {
                 customerObject.put("tipe", "member");
+                customerObject.put("idCustomer", member.getCustomerId() + len);
                 customerObject.put("nama", member.getNama());
                 customerObject.put("noTelp", member.getNoTelp());
                 customerObject.put("poin", member.getPoin());
                 customerObject.put("isActive", member.isActive());
             } else if (customer instanceof VIP vip) {
                 customerObject.put("tipe", "vip");
+                customerObject.put("idCustomer", vip.getCustomerId() + len);
                 customerObject.put("nama", vip.getNama());
                 customerObject.put("noTelp", vip.getNoTelp());
                 customerObject.put("poin", vip.getPoin());
                 customerObject.put("isActive", vip.isActive());
             } else {
                 customerObject.put("tipe", "customer");
+                customerObject.put("id", customer.getCustomerId());
             }
 
             // Menambahkan objek JSON baru ke dalam array JSON
@@ -415,7 +390,6 @@ public class DataStore {
             e.printStackTrace();
         }
     }
-
 
     public ArrayList<Item> readItems() throws IOException {
         ArrayList<Item> items = new ArrayList<Item>();
