@@ -1,12 +1,15 @@
 package bnmobusinessmanagementsystem.views.components.Settings;
 
 import bnmobusinessmanagementsystem.App;
+import bnmobusinessmanagementsystem.controllers.CustomerControllers;
+import bnmobusinessmanagementsystem.controllers.ItemDataStoreControllers;
 import bnmobusinessmanagementsystem.controllers.PaymentStatesControllers;
 
 import bnmobusinessmanagementsystem.models.plugin.ExchangeRate;
 import bnmobusinessmanagementsystem.models.plugin.PaymentStates;
 import bnmobusinessmanagementsystem.models.plugin.PluginManager;
 
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -25,6 +28,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import bnmobusinessmanagementsystem.controllers.ExchangeRateControllers;
+import javafx.util.Pair;
 
 
 public class Settings extends VBox {
@@ -34,29 +38,32 @@ public class Settings extends VBox {
 
     ExchangeRateControllers exchangeRateControllers = new ExchangeRateControllers();
     PaymentStatesControllers paymentStatesControllers = new PaymentStatesControllers();
+    CustomerControllers customersControllers = new CustomerControllers();
+    ItemDataStoreControllers itemDataStoreControllers = new ItemDataStoreControllers();
+
     public Settings() {
         plugins = new ArrayList<Object>();
 
         Label filePathLabel = new Label("No folder selected");
         filePathLabel.setStyle("""
-            -fx-font-size: 22px;
-            -fx-text-fill: #FEFEA8;
-            -fx-background-color: transparent;
-            -fx-font-family: "SF Pro Rounded Semibold";
-            -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
-            -fx-padding: 0 0 20 0;
-        """);
+                    -fx-font-size: 22px;
+                    -fx-text-fill: #FEFEA8;
+                    -fx-background-color: transparent;
+                    -fx-font-family: "SF Pro Rounded Semibold";
+                    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
+                    -fx-padding: 0 0 20 0;
+                """);
 
         Button chooseFolderButton = new Button("Choose Folder");
         chooseFolderButton.setStyle("""
-            -fx-background-color: #8A5760;
-            -fx-text-fill: white;
-            -fx-font-size: 14px;
-            -fx-font-family: "SF Pro Rounded Semibold";
-            -fx-padding: 10px 20px;
-            -fx-background-radius: 20px;
-            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
-        """);
+                    -fx-background-color: #8A5760;
+                    -fx-text-fill: white;
+                    -fx-font-size: 14px;
+                    -fx-font-family: "SF Pro Rounded Semibold";
+                    -fx-padding: 10px 20px;
+                    -fx-background-radius: 20px;
+                    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
+                """);
 
         chooseFolderButton.setOnAction(e -> {
             DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -86,24 +93,24 @@ public class Settings extends VBox {
             filePluginLabel.setText("Plugins successfully added");
         }
         filePluginLabel.setStyle("""
-            -fx-font-size: 22px;
-            -fx-text-fill: #FEFEA8;
-            -fx-background-color: transparent;
-            -fx-font-family: "SF Pro Rounded Semibold";
-            -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
-            -fx-padding: 20 0 20 0;
-        """);
+                    -fx-font-size: 22px;
+                    -fx-text-fill: #FEFEA8;
+                    -fx-background-color: transparent;
+                    -fx-font-family: "SF Pro Rounded Semibold";
+                    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
+                    -fx-padding: 20 0 20 0;
+                """);
 
         Button choosePluginButton = new Button("Choose Plugin");
         choosePluginButton.setStyle("""
-            -fx-background-color: #8A5760;
-            -fx-text-fill: white;
-            -fx-font-size: 14px;
-            -fx-font-family: "SF Pro Rounded Semibold";
-            -fx-padding: 10px 20px;
-            -fx-background-radius: 20px;
-            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
-        """);
+                    -fx-background-color: #8A5760;
+                    -fx-text-fill: white;
+                    -fx-font-size: 14px;
+                    -fx-font-family: "SF Pro Rounded Semibold";
+                    -fx-padding: 10px 20px;
+                    -fx-background-radius: 20px;
+                    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
+                """);
 
         choosePluginButton.setOnAction(e -> {
             DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -140,14 +147,14 @@ public class Settings extends VBox {
 
         Button pluginClearButton = new Button("Clear Plugin");
         pluginClearButton.setStyle("""
-            -fx-background-color: #8A5760;
-            -fx-text-fill: white;
-            -fx-font-size: 14px;
-            -fx-font-family: "SF Pro Rounded Semibold";
-            -fx-padding: 10px 20px;
-            -fx-background-radius: 20px;
-            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
-        """);
+                    -fx-background-color: #8A5760;
+                    -fx-text-fill: white;
+                    -fx-font-size: 14px;
+                    -fx-font-family: "SF Pro Rounded Semibold";
+                    -fx-padding: 10px 20px;
+                    -fx-background-radius: 20px;
+                    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 1);
+                """);
 
         pluginClearButton.setOnAction(e -> {
             pluginManager.unloadPlugin();
@@ -194,36 +201,89 @@ public class Settings extends VBox {
                     Method getNameMethod = plugin.getClass().getMethod("getName");
                     String name = (String) getNameMethod.invoke(plugin);
                     if (needPage) {
-                        if (name.equals("Plugin_Pie_Chart")) {
-                            Thread thread = new Thread(() -> {
-                                while (App.menuBar == null) {
-                                    try {
-                                        Thread.sleep(1000); // check every second
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-
-                                // Add the page to the menu and tab
+                        Thread thread = new Thread(() -> {
+                            while (App.menuBar == null) {
                                 try {
-                                    Method runMethod = plugin.getClass().getMethod("run", String.class);
-                                    runMethod.invoke(plugin, "hehe");
-
-                                    Method getSceneMethod = plugin.getClass().getMethod("getScene");
-                                    Scene scene = (Scene) getSceneMethod.invoke(plugin);
-
-                                    App.menuBar.addPageToMenuAndTab("Pie Chart", scene.getRoot());
-                                } catch (Exception e) {
+                                    Thread.sleep(1000); // check every second
+                                } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
-                            });
+                            }
 
-                            thread.start();
-                        }
-                        if (name.equals("Plugin_Line_Bar_Chart")) {
-                            ;
-                        }
-                    } else {
+                            // Add the page to the menu and tab
+                            try {
+                                Method needDB = plugin.getClass().getMethod("getDBNeeded");
+                                String db = (String) needDB.invoke(plugin);
+
+                                Method setRateMethod = null;
+                                try {
+                                    setRateMethod = plugin.getClass().getMethod("setRate", String.class, Double.class);
+                                } catch (NoSuchMethodException e) {
+                                    // setRate() method does not exist in the plugin class
+                                }
+
+                                if (setRateMethod != null) {
+                                    // Invoke the setRate() method if it exists
+                                    setRateMethod.invoke(plugin, exchangeRateControllers.getCurrentRate().getName(), exchangeRateControllers.getCurrentRate().getRate());
+                                }
+
+                                Method setupMethod = plugin.getClass().getMethod("setUp", ArrayList.class, Consumer.class, String.class);
+                                setupMethod.invoke(plugin, getDatabasePluginsWithPage(db), null, name);
+
+                                Method runMethod = plugin.getClass().getMethod("run", String.class);
+                                runMethod.invoke(plugin, name);
+
+                                Method getSceneMethod = plugin.getClass().getMethod("getScene");
+                                Scene scene = (Scene) getSceneMethod.invoke(plugin);
+
+                                Platform.runLater(() -> {
+                                    App.menuBar.addPageToMenuAndTab(name, scene.getRoot());
+                                });
+
+                                while (true) {
+                                    // Update the scene every second
+                                    Thread.sleep(1000);
+                                    Platform.runLater(() -> {
+                                        // Get updated scene from plugin
+                                        try {
+                                            Method needDB2 = plugin.getClass().getMethod("getDBNeeded");
+                                            String db2 = (String) needDB2.invoke(plugin);
+
+                                            Method setRateMethod2 = null;
+                                            try {
+                                                setRateMethod2 = plugin.getClass().getMethod("setRate", String.class, Double.class);
+                                            } catch (NoSuchMethodException e) {
+                                                // setRate() method does not exist in the plugin class
+                                            }
+
+                                            if (setRateMethod2 != null) {
+                                                // Invoke the setRate() method if it exists
+                                                setRateMethod2.invoke(plugin, exchangeRateControllers.getCurrentRate().getName(), exchangeRateControllers.getCurrentRate().getRate());
+                                            }
+
+                                            Method setupMethod2 = plugin.getClass().getMethod("setUp", ArrayList.class, Consumer.class, String.class);
+                                            setupMethod2.invoke(plugin, getDatabasePluginsWithPage(db2), null, name);
+
+                                            Method runMethod2 = plugin.getClass().getMethod("run", String.class);
+                                            runMethod2.invoke(plugin, name);
+
+                                            Method getSceneMethod2 = plugin.getClass().getMethod("getScene");
+                                            Scene scene2 = (Scene) getSceneMethod2.invoke(plugin);
+                                            // Replace old scene in menu and tab with updated scene
+                                            App.menuBar.replacePageInMenuAndTab(name, scene2.getRoot());
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    });
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        });
+
+                        thread.start();
+                    }
+                    else {
                         Method needDB = plugin.getClass().getMethod("getDBNeeded");
                         String db = (String) needDB.invoke(plugin);
 
@@ -245,11 +305,11 @@ public class Settings extends VBox {
         this.getChildren().addAll(filePathLabel, chooseFolderButton, filePluginLabel, btn, pluginSection);
         this.setAlignment(Pos.CENTER);
         this.setStyle("""
-            -fx-background-color: rgba(0, 0, 0, 0.5);
-            -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
-            -fx-padding: 40px 100px;
-            -fx-background-radius: 20px;
-        """);
+                    -fx-background-color: rgba(0, 0, 0, 0.5);
+                    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
+                    -fx-padding: 40px 100px;
+                    -fx-background-radius: 20px;
+                """);
     }
 
     public String getDBPath() {
@@ -279,7 +339,29 @@ public class Settings extends VBox {
                 e.printStackTrace();
             }
         }
+        return arrayList;
+    }
 
+    public ArrayList<Pair<String, Double>> getDatabasePluginsWithPage(String data) {
+        ArrayList<Pair<String, Double>> arrayList = new ArrayList<>();
+        if (data.equals("customer")) {
+            try {
+                arrayList = this.customersControllers.getData();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (data.equals("itemDataStore")) {
+            try {
+                ArrayList<Pair<String, Double>> array1 = this.customersControllers.getLineData();
+                ArrayList<Pair<String, Double>> array2 = this.itemDataStoreControllers.getBarData();
+
+                arrayList.addAll(array1);
+                arrayList.add(new Pair<>("mid", -1.0));
+                arrayList.addAll(array2);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return arrayList;
     }
 }

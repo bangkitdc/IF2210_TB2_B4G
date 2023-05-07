@@ -190,4 +190,20 @@ public class MenuAndTab {
             tabPane.getTabs().add(newTab);
         });
     }
+
+    public void replacePageInMenuAndTab(String pageName, Node pageContent) {
+        // Find the tab associated with the pageName
+        Tab pageTab = null;
+        for (Tab tab : tabPane.getTabs()) {
+            if (tab.getText().equals(pageName)) {
+                pageTab = tab;
+                break;
+            }
+        }
+
+        // If page is found, replace the content with the updated root node
+        if (pageTab != null) {
+            pageTab.setContent(pageContent);
+        }
+    }
 }

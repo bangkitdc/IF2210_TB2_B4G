@@ -1,6 +1,9 @@
 [
   {
-    "tipe": "customer",
+    "poin": 0.0,
+    "nama": "Jane Doe",
+    "tipe": "vip",
+    "isActive": true,
     "transaction": [
       {
         "date": "07\/05\/2023",
@@ -19,10 +22,14 @@
         ]
       }
     ],
+    "noTelp": "1234567890",
     "idCustomer": "1"
   },
   {
-    "tipe": "customer",
+    "poin": 0.0,
+    "nama": "Joli Diva",
+    "tipe": "member",
+    "isActive": true,
     "transaction": [
       {
         "date": "07\/05\/2023",
@@ -41,7 +48,8 @@
         ]
       }
     ],
-    "idCustomer": "2"
+    "noTelp": "123456789",
+    "idCustomer": "id2"
   },
   {
     "tipe": "customer",
@@ -245,7 +253,7 @@
     "tipe": "customer",
     "transaction": [
       {
-        "date": "07\/05\/2023",
+        "date": "08\/05\/2023",
         "customerId": "12",
         "bill": 15000.0,
         "itemList": [
@@ -267,7 +275,7 @@
     "tipe": "customer",
     "transaction": [
       {
-        "date": "07\/05\/2023",
+        "date": "08\/05\/2023",
         "customerId": "13",
         "bill": 20000.0,
         "itemList": [
