@@ -1,6 +1,6 @@
 package bnmobusinessmanagementsystem.views;
 
-import bnmobusinessmanagementsystem.models.customer.*;
+import bnmobusinessmanagementsystem.models.Item;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
