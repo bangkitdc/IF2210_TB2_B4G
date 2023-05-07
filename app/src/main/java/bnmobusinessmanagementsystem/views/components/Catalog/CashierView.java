@@ -15,9 +15,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.util.Duration;
@@ -47,8 +46,10 @@ public class CashierView extends VBox {
     private ArrayList<Item> itemPurchased;
     private ArrayList<Customer> custs;
     private DataStore custStore;
+    private Customer customer;
     public CashierView(DataStore customerDataStore, DataStore itemDataStore){
         this.custStore = customerDataStore;
+        customer = new Customer();
 
 
 
@@ -60,9 +61,10 @@ public class CashierView extends VBox {
 
         addCustomer = new Label("Add Customer");
         addCustomer.setPrefHeight(20);
-        addCustomer.setPrefWidth(maxWidth);
+        addCustomer.setPrefWidth(1080*2/5);
         addCustomer.setAlignment(Pos.CENTER);
-        addCustomer.setFont(Font.font(30));
+        addCustomer.setFont(Font.font(13));
+        addCustomer.setBackground(Background.fill(Color.valueOf("#BFCB7E")));
         addCustomer.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 System.out.println("Add Customer!");
@@ -108,16 +110,23 @@ public class CashierView extends VBox {
         });
         customerType = new HBox(20);
         customerType.getChildren().addAll(dropdown);
+        customerType.setBackground(Background.fill(Color.valueOf("#BFCB7E")));
 
         items = new ListView();
 
         discountBox = new HBox(20);
 //        discountBox.setPrefHeight(10);
         discountBox.getChildren().add(new Label("Discount : "));
+        discountBox.setBackground(Background.fill(Color.valueOf("#BFCB7E")));
+        discountBox.setStyle("-fx-font-size: 20px;");
+        // TODO: add discount plugin
 
         taxBox = new HBox(20);
 //        taxBox.setPrefHeight();
         taxBox.getChildren().add(new Label("Tax : "));
+        taxBox.setBackground(Background.fill(Color.valueOf("#BFCB7E")));
+        taxBox.setStyle("-fx-font-size: 20px;");
+        // TODO: add tax plugin
 
         sum = 0;
 
@@ -147,12 +156,20 @@ public class CashierView extends VBox {
 
         bill = new HBox(saveBill, printBill);
         bill.setPrefHeight(30);
+        bill.setBackground(Background.fill(Color.valueOf("#BFCB7E")));
+        bill.setStyle("-fx-font-size: 30px;");
 
         charge = new Label("Charge");
         charge.setPrefHeight(80);
-        charge.setPrefWidth(maxWidth);
+        charge.setPrefWidth(1080*2/5);
         charge.setAlignment(Pos.CENTER);
-        charge.setFont(Font.font(30));
+        charge.setStyle("-fx-font-size: 30px;");
+        Pane chargePane = new Pane();
+
+//        charge.setFont(Font.font(30));
+        charge.setBackground(Background.fill(Color.valueOf("#BFCB7E")));
+        chargePane.getChildren().add(charge);
+        chargePane.setStyle("-fx-font-size: 30px;");
         charge.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 boolean flag = true;
@@ -191,15 +208,22 @@ public class CashierView extends VBox {
 
                         }
                     }
-                    DataStore purchase = new DataStore("purchase.json");
+//                    DataStore purchase = new DataStore("purchase.json");
                     if (currentCustomer.equals("CUSTOMER")) {
-                        Customer customer = new Customer();
-                        ArrayList<Purchase> purchaseArray = new ArrayList<>();
-                        purchaseArray.add(new Purchase(customer.getCustomerId(), formattedDate, itemPurchased));
-                        customer.setTransaction(purchaseArray);
+                        customer.addTransaction(new Purchase(customer.getCustomerId(), formattedDate, itemPurchased));
+                        try {
+                            String latestId = custStore.getLatestID();
+                            if (customer.getCustomerId().equals(latestId)) {
+                                custStore.deleteCustomerById(custStore.getLatestID());
+                            }
+
+                        } catch (IOException | ParseException e){
+                            e.printStackTrace();
+                        }
                         custStore.addCustomer(customer);
                     }
                     System.out.print(currentCustomer);
+                    System.out.println(customer.getCustomerId());
                     items.getItems().clear();
                 }
                 else{
@@ -209,7 +233,7 @@ public class CashierView extends VBox {
             }
         });
 
-        items.setPrefHeight(534-addCustomer.getPrefHeight()-discountBox.getPrefHeight() - taxBox.getPrefHeight()- bill.getPrefHeight()-charge.getPrefHeight());
+        items.setPrefHeight(530-addCustomer.getPrefHeight()-discountBox.getPrefHeight() - taxBox.getPrefHeight()- bill.getPrefHeight() - charge.getPrefHeight());
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), event -> {
             // Code to execute every second
@@ -260,10 +284,18 @@ public class CashierView extends VBox {
                 }
             }
         });
+        addCustomer.setStyle("-fx-border-color: black;");
+        customerType.setStyle("-fx-border-color: black;");
+        items.setStyle("-fx-border-color: black;");
+        discountBox.setStyle("-fx-border-color: black;");
+        taxBox.setStyle("-fx-border-color: black;");
+        saveBill.setStyle("-fx-border-color: black;");
+        printBill.setStyle("-fx-border-color: black;");
+        charge.setStyle("-fx-border-color: black;");
 
-        this.getChildren().addAll(addCustomer, customerType, items, discountBox, taxBox,bill, charge);
-        this.setPrefWidth(maxWidth/4);
-        this.setPrefHeight(maxHeight);
+        this.getChildren().addAll(addCustomer, customerType, items, discountBox, taxBox,bill, chargePane);
+        this.setPrefWidth(1080*2/5);
+        this.setPrefHeight(560);
 
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();

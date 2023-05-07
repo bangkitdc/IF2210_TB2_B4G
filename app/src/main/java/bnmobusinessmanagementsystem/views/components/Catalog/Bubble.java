@@ -5,14 +5,16 @@ import bnmobusinessmanagementsystem.models.plugin.ExchangeRate;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 
 public class Bubble extends BorderPane {
-    private Label bubblePict;
+    private Pane bubblePict;
     private Label bubbleName;
     private Label bubblePrice;
     private double price;
@@ -23,9 +25,20 @@ public class Bubble extends BorderPane {
     private int quantity;
     private Item item;
     public Bubble(Item item){
+
+        String currentDir = System.getProperty("user.dir");
+        String path = "src/main/resources/itempict/"+item.getImage();
+        String fullPath = Paths.get(currentDir, path).toString();
+        Image img = new Image("file:"+fullPath);
+        ImageView imgview = new ImageView(img);
+        imgview.setFitHeight(150);
+        imgview.setFitWidth(150);
+
         this.item = item;
         quantity = 1;
-        bubblePict = new Label(item.getImage());
+        imgview.setFitWidth(50);
+        imgview.setFitHeight(50);
+        bubblePict = new Pane(imgview);
         bubbleName = new Label(item.getName());
         this.price = item.getSellPrice();
         this.updatedPrice = this.price;
@@ -53,7 +66,6 @@ public class Bubble extends BorderPane {
 
         bubblePict.setPrefHeight(50);
         bubblePict.setPrefWidth(50);
-        bubblePict.setBackground(Background.fill(Color.BLACK));
 
         bubblePrice.setTextAlignment(TextAlignment.RIGHT);
 
@@ -137,11 +149,11 @@ public class Bubble extends BorderPane {
         return bubbleName;
     }
 
-    public void setBubblePict(Label bubblePict) {
+    public void setBubblePict(Pane bubblePict) {
         this.bubblePict = bubblePict;
     }
 
-    public Label getBubblePict() {
+    public Pane getBubblePict() {
         return bubblePict;
     }
 
