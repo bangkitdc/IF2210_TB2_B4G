@@ -1,7 +1,9 @@
 package bnmobusinessmanagementsystem.views.components.Catalog;
 
+import bnmobusinessmanagementsystem.controllers.ExchangeRateControllers;
 import bnmobusinessmanagementsystem.models.customer.*;
 import bnmobusinessmanagementsystem.models.Item;
+import bnmobusinessmanagementsystem.models.plugin.ExchangeRate;
 import bnmobusinessmanagementsystem.utils.DataStore;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -21,6 +23,8 @@ import javafx.stage.Screen;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -32,6 +36,8 @@ public class CashierView extends VBox {
     private ComboBox<String> dropdown;
     private HBox customerType;
     private ListView items;
+    private HBox discountBox;
+    private HBox taxBox;
     private Label saveBill;
     private Label printBill;
     private HBox bill;
@@ -41,7 +47,7 @@ public class CashierView extends VBox {
     private ArrayList<Item> itemPurchased;
     private ArrayList<Customer> custs;
     private DataStore custStore;
-    public CashierView(DataStore customerDataStore){
+    public CashierView(DataStore customerDataStore, DataStore itemDataStore){
         this.custStore = customerDataStore;
 
 
@@ -53,7 +59,7 @@ public class CashierView extends VBox {
         double maxWidth = primaryScreen.getVisualBounds().getWidth();
 
         addCustomer = new Label("Add Customer");
-        addCustomer.setPrefHeight(50);
+        addCustomer.setPrefHeight(20);
         addCustomer.setPrefWidth(maxWidth);
         addCustomer.setAlignment(Pos.CENTER);
         addCustomer.setFont(Font.font(30));
@@ -105,6 +111,14 @@ public class CashierView extends VBox {
 
         items = new ListView();
 
+        discountBox = new HBox(20);
+//        discountBox.setPrefHeight(10);
+        discountBox.getChildren().add(new Label("Discount : "));
+
+        taxBox = new HBox(20);
+//        taxBox.setPrefHeight();
+        taxBox.getChildren().add(new Label("Tax : "));
+
         sum = 0;
 
         saveBill = new Label("Save Bill");
@@ -141,32 +155,61 @@ public class CashierView extends VBox {
         charge.setFont(Font.font(30));
         charge.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                // Get today's date
-                LocalDate today = LocalDate.now();
-
-                // Format today's date as "dd/MM/yyyy"
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                String formattedDate = today.format(formatter);
-                itemPurchased = new ArrayList<>();
-                System.out.println(charge.getText());
+                boolean flag = true;
                 for(Object item : items.getItems()){
-                    if(item instanceof Bubble){
-                        itemPurchased.add(((Bubble) item).getItem());
+                    if(item instanceof Bubble) {
+                        Item check = ((Bubble) item).getItem();
+                        if(check.outOfStock() || check.getQuantity() < ((Bubble) item).getQuantity()){
+                            flag = false;
+                        }
                     }
                 }
-                DataStore purchase = new DataStore("purchase.json");
-                if(currentCustomer.equals("CUSTOMER")){
-                    Customer customer = new Customer();
-                    ArrayList<Purchase> purchaseArray = new ArrayList<>();
-                    purchaseArray.add(new Purchase(customer.getCustomerId(), formattedDate,itemPurchased));
-                    customer.setTransaction(purchaseArray);
-                    custStore.addCustomer(customer);
+                if(flag) {
+                    // Get today's date
+                    LocalDate today = LocalDate.now();
+
+                    // Format today's date as "dd/MM/yyyy"
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    String formattedDate = today.format(formatter);
+                    itemPurchased = new ArrayList<>();
+                    System.out.println(charge.getText());
+                    for (Object item : items.getItems()) {
+                        if (item instanceof Bubble) {
+                            Item temp = ((Bubble) item).getItem();
+                            for (int i = 0; i < ((Bubble) item).getQuantity(); i++) {
+                                temp.itemSold();
+                            }
+                            itemPurchased.add(((Bubble) item).getItem());
+                            //                        int sold = ((Bubble) item).getQuantity();
+                            //                        System.out.println(sold);
+                            try {
+                                itemDataStore.deleteItemByName(((Bubble) item).getItem().getName());
+                                itemDataStore.addItem(temp);
+                            } catch (IOException | ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }
+                    DataStore purchase = new DataStore("purchase.json");
+                    if (currentCustomer.equals("CUSTOMER")) {
+                        Customer customer = new Customer();
+                        ArrayList<Purchase> purchaseArray = new ArrayList<>();
+                        purchaseArray.add(new Purchase(customer.getCustomerId(), formattedDate, itemPurchased));
+                        customer.setTransaction(purchaseArray);
+                        custStore.addCustomer(customer);
+                    }
+                    System.out.print(currentCustomer);
+                    items.getItems().clear();
                 }
-                System.out.print(currentCustomer);
+                else{
+                    AlertDialog alertDialog = new AlertDialog("Order quantity exceed its stock!");
+                    alertDialog.showAndWait();
+                }
             }
         });
 
-        items.setPrefHeight(584-addCustomer.getPrefHeight()-bill.getPrefHeight()-charge.getPrefHeight());
+        items.setPrefHeight(534-addCustomer.getPrefHeight()-discountBox.getPrefHeight() - taxBox.getPrefHeight()- bill.getPrefHeight()-charge.getPrefHeight());
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), event -> {
             // Code to execute every second
@@ -175,10 +218,24 @@ public class CashierView extends VBox {
             // Update sum of prices
             items.getItems().forEach(item -> {
                 if(item instanceof Bubble){
-                    var numString = ((Bubble) item).getBubblePrice().getText();
-                    var num = Double.parseDouble(numString);
-                    sum += num;
-                    charge.setText("Charge (Rp" + sum + ")");
+                    sum += ((Bubble) item).getUpdatedPrice();
+
+                    ExchangeRateControllers exchangeRateControllers = new ExchangeRateControllers();
+
+                    String currency = "";
+                    Double rate = 0.0;
+                    try {
+                        ExchangeRate exchangeRate = exchangeRateControllers.getCurrentRate();
+                        currency = exchangeRate.getName();
+                        rate = exchangeRate.getRate();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    Double res = sum * rate;
+                    DecimalFormat df = new DecimalFormat("#.#####");
+                    String formattedValue = df.format(res);
+                    charge.setText("Charge (" + currency + " " + formattedValue + ")");
                 }
             });
 
@@ -204,7 +261,7 @@ public class CashierView extends VBox {
             }
         });
 
-        this.getChildren().addAll(addCustomer, customerType, items, bill, charge);
+        this.getChildren().addAll(addCustomer, customerType, items, discountBox, taxBox,bill, charge);
         this.setPrefWidth(maxWidth/4);
         this.setPrefHeight(maxHeight);
 
@@ -234,7 +291,15 @@ public class CashierView extends VBox {
     }
 
     public void addItems(Pane itemPane) {
-        if(!items.getItems().contains(itemPane)){
+        boolean flag = false;
+        for(Object item : items.getItems()){
+            if(item instanceof Bubble && itemPane instanceof Bubble){
+                if(((Bubble) item).getBubbleName().getText() == ((Bubble) itemPane).getBubbleName().getText()){
+                    flag = true;
+                }
+            }
+        }
+        if(!flag){
             items.getItems().add(itemPane);
         }
     }

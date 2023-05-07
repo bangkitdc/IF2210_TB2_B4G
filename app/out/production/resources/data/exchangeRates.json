@@ -1,32 +1,32 @@
 {
   "currentRates": {
-    "rate": 0.0093,
-    "name": "JPY (\u00A5)"
+    "rate": 6.1E-5,
+    "name": "EUR"
   },
   "rates": [
     {
       "rate": 1.0,
-      "name": "IDR (Rp)"
+      "name": "IDR"
     },
     {
       "rate": 6.8E-5,
-      "name": "USD ($)"
+      "name": "USD"
     },
     {
       "rate": 6.1E-5,
-      "name": "EUR (\u20AC)"
+      "name": "EUR"
     },
     {
       "rate": 5.4E-5,
-      "name": "GBP (\u00A3)"
+      "name": "EUR"
     },
     {
       "rate": 0.0093,
-      "name": "JPY (\u00A5)"
+      "name": "JPY"
     },
     {
       "rate": 9.0E-5,
-      "name": "SGD (S$)"
+      "name": "SGD"
     }
   ]
 }

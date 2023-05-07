@@ -64,6 +64,7 @@ public class DataStore {
                     itemObject.put("quantity", item.getQuantity());
                     itemObject.put("category", item.getCategory());
                     itemObject.put("image", item.getImage());
+                    itemObject.put("sold", item.getSold());
 
                     itemArray.add(itemObject);
                 }
@@ -133,6 +134,7 @@ public class DataStore {
                     itemObject.put("quantity", item.getQuantity());
                     itemObject.put("category", item.getCategory());
                     itemObject.put("image", item.getImage());
+                    itemObject.put("sold", item.getSold());
 
                     itemArray.add(itemObject);
                 }
@@ -171,7 +173,6 @@ public class DataStore {
             e.printStackTrace();
         }
     }
-
     public void deleteCustomerById(String id) throws IOException, ParseException {
         try (FileReader reader = new FileReader(filename)) {
             JSONParser parser = new JSONParser();
@@ -231,7 +232,12 @@ public class DataStore {
                             int quantity = ((Long) itemJson.get("quantity")).intValue();
                             String category = (String) itemJson.get("category");
                             String image = (String) itemJson.get("image");
+<<<<<<< HEAD
                             Item item = new Item(name, sellPrice, buyPrice, quantity, category, image);
+=======
+                            int sold = ((Long) itemJson.get("sold")).intValue();
+                            Item item = new Item(name, sellPrice, buyPrice, quantity, sold, category, image);
+>>>>>>> b4f27b0eca608f048c17536b615d1f30bbe130b7
                             itemList.add(item);
                         }
 
@@ -343,6 +349,7 @@ public class DataStore {
             itemObject.put("quantity", item.getQuantity());
             itemObject.put("category", item.getCategory());
             itemObject.put("image", item.getImage());
+            itemObject.put("sold", item.getSold());
 
             itemsArray.add(itemObject);
         }
@@ -373,6 +380,7 @@ public class DataStore {
             itemObject.put("quantity", item.getQuantity());
             itemObject.put("category", item.getCategory());
             itemObject.put("image", item.getImage());
+            itemObject.put("sold", item.getSold());
 
             // Menambahkan objek JSON baru ke dalam array JSON
             itemsArray.add(itemObject);
@@ -404,8 +412,9 @@ public class DataStore {
                     int quantity = ((Long) itemJson.get("quantity")).intValue();
                     String category = (String) itemJson.get("category");
                     String image = (String) itemJson.get("image");
+                    int sold = ((Long) itemJson.get("sold")).intValue();
 
-                    item = new Item(nama, sellPrice, buyPrice, quantity, category, image);
+                    item = new Item(nama, sellPrice, buyPrice, quantity, sold, category, image);
                 }
             }
         } catch (Exception e) {
@@ -438,7 +447,6 @@ public class DataStore {
         }
     }
 
-
     public ArrayList<Item> readItems() throws IOException {
         ArrayList<Item> items = new ArrayList<Item>();
 
@@ -455,8 +463,9 @@ public class DataStore {
                 int quantity = ((Long) itemJson.get("quantity")).intValue();
                 String category = (String) itemJson.get("category");
                 String image = (String) itemJson.get("image");
+                int sold = ((Long) itemJson.get("sold")).intValue();
 
-                Item item = new Item(name, sellPrice, buyPrice, quantity, category, image);
+                Item item = new Item(name, sellPrice, buyPrice, quantity, sold, category, image);
                 items.add(item);
             }
         } catch (Exception e) {
@@ -491,7 +500,8 @@ public class DataStore {
                     int quantity = ((Long) itemJson.get("quantity")).intValue();
                     String category = (String) itemJson.get("category");
                     String image = (String) itemJson.get("image");
-                    Item item = new Item(name, sellPrice, buyPrice, quantity, category, image);
+                    int sold = ((Long) itemJson.get("sold")).intValue();
+                    Item item = new Item(name, sellPrice, buyPrice, quantity, sold, category, image);
                     itemList.add(item);
                 }
 
@@ -526,6 +536,7 @@ public class DataStore {
                 itemObject.put("quantity", item.getQuantity());
                 itemObject.put("category", item.getCategory());
                 itemObject.put("image", item.getImage());
+                itemObject.put("sold", item.getSold());
 
                 itemArray.add(itemObject);
             }

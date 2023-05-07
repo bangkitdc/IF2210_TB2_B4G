@@ -5,6 +5,7 @@ public class Item {
     private double sellPrice;
     private double buyPrice;
     private int quantity;
+    private int sold;
     private String category;
     private String image;
 
@@ -13,14 +14,16 @@ public class Item {
         this.sellPrice = 0.0;
         this.buyPrice = 0.0;
         this.quantity = 0;
+        this.sold = 0;
         this.category = "";
         this.image = "";
     }
-    public Item(String name, double sellPrice, double buyPrice, int quantity, String category, String image){
+    public Item(String name, double sellPrice, double buyPrice, int quantity, int sold, String category, String image){
         this.name = name;
         this.sellPrice = sellPrice;
         this.buyPrice = buyPrice;
         this.quantity = quantity;
+        this.sold = sold;
         this.category = category;
         this.image = image;
     }
@@ -30,6 +33,7 @@ public class Item {
         this.sellPrice = other.sellPrice;
         this.buyPrice = other.buyPrice;
         this.quantity = other.quantity;
+        this.sold = other.sold;
         this.category = other.category;
         this.image = other.image;
     }
@@ -66,6 +70,14 @@ public class Item {
         this.quantity = quantity;
     }
 
+    public void setSold(int sold) {
+        this.sold = sold;
+    }
+
+    public int getSold() {
+        return sold;
+    }
+
     public String getCategory() {
         return category;
     }
@@ -83,7 +95,11 @@ public class Item {
     }
 
     public boolean outOfStock(){
-        return this.quantity == 0;
+        return this.quantity <= this.sold;
+    }
+
+    public void itemSold(){
+        sold++;
     }
 
     @Override

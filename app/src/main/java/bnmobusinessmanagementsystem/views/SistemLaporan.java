@@ -48,6 +48,7 @@ public class SistemLaporan extends HBox {
         this.customers=FXCollections.observableArrayList();
         this.customers.addAll(customersData.readCustomer());
 
+
 //        this.setAlignment(Pos.CENTER);
         this.setPadding(new Insets(30));
 
@@ -58,6 +59,7 @@ public class SistemLaporan extends HBox {
         Image img = new Image(fullPath);
         BackgroundImage bg_img = new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(1.0, 1.0, true, true, false, false));
         this.setBackground(new Background(bg_img));
+
 
 
         customerComboBox = new ComboBox<>(customers);
