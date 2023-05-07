@@ -1,11 +1,15 @@
 package bnmobusinessmanagementsystem.views.components.Catalog;
+import bnmobusinessmanagementsystem.controllers.ExchangeRateControllers;
 import bnmobusinessmanagementsystem.models.Item;
+import bnmobusinessmanagementsystem.models.plugin.ExchangeRate;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
+
+import java.text.DecimalFormat;
 
 public class Bubble extends BorderPane {
     private Label bubblePict;
@@ -25,7 +29,24 @@ public class Bubble extends BorderPane {
         bubbleName = new Label(item.getName());
         this.price = item.getSellPrice();
         this.updatedPrice = this.price;
-        bubblePrice = new Label("Rp"+Double.toString(item.getSellPrice()));
+
+        ExchangeRateControllers exchangeRateControllers = new ExchangeRateControllers();
+
+        String currency = "";
+        Double rate = 0.0;
+        try {
+            ExchangeRate exchangeRate = exchangeRateControllers.getCurrentRate();
+            currency = exchangeRate.getName();
+            rate = exchangeRate.getRate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Double result = item.getSellPrice() * rate;
+        DecimalFormat df = new DecimalFormat("#.#####");
+        String formattedValue = df.format(result);
+
+        bubblePrice = new Label(currency + " " +formattedValue);
         removeItem = new Button("X");
         removeItem.setAlignment(Pos.CENTER);
         removeItem.setTextAlignment(TextAlignment.CENTER);
@@ -41,7 +62,22 @@ public class Bubble extends BorderPane {
             quantity++;
             double res = item.getSellPrice()*quantity;
             this.updatedPrice = this.price * quantity;
-            rightSide.getChildren().setAll(new Label("Rp"+res), removeItem);
+
+            String currency2 = "";
+            Double rate2 = 0.0;
+            try {
+                ExchangeRate exchangeRate = exchangeRateControllers.getCurrentRate();
+                currency2 = exchangeRate.getName();
+                rate2 = exchangeRate.getRate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            Double result2 = res * rate2;
+            DecimalFormat df2 = new DecimalFormat("#.#####");
+            String formattedValue2 = df2.format(result2);
+
+            rightSide.getChildren().setAll(new Label(currency2 + " " + formattedValue2), removeItem);
             this.setRight(rightSide);
             quantityLabel.setText(Integer.toString(quantity));
             bubblePrice.setText(Double.toString(res));
@@ -53,7 +89,22 @@ public class Bubble extends BorderPane {
                 quantity--;
                 double res = item.getSellPrice()*quantity;
                 this.updatedPrice = this.price * quantity;
-                rightSide.getChildren().setAll(new Label("Rp"+res), removeItem);
+
+                String currency2 = "";
+                Double rate2 = 0.0;
+                try {
+                    ExchangeRate exchangeRate = exchangeRateControllers.getCurrentRate();
+                    currency2 = exchangeRate.getName();
+                    rate2 = exchangeRate.getRate();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                Double result2 = res * rate2;
+                DecimalFormat df2 = new DecimalFormat("#.#####");
+                String formattedValue2 = df2.format(result2);
+
+                rightSide.getChildren().setAll(new Label(currency2 + " " + formattedValue2), removeItem);
                 this.setRight(rightSide);
                 quantityLabel.setText(Integer.toString(quantity));
                 bubblePrice.setText(Double.toString(res));

@@ -1,7 +1,9 @@
 package bnmobusinessmanagementsystem.views.components.Catalog;
 
+import bnmobusinessmanagementsystem.controllers.ExchangeRateControllers;
 import bnmobusinessmanagementsystem.models.customer.*;
 import bnmobusinessmanagementsystem.models.Item;
+import bnmobusinessmanagementsystem.models.plugin.ExchangeRate;
 import bnmobusinessmanagementsystem.utils.DataStore;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -22,6 +24,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -216,7 +219,23 @@ public class CashierView extends VBox {
             items.getItems().forEach(item -> {
                 if(item instanceof Bubble){
                     sum += ((Bubble) item).getUpdatedPrice();
-                    charge.setText("Charge (Rp" + sum + ")");
+
+                    ExchangeRateControllers exchangeRateControllers = new ExchangeRateControllers();
+
+                    String currency = "";
+                    Double rate = 0.0;
+                    try {
+                        ExchangeRate exchangeRate = exchangeRateControllers.getCurrentRate();
+                        currency = exchangeRate.getName();
+                        rate = exchangeRate.getRate();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    Double res = sum * rate;
+                    DecimalFormat df = new DecimalFormat("#.#####");
+                    String formattedValue = df.format(res);
+                    charge.setText("Charge (" + currency + " " + formattedValue + ")");
                 }
             });
 

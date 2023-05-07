@@ -161,9 +161,6 @@ public class Settings extends VBox {
 
         VBox pluginSection = new VBox();
 
-        // Akses ke database
-        ArrayList<String> arrayList = new ArrayList<>();
-
         Consumer<Object> optionsChose = (selectedOption) -> {
             if (selectedOption instanceof String) {
                 try {

@@ -46,5 +46,6 @@ public class Inventaris extends HBox{
         cashier.setPrefWidth(1080*2/5);
         catalog.setPrefHeight(maxHeight);
         this.getChildren().addAll(catalog, cashier);
+        this.setPrefSize(1080, 634);
     }
 }
