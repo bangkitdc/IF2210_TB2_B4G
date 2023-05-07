@@ -1,9 +1,11 @@
 package bnmobusinessmanagementsystem.views.components.Catalog;
 
 import bnmobusinessmanagementsystem.controllers.ExchangeRateControllers;
+import bnmobusinessmanagementsystem.controllers.PaymentStatesControllers;
 import bnmobusinessmanagementsystem.models.customer.*;
 import bnmobusinessmanagementsystem.models.Item;
 import bnmobusinessmanagementsystem.models.plugin.ExchangeRate;
+import bnmobusinessmanagementsystem.models.plugin.PaymentStates;
 import bnmobusinessmanagementsystem.utils.DataStore;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -37,6 +39,7 @@ public class CashierView extends VBox {
     private ListView items;
     private HBox discountBox;
     private HBox taxBox;
+    private HBox serviceBox;
     private Label saveBill;
     private Label printBill;
     private HBox bill;
@@ -120,6 +123,16 @@ public class CashierView extends VBox {
         discountBox.setBackground(Background.fill(Color.valueOf("#BFCB7E")));
         discountBox.setStyle("-fx-font-size: 20px;");
         // TODO: add discount plugin
+        PaymentStatesControllers paymentStatesControllers = new PaymentStatesControllers();
+
+        Integer discount = 0;
+        try {
+            PaymentStates payment = paymentStatesControllers.getCurrentStates();
+            discount = payment.getDiscount();
+            discountBox.getChildren().add(new Label(discount.toString() + "%"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         taxBox = new HBox(20);
 //        taxBox.setPrefHeight();
@@ -127,6 +140,30 @@ public class CashierView extends VBox {
         taxBox.setBackground(Background.fill(Color.valueOf("#BFCB7E")));
         taxBox.setStyle("-fx-font-size: 20px;");
         // TODO: add tax plugin
+
+        Integer tax = 0;
+        try {
+            PaymentStates payment = paymentStatesControllers.getCurrentStates();
+            tax = payment.getTax();
+            taxBox.getChildren().add(new Label(tax.toString() + "%"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        serviceBox = new HBox(20);
+        serviceBox.getChildren().add(new Label("Service : "));
+        serviceBox.setBackground(Background.fill(Color.valueOf("#BFCB7E")));
+        serviceBox.setStyle("-fx-font-size: 20px;");
+        // TODO: add service plugin
+
+        Integer service = 0;
+        try {
+            PaymentStates payment = paymentStatesControllers.getCurrentStates();
+            service = payment.getService();
+            serviceBox.getChildren().add(new Label(service.toString() + "%"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         sum = 0;
 
@@ -293,7 +330,7 @@ public class CashierView extends VBox {
         printBill.setStyle("-fx-border-color: black;");
         charge.setStyle("-fx-border-color: black;");
 
-        this.getChildren().addAll(addCustomer, customerType, items, discountBox, taxBox,bill, chargePane);
+        this.getChildren().addAll(addCustomer, customerType, items, discountBox, taxBox, serviceBox, bill, chargePane);
         this.setPrefWidth(1080*2/5);
         this.setPrefHeight(560);
 
