@@ -65,10 +65,12 @@ public class MenuAndTab {
         MenuItem pageInventaris = new MenuItem("Inventaris");
         MenuItem customerHistori = new MenuItem("Histori");
         MenuItem sistemLaporan = new MenuItem("Laporan");
+        MenuItem addMember = new MenuItem("Add Member");
+        MenuItem updateCustomer = new MenuItem("Update Customer");
 
         // Create menus
         this.pageMenu = new Menu("Menu");
-        pageMenu.getItems().addAll(page1MenuItem, page2MenuItem, pageSetting, pageInventaris, customerHistori,sistemLaporan);
+        pageMenu.getItems().addAll(page1MenuItem, page2MenuItem, pageSetting, pageInventaris, customerHistori,sistemLaporan, addMember, updateCustomer);
 
         // Create menu bar
         MenuBar menuBar = new MenuBar();
@@ -184,6 +186,28 @@ public class MenuAndTab {
             laporan.setPrefWidth(pane1.getWidth());
             laporan.setPrefHeight(pane1.getHeight());
             tab.setContent(laporan);
+            tabPane.getTabs().add(tab);
+        });
+
+        addMember.setOnAction(e -> {
+            pane1.setVisible(false);
+            pane2.setVisible(true);
+            Tab tab = new Tab("Add Member");
+            AddMember add = new AddMember();
+            add.setPrefWidth(pane1.getWidth());
+            add.setPrefHeight(pane1.getHeight());
+            tab.setContent(add);
+            tabPane.getTabs().add(tab);
+        });
+
+        updateCustomer.setOnAction(e -> {
+            pane1.setVisible(false);
+            pane2.setVisible(true);
+            Tab tab = new Tab("Update Customer");
+            UpdateCustomer update =new UpdateCustomer();
+            update.setPrefWidth(pane1.getWidth());
+            update.setPrefHeight(pane1.getHeight());
+            tab.setContent(update);
             tabPane.getTabs().add(tab);
         });
 
