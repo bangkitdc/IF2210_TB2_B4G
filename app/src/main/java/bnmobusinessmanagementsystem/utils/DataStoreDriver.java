@@ -24,7 +24,7 @@ public class DataStoreDriver {
         ArrayList<Item> itemL = new ArrayList<>(Arrays.asList(items));
 
         Purchase[] purchases = new Purchase[1];
-        purchases[0] = new Purchase("id1", "asdfghjkl", itemL, 69.69);
+        purchases[0] = new Purchase("id1", "asdfghjkl", itemL);
         ArrayList<Purchase> purchaseL = new ArrayList<>(Arrays.asList(purchases));
 
         customers[0].setTransaction(purchaseL);

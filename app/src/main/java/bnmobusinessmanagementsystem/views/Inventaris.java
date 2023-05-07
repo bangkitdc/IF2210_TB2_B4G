@@ -4,6 +4,7 @@ import bnmobusinessmanagementsystem.utils.DataStore;
 import bnmobusinessmanagementsystem.views.components.Catalog.*;
 import bnmobusinessmanagementsystem.views.components.Catalog.CashierView;
 import bnmobusinessmanagementsystem.views.components.Catalog.CatalogView;
+import bnmobusinessmanagementsystem.models.Item;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
