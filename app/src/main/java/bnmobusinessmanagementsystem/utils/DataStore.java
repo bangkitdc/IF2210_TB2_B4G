@@ -18,15 +18,22 @@ public class DataStore {
     private final String filename;
 
     public DataStore(String filename) {
-        this.filename = "src/main/resources/data/" +  filename;
+        this.filename = "app/src/main/resources/data/" +  filename;
     }
 
     public String getLatestID() {
-        String id = "";
+
+        String id = null;
+
 
         try (FileReader reader = new FileReader(filename)) {
             JSONParser parser = new JSONParser();
             JSONArray customersArray = (JSONArray) parser.parse(reader);
+
+            if (customersArray.size() < 1) {
+                return id;
+            }
+
 
             JSONObject lastObject = (JSONObject) customersArray.get(customersArray.size() - 1);
             id = (String) lastObject.get("idCustomer");

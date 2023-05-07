@@ -1,20 +1,38 @@
 [
   {
-    "buyPrice": 2000.0,
-    "image": "picture",
-    "sold": 5,
-    "quantity": 5,
-    "name": "rambutan",
-    "sellPrice": 3000.0,
-    "category": "buah"
+    "buyPrice": 1500.0,
+    "image": "obeng.jpg",
+    "sold": 9,
+    "quantity": 100,
+    "name": "obeng",
+    "sellPrice": 2500.0,
+    "category": "peralatan"
   },
   {
     "buyPrice": 1500.0,
-    "image": "picture",
-    "sold": 5,
-    "quantity": 10,
+    "image": "pisang.jpg",
+    "sold": 11,
+    "quantity": 100,
     "name": "pisang",
     "sellPrice": 2000.0,
+    "category": "buah"
+  },
+  {
+    "buyPrice": 5500.0,
+    "image": "apel.jpg",
+    "sold": 11,
+    "quantity": 100,
+    "name": "apel",
+    "sellPrice": 6000.0,
+    "category": "buah"
+  },
+  {
+    "buyPrice": 2000.0,
+    "image": "rambutan.jpg",
+    "sold": 5,
+    "quantity": 100,
+    "name": "rambutan",
+    "sellPrice": 3000.0,
     "category": "buah"
   }
 ]
