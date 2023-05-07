@@ -1,4 +1,5 @@
 package bnmobusinessmanagementsystem.views;
+import bnmobusinessmanagementsystem.models.Item;
 import bnmobusinessmanagementsystem.models.customer.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -43,8 +44,8 @@ public class TransactionView extends VBox {
         }
         this.getChildren().addAll(labelView,purchaseItemView);
     }
-    public void addItem(CustomerTransactionView items){
-        this.getChildren().add(items);
-    }
+//    public void addItem(CustomerTransactionView items){
+//        this.getChildren().add(items);
+//    }
 
 }

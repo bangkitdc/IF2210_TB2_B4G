@@ -2,6 +2,7 @@ package bnmobusinessmanagementsystem.views;
 
 import javafx.collections.ListChangeListener;
 import javafx.geometry.NodeOrientation;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
@@ -18,6 +19,9 @@ import java.nio.file.Paths;
 public class MenuAndTab {
     private Scene scene;
     private TabPane tabPane;
+    private Menu pageMenu;
+    private Pane pane1;
+    private Pane pane2;
 
     public MenuAndTab(Scene mainScene) {
         FontManager.loadFonts();
@@ -26,8 +30,8 @@ public class MenuAndTab {
         tabPane = new TabPane();
 
         // Create the two panes
-        Pane pane1 = new Pane();
-        Pane pane2 = new Pane();
+        this.pane1 = new Pane();
+        this.pane2 = new Pane();
 
         // Stack them on top of each other in a new StackPane
         StackPane stackPane = new StackPane(pane1, pane2);
@@ -57,10 +61,11 @@ public class MenuAndTab {
         MenuItem page1MenuItem = new MenuItem("Page 1");
         MenuItem page2MenuItem = new MenuItem("Page 2");
         MenuItem pageSetting = new MenuItem("Setting");
+        MenuItem pageInventaris = new MenuItem("Inventaris");
 
         // Create menus
         this.pageMenu = new Menu("Menu");
-        pageMenu.getItems().addAll(page1MenuItem, page2MenuItem, pageSetting);
+        pageMenu.getItems().addAll(page1MenuItem, page2MenuItem, pageSetting, pageInventaris);
 
         // Create menu bar
         MenuBar menuBar = new MenuBar();
@@ -107,6 +112,7 @@ public class MenuAndTab {
             tabPane.getTabs().add(tab2);
         });
 
+        SettingPage settingPage = new SettingPage();
         pageSetting.setOnAction(e -> {
             pane1.setVisible(false);
             pane2.setVisible(true);
@@ -117,7 +123,6 @@ public class MenuAndTab {
                     return;
                 }
             }
-            SettingPage settingPage = new SettingPage();
             settingPage.layoutBoundsProperty().addListener((obs, oldVal, newVal) -> {
                 settingPage.setPrefWidth(pane2.getWidth());
                 settingPage.setPrefHeight(pane2.getHeight());
@@ -125,6 +130,26 @@ public class MenuAndTab {
             Tab tab3 = new Tab(pageTitle);
             tab3.setContent(settingPage);
             tabPane.getTabs().add(tab3);
+        });
+
+        pageInventaris.setOnAction(e -> {
+            pane1.setVisible(false);
+            pane2.setVisible(true);
+            String pageTitle = "Inventaris";
+            for (Tab tab : tabPane.getTabs()) {
+                if (tab.getText().equals(pageTitle)) {
+                    tabPane.getSelectionModel().select(tab);
+                    return;
+                }
+            }
+            Inventaris inventaris = new Inventaris();
+//            inventaris.layoutBoundsProperty().addListener((obs, oldVal, newVal) -> {
+//                inventaris.setPrefWidth(pane2.getWidth());
+//                inventaris.setPrefHeight(pane2.getHeight());
+//            });
+            Tab tab4 = new Tab(pageTitle);
+            tab4.setContent(inventaris);
+            tabPane.getTabs().add(tab4);
         });
 
         tabPane.getTabs().addListener((ListChangeListener<Tab>) change -> {
@@ -143,5 +168,24 @@ public class MenuAndTab {
 
     public Scene getScene() {
         return scene;
+    }
+
+    public void addPageToMenuAndTab(String pageTitle, Node pageContent) {
+        MenuItem newPageMenuItem = new MenuItem(pageTitle);
+        pageMenu.getItems().add(newPageMenuItem);
+
+        newPageMenuItem.setOnAction(e -> {
+            pane1.setVisible(false);
+            pane2.setVisible(true);
+            for (Tab tab : tabPane.getTabs()) {
+                if (tab.getText().equals(pageTitle)) {
+                    tabPane.getSelectionModel().select(tab);
+                    return;
+                }
+            }
+            Tab newTab = new Tab(pageTitle);
+            newTab.setContent(pageContent);
+            tabPane.getTabs().add(newTab);
+        });
     }
 }
