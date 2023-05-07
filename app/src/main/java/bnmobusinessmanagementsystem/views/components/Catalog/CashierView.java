@@ -1,7 +1,7 @@
 package bnmobusinessmanagementsystem.views.components.Catalog;
 
-import bnmobusinessmanagementsystem.models.customer.Member;
-import bnmobusinessmanagementsystem.models.customer.VIP;
+import bnmobusinessmanagementsystem.models.customer.*;
+import bnmobusinessmanagementsystem.models.Item;
 import bnmobusinessmanagementsystem.utils.DataStore;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -158,7 +158,7 @@ public class CashierView extends VBox {
                 if(currentCustomer.equals("CUSTOMER")){
                     Customer customer = new Customer();
                     ArrayList<Purchase> purchaseArray = new ArrayList<>();
-                    purchaseArray.add(new Purchase(customer.getCustomerId(), formattedDate,itemPurchased, sum));
+                    purchaseArray.add(new Purchase(customer.getCustomerId(), formattedDate,itemPurchased));
                     customer.setTransaction(purchaseArray);
                     custStore.addCustomer(customer);
                 }
