@@ -151,7 +151,7 @@ public class SearchBar extends HBox {
                         categoryValue = formData.get(4);
                         imageValue = formData.get(5);
                         itemDataStore.addItem(new Item(nameValue, Double.parseDouble(sellPriceValue),
-                                Double.parseDouble(buyPriceValue), Integer.parseInt(quantityValue),
+                                Double.parseDouble(buyPriceValue), Integer.parseInt(quantityValue), 0,
                                 categoryValue, imageValue));
                     }
                 });

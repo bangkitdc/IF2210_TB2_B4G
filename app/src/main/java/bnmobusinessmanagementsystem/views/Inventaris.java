@@ -25,7 +25,7 @@ public class Inventaris extends HBox{
         DataStore custStore = new DataStore("customer.json");
 
         VBox catalog = new VBox(10);
-        CashierView cashier = new CashierView(custStore);
+        CashierView cashier = new CashierView(custStore, dataStore);
         itemList = new CatalogView();
         ScrollPane catalogs = new ScrollPane();
         catalogs.setContent(itemList);

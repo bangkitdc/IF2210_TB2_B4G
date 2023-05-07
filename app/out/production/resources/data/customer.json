@@ -1,61 +1,64 @@
 [
   {
-    "poin": 0.0,
-    "nama": "Jane Doe",
-    "tipe": "vip",
-    "isActive": true,
-    "transaction": [],
-    "noTelp": "987654321",
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "1",
+        "bill": 15000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 0,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
     "idCustomer": "1"
   },
   {
-    "poin": 0.0,
-    "nama": "Joli Diva",
-    "tipe": "member",
-    "isActive": true,
-    "transaction": [],
-    "noTelp": "123456789",
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "2",
+        "bill": 15000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 1,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
     "idCustomer": "2"
   },
   {
     "tipe": "customer",
     "transaction": [
       {
-        "date": "7\/5\/2023",
+        "date": "07\/05\/2023",
         "customerId": "3",
-        "bill": 4275.0,
+        "bill": 15000.0,
         "itemList": [
           {
-            "buyPrice": 1500.0,
+            "buyPrice": 2000.0,
             "image": "picture",
-            "quantity": 3,
-            "name": "apel",
-            "sellPrice": 20.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 4,
-            "name": "pisang",
-            "sellPrice": 205.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
+            "sold": 2,
             "quantity": 5,
-            "name": "alpukat",
-            "sellPrice": 2050.0,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
             "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 2,
-            "name": "obeng",
-            "sellPrice": 2000.0,
-            "category": "peralatan"
           }
         ]
       }
@@ -66,54 +69,40 @@
     "tipe": "customer",
     "transaction": [
       {
-        "date": "7\/5\/2023",
-        "customerId": "10",
-        "bill": 40.0,
+        "date": "07\/05\/2023",
+        "customerId": "4",
+        "bill": 15000.0,
         "itemList": [
           {
-            "buyPrice": 5.0,
-            "image": "ashoasufhaosifhaosifh",
-            "quantity": 1,
-            "name": "bagas",
-            "sellPrice": 20.0,
-            "category": "ganteng"
-          },
-          {
-            "buyPrice": 5.0,
-            "image": "asjhdoasd",
-            "quantity": 1,
-            "name": "jedan",
-            "sellPrice": 20.0,
-            "category": "bau"
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 0,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
           }
         ]
       }
     ],
-    "idCustomer": "10"
+    "idCustomer": "4"
   },
   {
     "tipe": "customer",
     "transaction": [
       {
-        "date": "7\/5\/2023",
+        "date": "07\/05\/2023",
         "customerId": "5",
-        "bill": 25.0,
+        "bill": 15000.0,
         "itemList": [
           {
-            "buyPrice": 0.0,
-            "image": "o",
-            "quantity": 1,
-            "name": "jedan111",
-            "sellPrice": 5.0,
-            "category": "s"
-          },
-          {
-            "buyPrice": 5.0,
-            "image": "ashoasufhaosifhaosifh",
-            "quantity": 1,
-            "name": "bagas",
-            "sellPrice": 20.0,
-            "category": "ganteng"
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 0,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
           }
         ]
       }
@@ -124,25 +113,18 @@
     "tipe": "customer",
     "transaction": [
       {
-        "date": "7\/5\/2023",
+        "date": "07\/05\/2023",
         "customerId": "6",
-        "bill": 125987.0,
+        "bill": 15000.0,
         "itemList": [
           {
-            "buyPrice": 0.0,
-            "image": "o",
-            "quantity": 1,
-            "name": "j",
-            "sellPrice": 2000.0,
-            "category": "s"
-          },
-          {
-            "buyPrice": 0.0,
-            "image": "o",
-            "quantity": 1,
-            "name": "bagasss",
-            "sellPrice": 123987.0,
-            "category": "s"
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 0,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
           }
         ]
       }
@@ -155,27 +137,152 @@
       {
         "date": "07\/05\/2023",
         "customerId": "7",
-        "bill": 125987.0,
+        "bill": 15000.0,
         "itemList": [
           {
-            "buyPrice": 0.0,
-            "image": "o",
-            "quantity": 1,
-            "name": "j",
-            "sellPrice": 2000.0,
-            "category": "s"
-          },
-          {
-            "buyPrice": 0.0,
-            "image": "o",
-            "quantity": 1,
-            "name": "bagasss",
-            "sellPrice": 123987.0,
-            "category": "s"
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 0,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
           }
         ]
       }
     ],
     "idCustomer": "7"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "8",
+        "bill": 15000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 2,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "8"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "9",
+        "bill": 15000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 3,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "9"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "10",
+        "bill": 15000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 4,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "10"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "11",
+        "bill": 15000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 9,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "11"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "12",
+        "bill": 15000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "picture",
+            "sold": 5,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "12"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "13",
+        "bill": 20000.0,
+        "itemList": [
+          {
+            "buyPrice": 1500.0,
+            "image": "picture",
+            "sold": 5,
+            "quantity": 10,
+            "name": "pisang",
+            "sellPrice": 2000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "13"
   }
 ]
