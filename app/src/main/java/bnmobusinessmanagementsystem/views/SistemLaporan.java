@@ -44,6 +44,7 @@ public class SistemLaporan extends HBox {
         Button selectFolderButton2 = new Button("Select Folder");
         this.fixedBill=new ArrayList<>();
         this.laporanPenjualan=new ArrayList<>();
+
         DataStore customersData=new DataStore("customer.json");
         this.customers=FXCollections.observableArrayList();
         this.customers.addAll(customersData.readCustomer());

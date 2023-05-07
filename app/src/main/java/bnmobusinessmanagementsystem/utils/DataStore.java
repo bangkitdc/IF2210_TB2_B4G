@@ -233,11 +233,18 @@ public class DataStore {
                             String category = (String) itemJson.get("category");
                             String image = (String) itemJson.get("image");
 <<<<<<< HEAD
+<<<<<<< HEAD
                             Item item = new Item(name, sellPrice, buyPrice, quantity, category, image);
 =======
                             int sold = ((Long) itemJson.get("sold")).intValue();
                             Item item = new Item(name, sellPrice, buyPrice, quantity, sold, category, image);
 >>>>>>> b4f27b0eca608f048c17536b615d1f30bbe130b7
+=======
+
+                            int sold = ((Long) itemJson.get("sold")).intValue();
+                            Item item = new Item(name, sellPrice, buyPrice, quantity, sold, category, image);
+
+>>>>>>> e799872b53a856ffd411244a55022f11dd16c897
                             itemList.add(item);
                         }
 

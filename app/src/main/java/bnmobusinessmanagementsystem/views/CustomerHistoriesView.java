@@ -158,6 +158,7 @@ public class CustomerHistoriesView extends VBox{
 
                 tempItem.add(new Item("TIDAK ADA TRANSAKSI", 0, 0, 0, "", ""));
                 temp.add(new Purchase(tempp.getCustomerId(), "-",tempItem));
+
                 tempp.setTransaction(temp);
                 this.customer=tempp;
                 this.purchaseList=tempp.getTransaction();

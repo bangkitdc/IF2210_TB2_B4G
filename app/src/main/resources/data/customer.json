@@ -17,120 +17,6 @@
             "category": "buah"
           }
         ]
-      },      {
-        "date": "7\/5\/2023",
-        "customerId": "3",
-        "bill": 4275.0,
-        "itemList": [
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 3,
-            "name": "apel",
-            "sellPrice": 20.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 4,
-            "name": "pisang",
-            "sellPrice": 205.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 5,
-            "name": "alpukat",
-            "sellPrice": 2050.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 2,
-            "name": "obeng",
-            "sellPrice": 2000.0,
-            "category": "peralatan"
-          }
-        ]
-      },      {
-        "date": "7\/5\/2023",
-        "customerId": "3",
-        "bill": 4275.0,
-        "itemList": [
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 3,
-            "name": "apel",
-            "sellPrice": 20.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 4,
-            "name": "pisang",
-            "sellPrice": 205.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 5,
-            "name": "alpukat",
-            "sellPrice": 2050.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 2,
-            "name": "obeng",
-            "sellPrice": 2000.0,
-            "category": "peralatan"
-          }
-        ]
-      },      {
-        "date": "7\/5\/2023",
-        "customerId": "3",
-        "bill": 4275.0,
-        "itemList": [
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 3,
-            "name": "apel",
-            "sellPrice": 20.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 4,
-            "name": "pisang",
-            "sellPrice": 205.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 5,
-            "name": "alpukat",
-            "sellPrice": 2050.0,
-            "category": "buah"
-          },
-          {
-            "buyPrice": 1500.0,
-            "image": "picture",
-            "quantity": 2,
-            "name": "obeng",
-            "sellPrice": 2000.0,
-            "category": "peralatan"
-          }
-        ]
       }
     ],
     "idCustomer": "3"
@@ -195,6 +81,120 @@
             "name": "rambutan",
             "sellPrice": 3000.0,
             "category": "buah"
+          }
+        ]
+      },      {
+        "date": "7\/5\/2023",
+        "customerId": "3",
+        "bill": 4275.0,
+        "itemList": [
+          {
+            "buyPrice": 1500.0,
+            "image": "picture",
+            "quantity": 3,
+            "name": "apel",
+            "sellPrice": 20.0,
+            "category": "buah"
+          },
+          {
+            "buyPrice": 1500.0,
+            "image": "picture",
+            "quantity": 4,
+            "name": "pisang",
+            "sellPrice": 205.0,
+            "category": "buah"
+          },
+          {
+            "buyPrice": 1500.0,
+            "image": "picture",
+            "quantity": 5,
+            "name": "alpukat",
+            "sellPrice": 2050.0,
+            "category": "buah"
+          },
+          {
+            "buyPrice": 1500.0,
+            "image": "picture",
+            "quantity": 2,
+            "name": "obeng",
+            "sellPrice": 2000.0,
+            "category": "peralatan"
+          }
+        ]
+      },      {
+        "date": "7\/5\/2023",
+        "customerId": "3",
+        "bill": 4275.0,
+        "itemList": [
+          {
+            "buyPrice": 1500.0,
+            "image": "picture",
+            "quantity": 3,
+            "name": "apel",
+            "sellPrice": 20.0,
+            "category": "buah"
+          },
+          {
+            "buyPrice": 1500.0,
+            "image": "picture",
+            "quantity": 4,
+            "name": "pisang",
+            "sellPrice": 205.0,
+            "category": "buah"
+          },
+          {
+            "buyPrice": 1500.0,
+            "image": "picture",
+            "quantity": 5,
+            "name": "alpukat",
+            "sellPrice": 2050.0,
+            "category": "buah"
+          },
+          {
+            "buyPrice": 1500.0,
+            "image": "picture",
+            "quantity": 2,
+            "name": "obeng",
+            "sellPrice": 2000.0,
+            "category": "peralatan"
+          }
+        ]
+      },      {
+        "date": "7\/5\/2023",
+        "customerId": "3",
+        "bill": 4275.0,
+        "itemList": [
+          {
+            "buyPrice": 1500.0,
+            "image": "picture",
+            "quantity": 3,
+            "name": "apel",
+            "sellPrice": 20.0,
+            "category": "buah"
+          },
+          {
+            "buyPrice": 1500.0,
+            "image": "picture",
+            "quantity": 4,
+            "name": "pisang",
+            "sellPrice": 205.0,
+            "category": "buah"
+          },
+          {
+            "buyPrice": 1500.0,
+            "image": "picture",
+            "quantity": 5,
+            "name": "alpukat",
+            "sellPrice": 2050.0,
+            "category": "buah"
+          },
+          {
+            "buyPrice": 1500.0,
+            "image": "picture",
+            "quantity": 2,
+            "name": "obeng",
+            "sellPrice": 2000.0,
+            "category": "peralatan"
           }
         ]
       }
