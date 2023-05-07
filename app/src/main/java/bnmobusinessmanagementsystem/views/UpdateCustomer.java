@@ -37,7 +37,6 @@ public class UpdateCustomer extends VBox{
     private Label poinLabel;
     private Label poinField;
     private Button submitButton;
-    private TextField displayField;
     private ToggleButton deactivate;
     private Circle deactCircle;
 
@@ -109,7 +108,6 @@ public class UpdateCustomer extends VBox{
         poinLabel = new Label("Poin                 :");
         poinField = new Label("" + poin);
         submitButton = new Button("Submit");
-        displayField = new TextField();
 
         button1.setOnAction(event -> {
             if (button1.isSelected()) {
@@ -305,7 +303,6 @@ public class UpdateCustomer extends VBox{
             String idText = idField.getText();
             String name = nameField.getText();
             String telephone = telephoneField.getText();
-            String contact = button + ", "+ name + ", " + telephone;
 
             if (button.equals("") | name.equals("") | telephone.equals("")){
                 Alert alert = new Alert(AlertType.ERROR);
@@ -340,8 +337,6 @@ public class UpdateCustomer extends VBox{
                     e.printStackTrace();
                 }
             }
-
-            displayField.setText(contact);
         });
 
         HBox b1 = new HBox(circlebutton1, button1);
@@ -356,10 +351,9 @@ public class UpdateCustomer extends VBox{
         HBox pointBox = new HBox(poinLabel, poinField);
         HBox deactBox = new HBox(deactCircle, deactivate);
         HBox buttonBox = new HBox(submitButton);
-        HBox displayBox = new HBox(displayField);
 
         VBox inputBox = new VBox(buttonBox2,idBox, nameBox, telephoneBox, pointBox);
-        VBox all = new VBox(titleBox, inputBox, deactBox,  buttonBox, displayBox);
+        VBox all = new VBox(titleBox, inputBox, deactBox,  buttonBox);
 
         titleBox.setAlignment(Pos.CENTER);
         buttonBox2.setAlignment(Pos.CENTER);
@@ -370,11 +364,9 @@ public class UpdateCustomer extends VBox{
         pointBox.setAlignment(Pos.CENTER_LEFT);
         buttonBox.setAlignment(Pos.CENTER);
         deactBox.setAlignment(Pos.CENTER_LEFT);
-        displayBox.setAlignment(Pos.CENTER);
 
         nameBox.setSpacing(20);
         telephoneBox.setSpacing(20);
-        displayBox.setSpacing(20);
         b1.setSpacing(5);
         b2.setSpacing(5);
         deactBox.setSpacing(5);
@@ -387,7 +379,6 @@ public class UpdateCustomer extends VBox{
         telephoneBox.setPadding(new Insets(15));
         deactBox.setPadding(new Insets(15, 15, 15, 40));
         pointBox.setPadding(new Insets(15));
-        displayBox.setPadding(new Insets(10));
         all.setPadding(new Insets(20,0,20,60));
         all.setStyle("""
             -fx-background-color : #F6968A;
