@@ -1,22 +1,20 @@
 package bnmobusinessmanagementsystem.views.components.Catalog;
 
+import bnmobusinessmanagementsystem.models.Item;
 import bnmobusinessmanagementsystem.models.customer.Customer;
 import bnmobusinessmanagementsystem.models.customer.Member;
+import bnmobusinessmanagementsystem.models.customer.Purchase;
 import bnmobusinessmanagementsystem.models.customer.VIP;
 import bnmobusinessmanagementsystem.utils.DataStore;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -26,11 +24,13 @@ import javafx.stage.Screen;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class CashierView extends VBox {
 
+    private String currentCustomer;
     private Label addCustomer;
     private ComboBox<String> dropdown;
     private HBox customerType;
@@ -41,13 +41,11 @@ public class CashierView extends VBox {
     private Label charge;
     private double sum;
     private ArrayList itemInfoList;
-    public CashierView(){
-        DataStore custStore = new DataStore("customer.json");
-        Customer[] customers = new Customer[2];
-        customers[0] = new VIP("Jane Doe", "987654321");
-        customers[1] = new Member("Joli Diva", "123456789");
-        ArrayList<Customer> customerList = new ArrayList<>(Arrays.asList(customers));
-        custStore.saveCustomer(customerList);
+    private ArrayList<Item> itemPurchased;
+    private ArrayList<Customer> custs;
+    private DataStore custStore;
+    public CashierView(DataStore customerDataStore){
+        this.custStore = customerDataStore;
 
 
 
@@ -68,9 +66,8 @@ public class CashierView extends VBox {
             }
         });
 
-//        customerType = new HBox(20);
         try{
-            ArrayList<Customer> custs = custStore.readCustomer();
+            custs = custStore.readCustomer();
             for (Customer cust : custs){
                 if(cust instanceof Member){
                     dropdown.getItems().add(((Member) cust).getNama());
@@ -78,7 +75,6 @@ public class CashierView extends VBox {
                 if(cust instanceof VIP){
                     dropdown.getItems().add(((VIP) cust).getNama());
                 }
-//                System.out.println(cust.);
             }
         } catch (IOException e){
             e.printStackTrace();;
@@ -87,13 +83,28 @@ public class CashierView extends VBox {
 
 //        dropdown.getItems().addAll("Customer", "Member", "VIP");
         dropdown.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-
+            if(newValue.equals("Customer")) {
+                this.currentCustomer = "CUSTOMER";
+            }
+            else{
+                for (Customer n : custs){
+                    if(n instanceof Member){
+                        if(newValue.equals(((Member) n).getNama())){
+                            System.out.println(((Member) n).getNama());
+                            this.currentCustomer = "MEMBER";
+                        }
+                    }
+                    if(n instanceof VIP){
+                        if(newValue.equals(((VIP) n).getNama())){
+                            System.out.println(((VIP) n).getNama());
+                            this.currentCustomer = "VIP";
+                        }
+                    }
+                }
+            }
         });
-//        customerType.getChildren().addAll(dropdown, new Label("ID"));
         customerType = new HBox(20);
         customerType.getChildren().addAll(dropdown);
-
-
 
         items = new ListView();
 
@@ -133,20 +144,28 @@ public class CashierView extends VBox {
         charge.setFont(Font.font(30));
         charge.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
+                // Get today's date
+                LocalDate today = LocalDate.now();
+
+                // Format today's date as "dd/MM/yyyy"
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String formattedDate = today.format(formatter);
+                itemPurchased = new ArrayList<>();
                 System.out.println(charge.getText());
                 for(Object item : items.getItems()){
                     if(item instanceof Bubble){
-                        ArrayList<String> itemInfo = new ArrayList<>();
-                        itemInfo.add(((Bubble) item).getBubbleName().getText());
-                        itemInfo.add(((Bubble) item).getBubblePrice().getText());
-                        itemInfo.add(((Bubble) item).getQuantityLabel().getText());
-                        System.out.print(itemInfo);
-//                        System.out.println(((Bubble) item).getBubbleName().getText());
-//                        System.out.println(((Bubble) item).getBubblePrice().getText());
-//                        System.out.println(((Bubble) item).getQuantityLabel().getText());
+                        itemPurchased.add(((Bubble) item).getItem());
                     }
                 }
-                //TODO : ngecharge ke customer
+                DataStore purchase = new DataStore("purchase.json");
+                if(currentCustomer.equals("CUSTOMER")){
+                    Customer customer = new Customer();
+                    ArrayList<Purchase> purchaseArray = new ArrayList<>();
+                    purchaseArray.add(new Purchase(customer.getCustomerId(), formattedDate,itemPurchased, sum));
+                    customer.setTransaction(purchaseArray);
+                    custStore.addCustomer(customer);
+                }
+                System.out.print(currentCustomer);
             }
         });
 
