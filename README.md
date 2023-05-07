@@ -1,6 +1,10 @@
 # BNMO: Business Management System
 > Tugas Besar 2 Mata Kuliah IF2210 Pemrograman Berorientasi Objek. Built by Kelompok Mahasiswa Pencari Takjil - B4G
 
+<p align="center">
+    <img src="https://github.com/bangkitdc/IF2210_TB2_B4G/blob/main/asset/oop.gif" width=600>
+</p>
+
 ## General Information
 Application that can help manage the BNMO Business System. It's basically POS (Point of Sales) program, which is a program that helps a store to make and record transactions related to their business. 
 
