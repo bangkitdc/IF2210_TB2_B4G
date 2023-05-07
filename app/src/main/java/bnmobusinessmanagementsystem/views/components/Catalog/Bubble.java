@@ -35,7 +35,6 @@ public class Bubble extends BorderPane {
 
         Button incrementButton = new Button("+");
         incrementButton.setOnAction(event -> {
-            removeItem = new Button("X");
             quantity++;
             double res = item.getSellPrice()*quantity;
             rightSide.getChildren().setAll(new Label("Rp"+res), removeItem);
