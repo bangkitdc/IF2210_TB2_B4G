@@ -14,6 +14,7 @@ import javafx.scene.layout.*;
 import javafx.scene.image.Image;
 
 
+import java.io.IOException;
 import java.nio.file.Paths;
 
 public class MenuAndTab {
@@ -62,10 +63,12 @@ public class MenuAndTab {
         MenuItem page2MenuItem = new MenuItem("Page 2");
         MenuItem pageSetting = new MenuItem("Setting");
         MenuItem pageInventaris = new MenuItem("Inventaris");
+        MenuItem customerHistori = new MenuItem("Histori");
+        MenuItem sistemLaporan = new MenuItem("Laporan");
 
         // Create menus
         this.pageMenu = new Menu("Menu");
-        pageMenu.getItems().addAll(page1MenuItem, page2MenuItem, pageSetting, pageInventaris);
+        pageMenu.getItems().addAll(page1MenuItem, page2MenuItem, pageSetting, pageInventaris, customerHistori,sistemLaporan);
 
         // Create menu bar
         MenuBar menuBar = new MenuBar();
@@ -150,6 +153,38 @@ public class MenuAndTab {
             Tab tab4 = new Tab(pageTitle);
             tab4.setContent(inventaris);
             tabPane.getTabs().add(tab4);
+        });
+
+        customerHistori.setOnAction(e -> {
+            pane1.setVisible(false);
+            pane2.setVisible(true);
+            Tab tab = new Tab("History Customer");
+            CustomerHistoriesView histori = null;
+            try {
+                histori = new CustomerHistoriesView();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            histori.setPrefWidth(pane1.getWidth());
+            histori.setPrefHeight(pane1.getHeight());
+            tab.setContent(histori);
+            tabPane.getTabs().add(tab);
+        });
+
+        sistemLaporan.setOnAction(e -> {
+            pane1.setVisible(false);
+            pane2.setVisible(true);
+            Tab tab = new Tab("Sistem Laporan");
+            SistemLaporan laporan = null;
+            try {
+                laporan = new SistemLaporan();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            laporan.setPrefWidth(pane1.getWidth());
+            laporan.setPrefHeight(pane1.getHeight());
+            tab.setContent(laporan);
+            tabPane.getTabs().add(tab);
         });
 
         tabPane.getTabs().addListener((ListChangeListener<Tab>) change -> {
