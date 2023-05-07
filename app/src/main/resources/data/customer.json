@@ -177,5 +177,26 @@
       }
     ],
     "idCustomer": "7"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "15",
+        "bill": 2000.0,
+        "itemList": [
+          {
+            "buyPrice": 0.0,
+            "image": "o",
+            "quantity": 1,
+            "name": "j",
+            "sellPrice": 2000.0,
+            "category": "s"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "15"
   }
 ]
