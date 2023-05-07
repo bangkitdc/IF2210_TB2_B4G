@@ -1,1 +1,20 @@
-[{"buyPrice":0.0,"image":"o","quantity":1,"name":"j","sellPrice":2000.0,"category":"s"},{"buyPrice":0.0,"image":"s","quantity":1,"name":"bagasss","sellPrice":2000.0,"category":"s"}]
+[
+  {
+    "buyPrice": 2000.0,
+    "image": "picture",
+    "sold": 5,
+    "quantity": 5,
+    "name": "rambutan",
+    "sellPrice": 3000.0,
+    "category": "buah"
+  },
+  {
+    "buyPrice": 1500.0,
+    "image": "picture",
+    "sold": 5,
+    "quantity": 10,
+    "name": "pisang",
+    "sellPrice": 2000.0,
+    "category": "buah"
+  }
+]

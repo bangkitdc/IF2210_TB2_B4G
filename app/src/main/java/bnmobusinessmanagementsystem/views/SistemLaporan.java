@@ -41,14 +41,14 @@ public class SistemLaporan extends VBox {
         this.setSpacing(20);
 
         ArrayList<Item> items=new ArrayList<Item>();
-        items.add(new Item("Alpukat",100,100,10,"buah","picture"));
-        items.add(new Item("Alpukat",100,100,10,"buah","picture"));
-        items.add(new Item("Alpukat",100,100,10,"buah","picture"));
-        items.add(new Item("Alpukat",100,100,10,"buah","picture"));
-        items.add(new Item("Alpukat",100,100,10,"buah","picture"));
-        items.add(new Item("Alpukat",100,100,10,"buah","picture"));
-        items.add(new Item("Alpukat",100,100,10,"buah","picture"));
-        items.add(new Item("Alpukat",100,100,10,"buah","picture"));
+        items.add(new Item("Alpukat",100,100,10, 0,"buah","picture"));
+        items.add(new Item("Alpukat",100,100,10,0,"buah","picture"));
+        items.add(new Item("Alpukat",100,100,10,0,"buah","picture"));
+        items.add(new Item("Alpukat",100,100,10,0,"buah","picture"));
+        items.add(new Item("Alpukat",100,100,10,0,"buah","picture"));
+        items.add(new Item("Alpukat",100,100,10,0,"buah","picture"));
+        items.add(new Item("Alpukat",100,100,10,0,"buah","picture"));
+        items.add(new Item("Alpukat",100,100,10,0,"buah","picture"));
         Customer temp=new Customer("1");
         Customer temp2=new Customer("1");
         temp.addTransaction(new Purchase("1","5/5/2023",items));

@@ -24,7 +24,7 @@ public class MenuAndTab {
     private Pane pane2;
 
     public MenuAndTab(Scene mainScene) {
-        FontManager.loadFonts();
+//        FontManager.loadFonts();
 
         // Tab pane
         tabPane = new TabPane();

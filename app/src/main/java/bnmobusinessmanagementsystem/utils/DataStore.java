@@ -47,6 +47,7 @@ public class DataStore {
                     itemObject.put("quantity", item.getQuantity());
                     itemObject.put("category", item.getCategory());
                     itemObject.put("image", item.getImage());
+                    itemObject.put("sold", item.getSold());
 
                     itemArray.add(itemObject);
                 }
@@ -97,24 +98,50 @@ public class DataStore {
             // Membuat objek JSON dari data customer
             JSONObject customerObject = new JSONObject();
 
+            customerObject.put("idCustomer", customer.getCustomerId());
+            JSONArray transactionArray = new JSONArray();
+            for (Purchase purchase : customer.getTransaction()) {
+                JSONObject purchaseObject = new JSONObject();
+
+                purchaseObject.put("customerId", purchase.getCustomerId());
+                purchaseObject.put("date", purchase.getDate());
+                purchaseObject.put("bill", purchase.getBill());
+
+                JSONArray itemArray = new JSONArray();
+                for (Item item : purchase.getItemList()) {
+                    JSONObject itemObject = new JSONObject();
+
+                    itemObject.put("name", item.getName());
+                    itemObject.put("sellPrice", item.getSellPrice());
+                    itemObject.put("buyPrice", item.getBuyPrice());
+                    itemObject.put("quantity", item.getQuantity());
+                    itemObject.put("category", item.getCategory());
+                    itemObject.put("image", item.getImage());
+                    itemObject.put("sold", item.getSold());
+
+                    itemArray.add(itemObject);
+                }
+
+                purchaseObject.put("itemList", itemArray);
+
+                transactionArray.add(purchaseObject);
+            }
+            customerObject.put("transaction", transactionArray);
 
             if (customer instanceof Member member) {
                 customerObject.put("tipe", "member");
-                customerObject.put("idCustomer", member.getCustomerId() + len);
                 customerObject.put("nama", member.getNama());
                 customerObject.put("noTelp", member.getNoTelp());
                 customerObject.put("poin", member.getPoin());
                 customerObject.put("isActive", member.isActive());
             } else if (customer instanceof VIP vip) {
                 customerObject.put("tipe", "vip");
-                customerObject.put("idCustomer", vip.getCustomerId() + len);
                 customerObject.put("nama", vip.getNama());
                 customerObject.put("noTelp", vip.getNoTelp());
                 customerObject.put("poin", vip.getPoin());
                 customerObject.put("isActive", vip.isActive());
             } else {
                 customerObject.put("tipe", "customer");
-                customerObject.put("id", customer.getCustomerId());
             }
 
             // Menambahkan objek JSON baru ke dalam array JSON
@@ -129,7 +156,6 @@ public class DataStore {
             e.printStackTrace();
         }
     }
-
     public void deleteCustomerById(String id) throws IOException, ParseException {
         try (FileReader reader = new FileReader(filename)) {
             JSONParser parser = new JSONParser();
@@ -168,34 +194,41 @@ public class DataStore {
 
                 JSONArray purchasesArray = (JSONArray) customerJson.get("transaction");
 
-                for (Object purchaseList : purchasesArray) {
-                    JSONObject purchaseJson = (JSONObject) purchaseList;
+                ArrayList<Purchase> purchaseArrayList = new ArrayList<>();
 
-                    String customerId = (String) purchaseJson.get("customerId");
-                    String date = (String) purchaseJson.get("date");
-                    double bill = (Double) purchaseJson.get("bill");
+                if (purchasesArray != null) {
+                    for (Object purchaseList : purchasesArray) {
+                        JSONObject purchaseJson = (JSONObject) purchaseList;
 
-                    JSONArray itemArray = (JSONArray) purchaseJson.get("itemList");
+                        String customerId = (String) purchaseJson.get("customerId");
+                        String date = (String) purchaseJson.get("date");
+                        double bill = (Double) purchaseJson.get("bill");
 
-                    ArrayList<Item> itemList = new ArrayList<>();
-                    for (Object itemObj : itemArray) {
-                        JSONObject itemJson = (JSONObject) itemObj;
-                        String name = (String) itemJson.get("name");
-                        double sellPrice = (Double) itemJson.get("sellPrice");
-                        double buyPrice = (Double) itemJson.get("buyPrice");
-                        int quantity = ((Long) itemJson.get("quantity")).intValue();
-                        String category = (String) itemJson.get("category");
-                        String image = (String) itemJson.get("image");
-                        Item item = new Item(name, sellPrice, buyPrice, quantity, category, image);
-                        itemList.add(item);
+                        JSONArray itemArray = (JSONArray) purchaseJson.get("itemList");
+
+                        ArrayList<Item> itemList = new ArrayList<>();
+                        for (Object itemObj : itemArray) {
+                            JSONObject itemJson = (JSONObject) itemObj;
+                            String name = (String) itemJson.get("name");
+                            double sellPrice = (Double) itemJson.get("sellPrice");
+                            double buyPrice = (Double) itemJson.get("buyPrice");
+                            int quantity = ((Long) itemJson.get("quantity")).intValue();
+                            String category = (String) itemJson.get("category");
+                            String image = (String) itemJson.get("image");
+                            int sold = ((Long) itemJson.get("sold")).intValue();
+                            Item item = new Item(name, sellPrice, buyPrice, quantity, sold, category, image);
+                            itemList.add(item);
+                        }
+
+                        Purchase purchase = new Purchase(customerId, date, itemList);
+                        purchaseArrayList.add(purchase);
                     }
 
-                    Purchase purchase = new Purchase(customerId, date, itemList);
-                    purchasesArray.add(purchase);
+                }
 
                 if (type.equals("customer")) {
                     Customer customer = new Customer(id);
-                    customer.setTransaction(purchasesArray);
+                    customer.setTransaction(purchaseArrayList);
                     customers.add(customer);
                 }
                 else {
@@ -208,7 +241,7 @@ public class DataStore {
                     if (type.equals("member")) {
                         Member member = new Member(name, phoneNumber, id);
                         member.setPoin(points);
-                        member.setTransaction(purchasesArray);
+                        member.setTransaction(purchaseArrayList);
                         if (!isActive) {
                             member.statusOff();
                         }
@@ -216,7 +249,7 @@ public class DataStore {
                     } else if (type.equals("vip")) {
                         VIP vip = new VIP(name, phoneNumber, id);
                         vip.setPoin(points);
-                        vip.setTransaction(purchasesArray);
+                        vip.setTransaction(purchaseArrayList);
                         if (!isActive) {
                             vip.statusOff();
                         }
@@ -224,7 +257,6 @@ public class DataStore {
                     }
                 }
             }
-        }
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -295,6 +327,7 @@ public class DataStore {
             itemObject.put("quantity", item.getQuantity());
             itemObject.put("category", item.getCategory());
             itemObject.put("image", item.getImage());
+            itemObject.put("sold", item.getSold());
 
             itemsArray.add(itemObject);
         }
@@ -325,6 +358,7 @@ public class DataStore {
             itemObject.put("quantity", item.getQuantity());
             itemObject.put("category", item.getCategory());
             itemObject.put("image", item.getImage());
+            itemObject.put("sold", item.getSold());
 
             // Menambahkan objek JSON baru ke dalam array JSON
             itemsArray.add(itemObject);
@@ -356,8 +390,9 @@ public class DataStore {
                     int quantity = ((Long) itemJson.get("quantity")).intValue();
                     String category = (String) itemJson.get("category");
                     String image = (String) itemJson.get("image");
+                    int sold = ((Long) itemJson.get("sold")).intValue();
 
-                    item = new Item(nama, sellPrice, buyPrice, quantity, category, image);
+                    item = new Item(nama, sellPrice, buyPrice, quantity, sold, category, image);
                 }
             }
         } catch (Exception e) {
@@ -406,8 +441,9 @@ public class DataStore {
                 int quantity = ((Long) itemJson.get("quantity")).intValue();
                 String category = (String) itemJson.get("category");
                 String image = (String) itemJson.get("image");
+                int sold = ((Long) itemJson.get("sold")).intValue();
 
-                Item item = new Item(name, sellPrice, buyPrice, quantity, category, image);
+                Item item = new Item(name, sellPrice, buyPrice, quantity, sold, category, image);
                 items.add(item);
             }
         } catch (Exception e) {
@@ -442,7 +478,8 @@ public class DataStore {
                     int quantity = ((Long) itemJson.get("quantity")).intValue();
                     String category = (String) itemJson.get("category");
                     String image = (String) itemJson.get("image");
-                    Item item = new Item(name, sellPrice, buyPrice, quantity, category, image);
+                    int sold = ((Long) itemJson.get("sold")).intValue();
+                    Item item = new Item(name, sellPrice, buyPrice, quantity, sold, category, image);
                     itemList.add(item);
                 }
 
@@ -477,6 +514,7 @@ public class DataStore {
                 itemObject.put("quantity", item.getQuantity());
                 itemObject.put("category", item.getCategory());
                 itemObject.put("image", item.getImage());
+                itemObject.put("sold", item.getSold());
 
                 itemArray.add(itemObject);
             }
