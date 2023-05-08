@@ -125,10 +125,12 @@ public class AddMember extends VBox{
             }else {
                 DataStore dataStore = new DataStore("customer.json");
                 String id = dataStore.getLatestID();
+                int len = 0;
 
                 try {
                     Customer c = dataStore.getCustomerById(id);
                     dataStore.deleteCustomerById(id);
+                    len = c.getTransaction().size();
                     if (c.getTransaction().size() == 0){
                         Alert alert = new Alert(AlertType.ERROR);
                         alert.setTitle("Information Dialog");
@@ -139,11 +141,12 @@ public class AddMember extends VBox{
                 } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }
-                Customer cust = new Member(name, telephone, id);
-
-                dataStore.addCustomer(cust);
+                if (len != 0){
+                        Customer cust = new Member(name, telephone, id);  
+                        dataStore.addCustomer(cust);  
+                }
                 nameField.setText("");
-                telephoneField.setText("");
+                telephoneField.setText("");  
             }
             
         });
