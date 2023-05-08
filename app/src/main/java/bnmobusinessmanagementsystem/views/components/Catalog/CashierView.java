@@ -34,7 +34,6 @@ import java.util.ArrayList;
 public class CashierView extends VBox {
 
     private String currentCustomer;
-    private Label addCustomer;
     private ComboBox<String> dropdown;
     private HBox customerType;
     private ListView items;
@@ -62,18 +61,6 @@ public class CashierView extends VBox {
         Screen primaryScreen = Screen.getPrimary();
         double maxHeight = primaryScreen.getVisualBounds().getHeight();
         double maxWidth = primaryScreen.getVisualBounds().getWidth();
-
-        addCustomer = new Label("Add Customer");
-        addCustomer.setPrefHeight(20);
-        addCustomer.setPrefWidth(1080*2/5);
-        addCustomer.setAlignment(Pos.CENTER);
-        addCustomer.setFont(Font.font(13));
-        addCustomer.setBackground(Background.fill(Color.valueOf("#BFCB7E")));
-        addCustomer.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                System.out.println("Add Customer!");
-            }
-        });
 
         try{
             custs = custStore.readCustomer();
@@ -271,7 +258,7 @@ public class CashierView extends VBox {
             }
         });
 
-        items.setPrefHeight(500-addCustomer.getPrefHeight()-discountBox.getPrefHeight() - taxBox.getPrefHeight()- bill.getPrefHeight() - charge.getPrefHeight());
+        items.setPrefHeight(500-customerType.getPrefHeight()-discountBox.getPrefHeight() - taxBox.getPrefHeight()- bill.getPrefHeight() - charge.getPrefHeight());
 
         Integer finalDiscount = discount;
         Integer finalTax = tax;
@@ -329,7 +316,6 @@ public class CashierView extends VBox {
                 }
             }
         });
-        addCustomer.setStyle("-fx-border-color: black;");
         customerType.setStyle("-fx-border-color: black;");
         items.setStyle("-fx-border-color: black;");
         saveBill.setStyle("-fx-border-color: black;");
@@ -344,21 +330,13 @@ public class CashierView extends VBox {
         taxBox.setStyle("-fx-font-size: 15px; -fx-alignment: center; -fx-border-color: black;");
         serviceBox.setStyle("-fx-font-size: 15px; -fx-alignment: center; -fx-border-color: black;");
 
-        this.getChildren().addAll(addCustomer, customerType, items, discountBox, taxBox, serviceBox, bill, chargePane);
+        this.getChildren().addAll(customerType, items, discountBox, taxBox, serviceBox, bill, chargePane);
         this.setPrefWidth(1080*2/5);
         this.setPrefHeight(560);
 
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
         dropdown.getSelectionModel().select("Customer");
-    }
-
-    public Label getAddCustomer() {
-        return addCustomer;
-    }
-
-    public void setAddCustomer(Label addCustomer) {
-        this.addCustomer = addCustomer;
     }
 
     public Label getCharge() {

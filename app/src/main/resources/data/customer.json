@@ -362,5 +362,49 @@
       }
     ],
     "idCustomer": "1"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "08\/05\/2023",
+        "customerId": "31",
+        "bill": 250000.0,
+        "itemList": [
+          {
+            "buyPrice": 1500.0,
+            "image": "obeng.jpg",
+            "sold": 11,
+            "quantity": 100,
+            "name": "obeng",
+            "sellPrice": 2500.0,
+            "category": "peralatan"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "31"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "08\/05\/2023",
+        "customerId": "46",
+        "bill": 300000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "rambutan.jpg",
+            "sold": 7,
+            "quantity": 100,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "46"
   }
 ]
