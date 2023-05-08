@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
@@ -35,7 +37,6 @@ public class UpdateCustomer extends VBox{
     private Label poinLabel;
     private Label poinField;
     private Button submitButton;
-    private TextField displayField;
     private ToggleButton deactivate;
     private Circle deactCircle;
 
@@ -47,7 +48,7 @@ public class UpdateCustomer extends VBox{
         //    BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
 
         // Set the BackgroundImage as the background of the main VBox
-        DataStore dataStore = new DataStore("add.json");
+        DataStore dataStore = new DataStore("customer.json");
         String nama = "";
         String phone = "";
         String id = "";
@@ -77,6 +78,11 @@ public class UpdateCustomer extends VBox{
             e.printStackTrace();
         }
 
+        System.out.println(nama);
+        System.out.println(id);
+        System.out.println(poin);
+        System.out.println(phone);
+
         button1 = new ToggleButton("Member");
         button2 = new ToggleButton("VIP");
         circlebutton1 = new Circle(5, Color.TRANSPARENT);
@@ -102,7 +108,6 @@ public class UpdateCustomer extends VBox{
         poinLabel = new Label("Poin                 :");
         poinField = new Label("" + poin);
         submitButton = new Button("Submit");
-        displayField = new TextField();
 
         button1.setOnAction(event -> {
             if (button1.isSelected()) {
@@ -285,37 +290,53 @@ public class UpdateCustomer extends VBox{
 
         submitButton.setOnAction(event -> {
             String button = "";
+            String deactState = "";
             if (button1.isSelected()){
                 button = button1.getText();
-            } else {
+            } else if (button2.isSelected()){
                 button = button2.getText();
+            }
+
+            if (deactivate.isSelected()){
+                deactState = "deact";
             }
             String idText = idField.getText();
             String name = nameField.getText();
             String telephone = telephoneField.getText();
-            String deactbutton = deactivate.getText();
-            String contact = button + " " + deactbutton + ", "+ name + ", " + telephone;
 
-            try{
-                String idTemp = dataStore.getLatestID();
-                Customer c = dataStore.getCustomerById(idTemp);
-
-                dataStore.deleteCustomerById(idTemp);
-
-                if (button == "Member"){
-                    Customer temp = new Member(name, telephone, idText);
-                    dataStore.addCustomer(temp);
-                } else if (button == "VIP"){
-                    Customer temp = new VIP(name, telephone, idText);
-                    dataStore.addCustomer(temp);
+            if (button.equals("") | name.equals("") | telephone.equals("")){
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("You submit blank input!");
+                alert.show();
+            } else {
+                try{
+                    String idTemp = dataStore.getLatestID();
+                    Customer c = dataStore.getCustomerById(idTemp);
+    
+                    dataStore.deleteCustomerById(idTemp);
+    
+                    if (button == "Member"){
+                        Customer temp = new Member(name, telephone, idText);
+                        if (deactState == "deact"){
+                            ((Member) temp).statusOff();
+                        }
+                        dataStore.addCustomer(temp);
+                    } else if (button == "VIP"){
+                        Customer temp = new VIP(name, telephone, idText);
+                        if (deactState == "deact"){
+                            ((VIP) temp).statusOff();
+                        }
+                        dataStore.addCustomer(temp);
+                    }
+    
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
-                e.printStackTrace();
             }
-
-            displayField.setText(contact);
         });
 
         HBox b1 = new HBox(circlebutton1, button1);
@@ -330,10 +351,9 @@ public class UpdateCustomer extends VBox{
         HBox pointBox = new HBox(poinLabel, poinField);
         HBox deactBox = new HBox(deactCircle, deactivate);
         HBox buttonBox = new HBox(submitButton);
-        HBox displayBox = new HBox(displayField);
 
         VBox inputBox = new VBox(buttonBox2,idBox, nameBox, telephoneBox, pointBox);
-        VBox all = new VBox(titleBox, inputBox, deactBox,  buttonBox, displayBox);
+        VBox all = new VBox(titleBox, inputBox, deactBox,  buttonBox);
 
         titleBox.setAlignment(Pos.CENTER);
         buttonBox2.setAlignment(Pos.CENTER);
@@ -344,11 +364,9 @@ public class UpdateCustomer extends VBox{
         pointBox.setAlignment(Pos.CENTER_LEFT);
         buttonBox.setAlignment(Pos.CENTER);
         deactBox.setAlignment(Pos.CENTER_LEFT);
-        displayBox.setAlignment(Pos.CENTER);
 
         nameBox.setSpacing(20);
         telephoneBox.setSpacing(20);
-        displayBox.setSpacing(20);
         b1.setSpacing(5);
         b2.setSpacing(5);
         deactBox.setSpacing(5);
@@ -359,22 +377,15 @@ public class UpdateCustomer extends VBox{
         idBox.setPadding(new Insets(15));
         nameBox.setPadding(new Insets(15));
         telephoneBox.setPadding(new Insets(15));
-        deactBox.setPadding(new Insets(15));
+        deactBox.setPadding(new Insets(15, 15, 15, 40));
         pointBox.setPadding(new Insets(15));
-        displayBox.setPadding(new Insets(10));
         all.setPadding(new Insets(20,0,20,60));
         all.setStyle("""
             -fx-background-color : #F6968A;
             """);
+        all.setPrefSize(1080, 660);
 
         getChildren().addAll(all);
-        // all.setBackground(new Background(background));
-//        all.setBackground(new Background(background));
-        /*getStylesheets().add("addstyle.css");
-        getStyleClass().add("add-page");
-        nameField.getStyleClass().add("text-field");
-        telephoneField.getStyleClass().add("text-field");
-        displayField.getStyleClass().add("text-field");
-        submitButton.getStyleClass().add("button");*/
+        
     }
 }

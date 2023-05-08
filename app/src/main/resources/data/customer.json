@@ -1,6 +1,32 @@
 [
   {
     "poin": 0.0,
+    "nama": "Jane Doe",
+    "tipe": "vip",
+    "isActive": true,
+    "transaction": [
+      {
+        "date": "07\/05\/2023",
+        "customerId": "1",
+        "bill": 15000.0,
+        "itemList": [
+          {
+            "buyPrice": 2000.0,
+            "image": "rambutan.jpg",
+            "sold": 0,
+            "quantity": 5,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "noTelp": "1234567890",
+    "idCustomer": "1"
+  },
+  {
+    "poin": 0.0,
     "nama": "Joli Diva",
     "tipe": "member",
     "isActive": true,
@@ -12,7 +38,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 1,
             "quantity": 5,
             "name": "rambutan",
@@ -35,7 +61,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 2,
             "quantity": 5,
             "name": "rambutan",
@@ -57,7 +83,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 0,
             "quantity": 5,
             "name": "rambutan",
@@ -79,7 +105,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 0,
             "quantity": 5,
             "name": "rambutan",
@@ -101,7 +127,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 0,
             "quantity": 5,
             "name": "rambutan",
@@ -123,7 +149,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 0,
             "quantity": 5,
             "name": "rambutan",
@@ -145,7 +171,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 2,
             "quantity": 5,
             "name": "rambutan",
@@ -167,7 +193,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 3,
             "quantity": 5,
             "name": "rambutan",
@@ -189,7 +215,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 4,
             "quantity": 5,
             "name": "rambutan",
@@ -211,7 +237,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 9,
             "quantity": 5,
             "name": "rambutan",
@@ -233,7 +259,7 @@
         "itemList": [
           {
             "buyPrice": 2000.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 5,
             "quantity": 5,
             "name": "rambutan",
@@ -255,7 +281,7 @@
         "itemList": [
           {
             "buyPrice": 1500.0,
-            "image": "picture",
+            "image": "rambutan.jpg",
             "sold": 5,
             "quantity": 10,
             "name": "pisang",
