@@ -3,6 +3,7 @@ import bnmobusinessmanagementsystem.models.Item;
 import bnmobusinessmanagementsystem.models.customer.*;
 
 import bnmobusinessmanagementsystem.utils.DataStore;
+import bnmobusinessmanagementsystem.views.components.CustomerHistories.TransactionView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -11,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import java.io.IOException;
 import java.nio.file.Paths;

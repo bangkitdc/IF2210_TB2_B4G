@@ -1,4 +1,4 @@
-package bnmobusinessmanagementsystem.views;
+package bnmobusinessmanagementsystem.views.components.CustomerHistories;
 
 import bnmobusinessmanagementsystem.controllers.ExchangeRateControllers;
 import bnmobusinessmanagementsystem.models.plugin.ExchangeRate;

@@ -1,6 +1,7 @@
-package bnmobusinessmanagementsystem.views;
+package bnmobusinessmanagementsystem.views.components.CustomerHistories;
 import bnmobusinessmanagementsystem.models.customer.*;
 import bnmobusinessmanagementsystem.models.*;
+import bnmobusinessmanagementsystem.views.components.CustomerHistories.ItemHistoryView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
