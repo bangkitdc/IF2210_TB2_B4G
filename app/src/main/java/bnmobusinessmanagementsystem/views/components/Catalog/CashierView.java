@@ -258,7 +258,7 @@ public class CashierView extends VBox {
             }
         });
 
-        items.setPrefHeight(500-customerType.getPrefHeight()-discountBox.getPrefHeight() - taxBox.getPrefHeight()- bill.getPrefHeight() - charge.getPrefHeight());
+        items.setPrefHeight(500-customerType.getPrefHeight()-discountBox.getPrefHeight() - taxBox.getPrefHeight()- charge.getPrefHeight());
 
         Integer finalDiscount = discount;
         Integer finalTax = tax;
@@ -330,7 +330,7 @@ public class CashierView extends VBox {
         taxBox.setStyle("-fx-font-size: 15px; -fx-alignment: center; -fx-border-color: black;");
         serviceBox.setStyle("-fx-font-size: 15px; -fx-alignment: center; -fx-border-color: black;");
 
-        this.getChildren().addAll(customerType, items, discountBox, taxBox, serviceBox, bill, chargePane);
+        this.getChildren().addAll(customerType, items, discountBox, taxBox, serviceBox, chargePane);
         this.setPrefWidth(1080*2/5);
         this.setPrefHeight(560);
 
