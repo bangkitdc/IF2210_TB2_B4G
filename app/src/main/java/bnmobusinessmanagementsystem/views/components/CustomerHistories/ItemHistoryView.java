@@ -1,4 +1,4 @@
-package bnmobusinessmanagementsystem.views;
+package bnmobusinessmanagementsystem.views.components.CustomerHistories;
 
 import bnmobusinessmanagementsystem.controllers.ExchangeRateControllers;
 import bnmobusinessmanagementsystem.models.plugin.ExchangeRate;
@@ -43,7 +43,6 @@ public class ItemHistoryView extends Pane {
         String currentDir = System.getProperty("user.dir");
         String path = "src/main/resources/itempict/"+_item.getImage();
         String fullPath = Paths.get(currentDir, path).toString();
-        System.out.println(_item.getImage());
         Image img = new Image(fullPath);
         ImageView imgview = new ImageView(img);
         imgview.setFitHeight(150);
