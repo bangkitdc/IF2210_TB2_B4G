@@ -412,25 +412,34 @@
     "idCustomer": "31"
   },
   {
+    "poin": 0.0,
+    "nama": "bary",
+    "tipe": "vip",
+    "isActive": true,
+    "transaction": [],
+    "noTelp": "08123456",
+    "idCustomer": "46"
+  },
+  {
     "tipe": "customer",
     "transaction": [
       {
         "date": "08\/05\/2023",
-        "customerId": "46",
-        "bill": 300000.0,
+        "customerId": "6",
+        "bill": 120000.0,
         "itemList": [
           {
-            "buyPrice": 2000.0,
-            "image": "rambutan.jpg",
-            "sold": 7,
-            "quantity": 100,
-            "name": "rambutan",
-            "sellPrice": 3000.0,
-            "category": "buah"
+            "buyPrice": 3000.0,
+            "image": "brokoli.jpeg",
+            "sold": 5,
+            "quantity": 30,
+            "name": "brokoli",
+            "sellPrice": 4000.0,
+            "category": "sayur"
           }
         ]
       }
     ],
-    "idCustomer": "46"
+    "idCustomer": "6"
   }
 ]
