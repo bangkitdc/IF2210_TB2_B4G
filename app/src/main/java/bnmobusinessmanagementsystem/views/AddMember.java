@@ -122,13 +122,20 @@ public class AddMember extends VBox{
                 alert.setHeaderText(null);
                 alert.setContentText("You submit blank input!");
                 alert.show();
-            } else {
+            }else {
                 DataStore dataStore = new DataStore("customer.json");
                 String id = dataStore.getLatestID();
 
                 try {
                     Customer c = dataStore.getCustomerById(id);
                     dataStore.deleteCustomerById(id);
+                    if (c.getTransaction().size() == 0){
+                        Alert alert = new Alert(AlertType.ERROR);
+                        alert.setTitle("Information Dialog");
+                        alert.setHeaderText(null);
+                        alert.setContentText("The customer didn't have any transaction yet!");
+                        alert.show();
+                    }
                 } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }
