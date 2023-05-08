@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 public class CashierView extends VBox {
 
-    private String currentCustomer;
+    private Customer currentCustomer;
     private ComboBox<String> dropdown;
     private HBox customerType;
     private ListView items;
@@ -50,9 +50,10 @@ public class CashierView extends VBox {
     private ArrayList<Customer> custs;
     private DataStore custStore;
     private Customer customer;
+    private Double res;
     public CashierView(DataStore customerDataStore, DataStore itemDataStore){
         this.custStore = customerDataStore;
-        customer = new Customer();
+        currentCustomer = new Customer();
 
 
 
@@ -62,6 +63,7 @@ public class CashierView extends VBox {
         double maxHeight = primaryScreen.getVisualBounds().getHeight();
         double maxWidth = primaryScreen.getVisualBounds().getWidth();
 
+        dropdown.getItems().add("Customer");
         try{
             custs = custStore.readCustomer();
             for (Customer cust : custs){
@@ -79,21 +81,20 @@ public class CashierView extends VBox {
 
 //        dropdown.getItems().addAll("Customer", "Member", "VIP");
         dropdown.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-            if(newValue.equals("Customer")) {
-                this.currentCustomer = "CUSTOMER";
-            }
-            else{
-                for (Customer n : custs){
-                    if(n instanceof Member){
-                        if(newValue.equals(((Member) n).getNama())){
+            if(newValue.equals("Customer")){
+//                customerType.getChildren().add(new Label(custStore.getLatestID()));
+            }else {
+//                customerType.getChildren().remove(1);
+                for (Customer n : custs) {
+                    if (n instanceof Member) {
+                        if (newValue.equals(((Member) n).getNama())) {
                             System.out.println(((Member) n).getNama());
-                            this.currentCustomer = "MEMBER";
+                            this.currentCustomer = n;
                         }
-                    }
-                    if(n instanceof VIP){
-                        if(newValue.equals(((VIP) n).getNama())){
+                    } else if (n instanceof VIP) {
+                        if (newValue.equals(((VIP) n).getNama())) {
                             System.out.println(((VIP) n).getNama());
-                            this.currentCustomer = "VIP";
+                            this.currentCustomer = n;
                         }
                     }
                 }
@@ -235,20 +236,24 @@ public class CashierView extends VBox {
                     }
 //                    DataStore purchase = new DataStore("purchase.json");
 //                    if (currentCustomer.equals("CUSTOMER")) {
-                        customer.addTransaction(new Purchase(customer.getCustomerId(), formattedDate, itemPurchased));
-                        try {
-                            String latestId = custStore.getLatestID();
-                            if (customer.getCustomerId().equals(latestId)) {
-                                custStore.deleteCustomerById(custStore.getLatestID());
-                            }
+                    if (currentCustomer instanceof Member){
+                        ((Member) currentCustomer).addPoin(res);
+                    } else if (currentCustomer instanceof VIP){
+                        ((VIP) currentCustomer).addPoin(res);
+                    }
 
-                        } catch (IOException | ParseException e){
+                    currentCustomer.addTransaction(new Purchase(currentCustomer.getCustomerId(), formattedDate, itemPurchased));
+
+                    if(currentCustomer instanceof Member || customer instanceof VIP){
+                        try {
+                            custStore.deleteCustomerById(currentCustomer.getCustomerId());
+                        } catch (IOException | ParseException e) {
                             e.printStackTrace();
                         }
-                        custStore.addCustomer(customer);
-//                    }
+                    }
+                    custStore.addCustomer(currentCustomer);
                     System.out.print(currentCustomer);
-                    System.out.println(customer.getCustomerId());
+                    System.out.println(currentCustomer.getCustomerId());
                     items.getItems().clear();
                 }
                 else{
@@ -284,7 +289,7 @@ public class CashierView extends VBox {
                         e.printStackTrace();
                     }
 
-                    Double res = sum * rate;
+                    res = sum * rate;
                     Double resDiscount = res * finalDiscount/100;
                     Double resTax = (res * finalTax/100);
                     Double resService = (res * finalService/100);
