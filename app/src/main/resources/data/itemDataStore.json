@@ -1,43 +1,7 @@
 [
   {
-    "buyPrice": 1500.0,
-    "image": "obeng.jpg",
-    "sold": 9,
-    "quantity": 100,
-    "name": "obeng",
-    "sellPrice": 2500.0,
-    "category": "peralatan"
-  },
-  {
-    "buyPrice": 1500.0,
-    "image": "pisang.jpg",
-    "sold": 11,
-    "quantity": 100,
-    "name": "pisang",
-    "sellPrice": 2000.0,
-    "category": "buah"
-  },
-  {
-    "buyPrice": 5500.0,
-    "image": "apel.jpg",
-    "sold": 11,
-    "quantity": 100,
-    "name": "apel",
-    "sellPrice": 6000.0,
-    "category": "buah"
-  },
-  {
-    "buyPrice": 2000.0,
-    "image": "rambutan.jpg",
-    "sold": 5,
-    "quantity": 100,
-    "name": "rambutan",
-    "sellPrice": 3000.0,
-    "category": "buah"
-  },
-  {
     "buyPrice": 15000.0,
-    "image": "picture",
+    "image": "susu.jpg",
     "sold": 7,
     "quantity": 20,
     "name": "susu 2L",
@@ -46,7 +10,7 @@
   },
   {
     "buyPrice": 10000.0,
-    "image": "picture",
+    "image": "yoghurt.jpg",
     "sold": 10,
     "quantity": 20,
     "name": "yoghurt 300mL",
@@ -54,17 +18,8 @@
     "category": "produk susu"
   },
   {
-    "buyPrice": 3000.0,
-    "image": "picture",
-    "sold": 4,
-    "quantity": 30,
-    "name": "brokoli",
-    "sellPrice": 4000.0,
-    "category": "sayur"
-  },
-  {
     "buyPrice": 2000.0,
-    "image": "picture",
+    "image": "Tomato.jpg",
     "sold": 16,
     "quantity": 30,
     "name": "tomat",
@@ -73,7 +28,7 @@
   },
   {
     "buyPrice": 1500.0,
-    "image": "picture",
+    "image": "wortel.jpg",
     "sold": 13,
     "quantity": 19,
     "name": "wortel",
@@ -82,7 +37,7 @@
   },
   {
     "buyPrice": 13000.0,
-    "image": "picture",
+    "image": "chitato.jpeg",
     "sold": 17,
     "quantity": 50,
     "name": "chitato 150g",
@@ -91,7 +46,7 @@
   },
   {
     "buyPrice": 4000.0,
-    "image": "picture",
+    "image": "taro.png",
     "sold": 23,
     "quantity": 43,
     "name": "taro 65g",
@@ -100,7 +55,7 @@
   },
   {
     "buyPrice": 16000.0,
-    "image": "picture",
+    "image": "cikiballs.jpeg",
     "sold": 11,
     "quantity": 23,
     "name": "chiki balls 200g",
@@ -109,11 +64,56 @@
   },
   {
     "buyPrice": 4000.0,
-    "image": "picture",
+    "image": "pilus.jpg",
     "sold": 18,
     "quantity": 26,
     "name": "pilus 80gr",
     "sellPrice": 5500.0,
     "category": "snack"
+  },
+  {
+    "buyPrice": 5500.0,
+    "image": "apel.jpg",
+    "sold": 12,
+    "quantity": 100,
+    "name": "apel",
+    "sellPrice": 6000.0,
+    "category": "buah"
+  },
+  {
+    "buyPrice": 1500.0,
+    "image": "pisang.jpg",
+    "sold": 12,
+    "quantity": 100,
+    "name": "pisang",
+    "sellPrice": 2000.0,
+    "category": "buah"
+  },
+  {
+    "buyPrice": 1500.0,
+    "image": "obeng.jpg",
+    "sold": 11,
+    "quantity": 100,
+    "name": "obeng",
+    "sellPrice": 2500.0,
+    "category": "peralatan"
+  },
+  {
+    "buyPrice": 2000.0,
+    "image": "rambutan.jpg",
+    "sold": 7,
+    "quantity": 100,
+    "name": "rambutan",
+    "sellPrice": 3000.0,
+    "category": "buah"
+  },
+  {
+    "buyPrice": 3000.0,
+    "image": "brokoli.jpeg",
+    "sold": 5,
+    "quantity": 30,
+    "name": "brokoli",
+    "sellPrice": 4000.0,
+    "category": "sayur"
   }
 ]

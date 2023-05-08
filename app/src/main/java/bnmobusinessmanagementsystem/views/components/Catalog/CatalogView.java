@@ -12,6 +12,7 @@ public class CatalogView extends TilePane {
         this.setVgap(20);
         this.setStyle("-fx-background-color: null;");
         this.setMinHeight(634);
+        this.setPadding(new Insets(0,0,40,10));
     }
 
     public void addItem(ItemView items){

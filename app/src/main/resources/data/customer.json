@@ -292,5 +292,154 @@
       }
     ],
     "idCustomer": "13"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "08\/05\/2023",
+        "customerId": "1",
+        "bill": 1100000.0,
+        "itemList": [
+          {
+            "buyPrice": 5500.0,
+            "image": "apel.jpg",
+            "sold": 12,
+            "quantity": 100,
+            "name": "apel",
+            "sellPrice": 6000.0,
+            "category": "buah"
+          },
+          {
+            "buyPrice": 1500.0,
+            "image": "pisang.jpg",
+            "sold": 12,
+            "quantity": 100,
+            "name": "pisang",
+            "sellPrice": 2000.0,
+            "category": "buah"
+          },
+          {
+            "buyPrice": 2000.0,
+            "image": "rambutan.jpg",
+            "sold": 6,
+            "quantity": 100,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "1"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "08\/05\/2023",
+        "customerId": "1",
+        "bill": 1100000.0,
+        "itemList": [
+          {
+            "buyPrice": 5500.0,
+            "image": "apel.jpg",
+            "sold": 12,
+            "quantity": 100,
+            "name": "apel",
+            "sellPrice": 6000.0,
+            "category": "buah"
+          },
+          {
+            "buyPrice": 1500.0,
+            "image": "pisang.jpg",
+            "sold": 12,
+            "quantity": 100,
+            "name": "pisang",
+            "sellPrice": 2000.0,
+            "category": "buah"
+          },
+          {
+            "buyPrice": 2000.0,
+            "image": "rambutan.jpg",
+            "sold": 6,
+            "quantity": 100,
+            "name": "rambutan",
+            "sellPrice": 3000.0,
+            "category": "buah"
+          }
+        ]
+      },
+      {
+        "date": "08\/05\/2023",
+        "customerId": "1",
+        "bill": 250000.0,
+        "itemList": [
+          {
+            "buyPrice": 1500.0,
+            "image": "obeng.jpg",
+            "sold": 10,
+            "quantity": 100,
+            "name": "obeng",
+            "sellPrice": 2500.0,
+            "category": "peralatan"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "1"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "08\/05\/2023",
+        "customerId": "31",
+        "bill": 250000.0,
+        "itemList": [
+          {
+            "buyPrice": 1500.0,
+            "image": "obeng.jpg",
+            "sold": 11,
+            "quantity": 100,
+            "name": "obeng",
+            "sellPrice": 2500.0,
+            "category": "peralatan"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "31"
+  },
+  {
+    "poin": 0.0,
+    "nama": "bary",
+    "tipe": "vip",
+    "isActive": true,
+    "transaction": [],
+    "noTelp": "08123456",
+    "idCustomer": "46"
+  },
+  {
+    "tipe": "customer",
+    "transaction": [
+      {
+        "date": "08\/05\/2023",
+        "customerId": "6",
+        "bill": 120000.0,
+        "itemList": [
+          {
+            "buyPrice": 3000.0,
+            "image": "brokoli.jpeg",
+            "sold": 5,
+            "quantity": 30,
+            "name": "brokoli",
+            "sellPrice": 4000.0,
+            "category": "sayur"
+          }
+        ]
+      }
+    ],
+    "idCustomer": "6"
   }
 ]
